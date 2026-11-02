@@ -1,6 +1,6 @@
 # UJAAS (उजास) — अपनी बात, अपना मंच
 
-Professional Hindi literary publishing platform: public reading site, editorial CMS, public writer submissions, and a readable digital e-magazine.
+Professional Hindi literary publishing platform: public reading site, editorial CMS, public writer submissions, and a readable digital e-magazine.It is very famous magazine.
 
 ## How this project works (read this first)
 
