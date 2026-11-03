@@ -4,12 +4,15 @@
 <radialGradient id="ujLgSun" cx=".5" cy=".9" r=".9"><stop offset="0" stop-color="#FFD36E"></stop><stop offset=".6" stop-color="#F2A03A"></stop><stop offset="1" stop-color="#D9661E"></stop></radialGradient>
 <linearGradient id="ujLgRay" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#F2A03A"></stop><stop offset="1" stop-color="#D9661E"></stop></linearGradient>
 </defs>
-<g fill="url(#ujLgRay)">
+<g class="uj-rays" fill="url(#ujLgRay)">
 <path d="M33 48 L12 45 L33 44Z"></path><path d="M35 39 L17 28 L37 35Z"></path><path d="M41 31 L28 15 L44 28Z"></path><path d="M49 26 L43 7 L53 24Z"></path><path d="M58 24 L60 4 L62 24Z"></path><path d="M67 24 L77 7 L71 26Z"></path><path d="M76 28 L92 15 L79 31Z"></path><path d="M83 35 L103 28 L85 39Z"></path><path d="M87 44 L108 45 L87 48Z"></path>
 </g>
 <path d="M34 54 A26 26 0 0 1 86 54Z" fill="url(#ujLgSun)"></path>
+<circle class="uj-flame-glow" cx="60" cy="44" r="15" fill="#FFE3A0" opacity=".3"></circle>
+<g class="uj-flame">
 <path d="M60 30 Q70 44 60 56 Q50 44 60 30Z" fill="#FFF3CF" stroke="#E7932F" stroke-width="1.4"></path>
 <path d="M60 39 Q64 47 60 55 Q56 47 60 39Z" fill="#F2A03A"></path>
+</g>
 <path d="M42 56 Q60 74 78 56Z" fill="#7A1424"></path>
 <path d="M42 56 H78" stroke="#E7A64D" stroke-width="2.4" stroke-linecap="round"></path>
 <path d="M60 66 Q40 57 12 62 L10 82 Q38 75 60 84Z" fill="#FFF6E2" stroke="#7A1424" stroke-width="1.6"></path>

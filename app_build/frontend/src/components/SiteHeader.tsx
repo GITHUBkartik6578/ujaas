@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { ArtSvg } from './ArtSvg';
 import Link from 'next/link';
 import { DESIGN_REVIEW, isBuilt } from '@/lib/routes';
 import { getSubmissionConfig } from '@/lib/submission';
@@ -43,7 +43,7 @@ export async function SiteHeader() {
       </div>
       <div className="frame header-row">
         <Link className="brand" href="/" aria-label="उजास — अपनी बात, अपना मंच — मुख्य पृष्ठ">
-          <Image className="brand-mark" src="/art/ujaas-mark.svg" alt="" width={104} height={84} priority unoptimized />
+          <ArtSvg file="ujaas-mark.svg" scope="hdr" className="brand-mark" />
           <span className="brand-text">
             <span className="brand-word">उजास</span>
             <span className="brand-tag">अपनी बात — अपना मंच</span>

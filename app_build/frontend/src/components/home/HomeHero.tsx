@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { ArtSvg } from '../ArtSvg';
 import { SafeLink } from '../SafeLink';
 import { HeroArtwork } from './HeroArtwork';
 import { Arrow, BookIcon, LotusRule, PenIcon } from './Ornament';
@@ -10,9 +10,12 @@ import { Arrow, BookIcon, LotusRule, PenIcon } from './Ornament';
 export function HomeHero({ submitOpen }: { submitOpen: boolean }) {
   return (
     <section className="hero" aria-labelledby="hero-h">
-      <HeroArtwork />
-      <Image className="hero-leaves" src="/art/leaves-top.svg" alt="" width={230} height={300} unoptimized />
-      <Image className="hero-leaves hero-leaves-low" src="/art/leaves-low.svg" alt="" width={150} height={250} unoptimized />
+      <HeroArtwork
+        back={<ArtSvg file="hero-back.svg" scope="hb" className="hero-layer" slice />}
+        front={<ArtSvg file="hero-front.svg" scope="hf" className="hero-layer" slice />}
+      />
+      <ArtSvg file="leaves-top.svg" scope="lt" className="hero-leaves uj-leaves uj-leaves-top" />
+      <ArtSvg file="leaves-low.svg" scope="ll" className="hero-leaves hero-leaves-low uj-leaves uj-leaves-low" />
 
       <div className="hero-inner">
         <div className="hero-copy">

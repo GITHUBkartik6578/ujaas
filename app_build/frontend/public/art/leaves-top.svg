@@ -15,4 +15,5 @@
 <path d="M142 230 Q168 234 176 262 Q148 260 142 230Z" opacity=".85"></path>
 </g>
 <g fill="none" stroke="#8C5A2B" stroke-width=".8" opacity=".7"><path d="M130 60 Q158 48 186 34"></path><path d="M190 90 Q208 76 228 64"></path><path d="M92 64 Q72 82 54 100"></path><path d="M120 120 Q104 142 92 164"></path><path d="M140 150 Q164 164 186 178"></path></g>
+<g transform="translate(150 140)"><path class="uj-leaf-fall" d="M0 0 Q10 -8 20 0 Q10 8 0 0Z" fill="url(#ujLeaf)" stroke="#9A6430" stroke-width=".7"></path></g>
 </svg>

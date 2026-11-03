@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { ArtSvg } from './ArtSvg';
 import Link from 'next/link';
 import type { AuthorCard, IssueCard } from '@/lib/api';
 import { Picture } from './parts';
@@ -32,7 +32,7 @@ export function IssueShowcase({ issue }: { issue: IssueSummary }) {
         ) : (
           <div className="latest-cover" aria-hidden="true">
             <div className="latest-cover-frame">
-              <Image src="/art/ujaas-mark.svg" alt="" width={110} height={88} unoptimized />
+              <ArtSvg file="ujaas-mark-cover.svg" scope="cov" className="latest-cover-mark" />
               <span className="latest-cover-word">उजास</span>
               <span className="latest-cover-sub">ई-पत्रिका · अंक {issue.issue_number}</span>
             </div>
@@ -191,7 +191,7 @@ export function SiteFooter() {
       <div className="frame footer-grid">
         <div className="footer-brand">
           <Link className="footer-logo" href="/" aria-label="उजास — मुख्य पृष्ठ">
-            <Image src="/art/ujaas-mark.svg" alt="" width={84} height={68} unoptimized />
+            <ArtSvg file="ujaas-mark-light.svg" scope="ftr" className="footer-mark" />
             <span>
               <span className="footer-word">उजास</span>
               <span className="footer-tag">अपनी बात — अपना मंच</span>

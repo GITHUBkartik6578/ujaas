@@ -1,7 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { LINES, QuillController } from './quill';
 
 const linePath = (l: (typeof LINES)[number]) => `M${l[0]} ${l[1]} Q${l[2]} ${l[3]} ${l[4]} ${l[5]}`;
@@ -9,10 +8,11 @@ const RACHIS = 'M548 350 C572 240 640 140 762 18';
 
 /**
  * The hero illustration in three aligned layers that share one viewBox and the same crop:
- * the scene behind the quill and the drape and flowers in front of it are static SVG files;
- * the quill, the page it writes and the inkpot rim it slides behind are live SVG in between.
+ * the scene behind the quill and the drape and flowers in front of it come from public/art (inlined on the server,
+ * so the birds, petals and shimmer can animate); the quill, the page it writes and the inkpot rim it slides behind
+ * are live SVG in between.
  */
-export function HeroArtwork() {
+export function HeroArtwork({ back, front }: { back: ReactNode; front: ReactNode }) {
   const art = useRef<HTMLDivElement>(null);
   const svg = useRef<SVGSVGElement>(null);
   const ctl = useRef<QuillController | null>(null);
@@ -50,7 +50,7 @@ export function HeroArtwork() {
       onPointerLeave={() => ctl.current?.leave()}
       onPointerDown={(e) => ctl.current?.down(e.clientX, e.clientY, e.pointerType, e.button)}
     >
-      <Image className="hero-layer" src="/art/hero-back.svg" alt="" fill priority unoptimized sizes="65vw" />
+      {back}
       <svg ref={svg} className="hero-layer quill-layer" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <defs>
           <linearGradient id="qFeather" x1="0" y1="1" x2="1" y2="0">
@@ -97,7 +97,7 @@ export function HeroArtwork() {
         <ellipse data-part="ripple" className="q-ripple" cx="533" cy="346" rx="28" ry="4.5" opacity="0" />
         <ellipse data-part="hint" className="q-hint" cx="533" cy="347" rx="38" ry="7.5" />
       </svg>
-      <Image className="hero-layer" src="/art/hero-front.svg" alt="" fill priority unoptimized sizes="65vw" />
+      {front}
     </div>
   );
 }

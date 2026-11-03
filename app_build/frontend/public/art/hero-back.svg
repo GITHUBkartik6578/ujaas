@@ -1,26 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid slice">
-
 <defs>
 <linearGradient id="ujSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7CD"></stop><stop offset=".55" stop-color="#F3E0BF"></stop><stop offset="1" stop-color="#EFD8B2"></stop></linearGradient>
 <radialGradient id="ujGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF3D6" stop-opacity="1"></stop><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"></stop></radialGradient>
 <linearGradient id="ujPal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C79C"></stop><stop offset="1" stop-color="#C9A576"></stop></linearGradient>
 <linearGradient id="ujRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEDCBC"></stop><stop offset="1" stop-color="#E5CDA3"></stop></linearGradient>
+<clipPath id="ujRiverClip"><rect x="0" y="300" width="960" height="72"></rect></clipPath>
 <linearGradient id="ujTable" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAD5AF"></stop><stop offset="1" stop-color="#D9BB8C"></stop></linearGradient>
 <linearGradient id="ujPage" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F7EBD2"></stop><stop offset=".8" stop-color="#FFF7E6"></stop><stop offset="1" stop-color="#E9D6B2"></stop></linearGradient>
 <linearGradient id="ujPage2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E9D6B2"></stop><stop offset=".2" stop-color="#FFF7E6"></stop><stop offset="1" stop-color="#F4E5C8"></stop></linearGradient>
-
-<linearGradient id="ujVelvet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9A1F33"></stop><stop offset=".5" stop-color="#741226"></stop><stop offset="1" stop-color="#480812"></stop></linearGradient>
-<linearGradient id="ujVelvet2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E1A2E"></stop><stop offset="1" stop-color="#4C0913"></stop></linearGradient>
 <linearGradient id="ujLeather1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6A3A22"></stop><stop offset=".5" stop-color="#4A2616"></stop><stop offset="1" stop-color="#2E170D"></stop></linearGradient>
 <linearGradient id="ujLeather2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A4528"></stop><stop offset=".5" stop-color="#5A2F1B"></stop><stop offset="1" stop-color="#3A1E11"></stop></linearGradient>
+<linearGradient id="ujVelvet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9A1F33"></stop><stop offset=".5" stop-color="#741226"></stop><stop offset="1" stop-color="#480812"></stop></linearGradient>
 <linearGradient id="ujInk" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3A2A24"></stop><stop offset=".35" stop-color="#1B1210"></stop><stop offset="1" stop-color="#0E0907"></stop></linearGradient>
-<clipPath id="ujRiverClip"><rect x="0" y="300" width="960" height="72"></rect></clipPath>
-
-
 </defs>
 
+
+
 <rect width="960" height="600" fill="url(#ujSky)"></rect>
-<circle cx="330" cy="190" r="300" fill="url(#ujGlow)"></circle>
+<circle class="uj-sunglow" cx="330" cy="190" r="300" fill="url(#ujGlow)"></circle>
 <g fill="#FFFFFF" opacity=".35"><ellipse cx="180" cy="60" rx="160" ry="22"></ellipse><ellipse cx="520" cy="100" rx="190" ry="18"></ellipse><ellipse cx="80" cy="150" rx="120" ry="14"></ellipse></g>
 
 <g fill="#E6D0AA" opacity=".8">
@@ -74,17 +71,17 @@
 <rect x="96" y="204" width="104" height="96"></rect><rect x="190" y="168" width="230" height="132"></rect><path d="M199 140 Q235 92 271 140Z"></path><path d="M339 140 Q375 92 411 140Z"></path><path d="M276 106 Q305 52 334 106Z"></path><rect x="420" y="190" width="100" height="110"></rect>
 </g>
 </g>
-<g stroke="#FFF9EC" stroke-width="2" stroke-linecap="round" opacity=".85">
+<g class="uj-shimmer" stroke="#FFF9EC" stroke-width="2" stroke-linecap="round" opacity=".85">
 <line x1="40" y1="326" x2="96" y2="326"></line><line x1="200" y1="334" x2="290" y2="334"></line><line x1="330" y1="324" x2="400" y2="324"></line><line x1="460" y1="340" x2="540" y2="340"></line><line x1="120" y1="350" x2="180" y2="350"></line><line x1="280" y1="356" x2="350" y2="356"></line><line x1="600" y1="330" x2="650" y2="330"></line>
 </g>
 <path d="M30 332 Q52 342 74 332 L69 327 H35Z" fill="#9C7446" opacity=".75"></path><line x1="52" y1="327" x2="52" y2="312" stroke="#9C7446" stroke-width="1.4" opacity=".75"></line>
 <path d="M150 346 Q166 352 182 346 L178 342 H154Z" fill="#9C7446" opacity=".6"></path>
 
 <g fill="#7A1424">
-<path transform="translate(72 74)" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path>
-<path transform="translate(50 116) scale(.85)" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path>
-<path transform="translate(152 136) scale(.9) rotate(-8)" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path>
-<path transform="translate(110 172) scale(.65) rotate(6)" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path>
+<g class="uj-b1" transform="translate(72 74)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b2" transform="translate(50 116) scale(.85)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b3" transform="translate(152 136) scale(.9) rotate(-8)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b4" transform="translate(110 172) scale(.65) rotate(6)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
 </g>
 
 <path d="M0 380 Q480 360 960 372 V600 H0Z" fill="url(#ujTable)"></path>
@@ -118,6 +115,12 @@
 </g>
 
 
+<g fill="#FFFCF4" stroke="#E2D3B6" stroke-width=".8">
+<g class="uj-p1" transform="translate(432 236)"><g class="uj-petal"><ellipse rx="6.5" ry="3.2"></ellipse></g></g>
+<g class="uj-p2" transform="translate(452 210)"><g class="uj-petal"><ellipse rx="5.5" ry="2.8"></ellipse></g></g>
+<g class="uj-p3" transform="translate(414 262)"><g class="uj-petal"><ellipse rx="6" ry="3"></ellipse></g></g>
+<g class="uj-p4" transform="translate(444 250)"><g class="uj-petal"><ellipse rx="5" ry="2.6"></ellipse></g></g>
+</g>
 
 <g>
 <rect x="612" y="244" width="360" height="66" rx="9" fill="url(#ujLeather1)"></rect>
