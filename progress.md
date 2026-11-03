@@ -104,6 +104,7 @@ Full list with options: `docs/decisions/owner-decision-register.md`. Assumptions
 |---|---|---|
 | 2026-10-24 | Created workflow docs and this progress tracker | — |
 | 2026-11-02 | Wrote `.agents/agents.md` (roles, skills, designs folder rules) | Agent |
+| 2026-11-03 | Public shell and homepage replaced with the approved canvas design "UJAAS Homepage" (top strip, header with genre dropdown, search and phone menu, hero with the interactive quill, genre bar, issue, works, writers, विचार band, submission invitation with the 7 editorial steps, wine footer). Blocks still come from `/api/v1/home` and hide when empty; links follow the route registry. New tokens (wine/ivory/gold, art colours), self-hosted Yatra One (OFL-1.1), static artwork in `public/art/`. Evidence: lint, typecheck, 14 tests and build pass; checked in the browser at 1440, 768 and 390 px with no horizontal overflow. Open for owner: logo is a recreation (D-27), गतिविधियाँ and social links stay out (D-25, no URLs), "साहित्यिक लेख" opens all of साहित्य (no matching type) | Agent |
 | 2026-11-02 | Recorded D-07 (MERN with Next.js) from owner message; created decision register, assumptions, ADR 0001 (Proposed) | Agent |
 | 2026-11-02 | Added `docs/design-tokens.md` (palette measured from design pack); recorded D-09 as answered by owner instruction | Agent |
 | 2026-11-02 | Owner instruction "dont wait for owners decision, proceed further": recorded as Phase 1 accepted, Phase 2 authorised, P1 decisions on assumptions (register §A2) | Agent |

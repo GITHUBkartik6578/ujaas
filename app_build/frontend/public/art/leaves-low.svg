@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 250">
+<defs><linearGradient id="ujLeaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E3B060"></stop><stop offset="1" stop-color="#A8692A"></stop></linearGradient></defs>
+<path d="M0 240 Q40 170 46 90 Q48 40 30 0" fill="none" stroke="#8C5A2B" stroke-width="2"></path>
+<g fill="url(#ujLeaf)" stroke="#9A6430" stroke-width=".8">
+<path d="M44 110 Q76 92 104 108 Q74 128 44 110Z"></path>
+<path d="M40 150 Q12 140 -6 160 Q22 172 40 150Z"></path>
+<path d="M36 70 Q62 46 90 54 Q66 80 36 70Z" opacity=".9"></path>
+<path d="M28 190 Q58 180 80 200 Q50 212 28 190Z" opacity=".85"></path>
+<path d="M34 30 Q10 20 -4 36 Q18 50 34 30Z" opacity=".8"></path>
+</g>
+</svg>

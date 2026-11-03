@@ -17,6 +17,42 @@
   --color-rust: #793423;
   --color-saffron: #f5bf89;
 
+  /* homepage design (approved canvas "UJAAS Homepage", 2026-11-03): wine, ivory and antique gold */
+  --color-wine-bright: #8a1a2c;
+  --color-wine: #7a1424;
+  --color-wine-deep: #650b18;
+  --color-wine-dark: #4c0913;
+  --color-wine-night: #3a0710;
+  --color-gold: #b9853d;
+  --color-gold-soft: #c99a52;
+  --color-gold-pale: #e7c27a;
+  --color-saffron-warm: #e7a64d;
+  --color-ivory: #fbf4e9;
+  --color-paper: #fff9f0;
+  --color-parchment: #f4e3c6;
+  --color-parchment-light: #f9eedc;
+  --color-linen: #f3e4cc;
+  --color-sandstone: #e4cdb5;
+  --color-ink-warm: #2b211e;
+  --color-muted-warm: #6d5a50;
+
+  /* hero artwork: the interactive quill layer (the static layers live in public/art) */
+  --art-feather-1: #8a6238;
+  --art-feather-2: #c79a62;
+  --art-feather-3: #e8cfa2;
+  --art-feather-4: #fbf1dc;
+  --art-feather-edge: #b88e58;
+  --art-rachis: #6e4f30;
+  --art-barb: #b08455;
+  --art-nib: #1c120b;
+  --art-sheen: #fff6da;
+  --art-ink: #6a4a2e;
+  --art-shadow: #3a2412;
+  --art-pot: #1e1513;
+  --art-pot-lip: #3a2a22;
+  --art-pot-gold: #d3a65b;
+  --art-glint: #f3d08a;
+
   /* roles */
   --bg: var(--color-cream);
   --surface: var(--color-panel);
@@ -33,6 +69,8 @@
   /* type: two families at most (D: fonts are a proposal pending the design direction session) */
   --font-reading: 'Noto Serif Devanagari', 'Noto Serif', Georgia, serif;
   --font-ui: 'Noto Sans Devanagari', 'Noto Sans', system-ui, sans-serif;
+  /* display face for the उजास wordmark and hero heading only (self-hosted, OFL-1.1) */
+  --font-display: 'Yatra One', var(--font-reading);
 
   /* five sizes at most; body 18px or more for reading pages */
   --text-sm: 1rem;
