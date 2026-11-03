@@ -1,0 +1,17 @@
+{
+  "name": "ujaas",
+  "private": true,
+  "version": "0.0.0",
+  "description": "UJAAS (उजास) — Hindi literary publishing platform",
+  "engines": { "node": ">=22" },
+  "workspaces": ["app_build/backend", "app_build/frontend"],
+  "scripts": {
+    "dev:db": "npm run dev:db -w app_build/backend",
+    "dev:api": "npm run dev -w app_build/backend",
+    "dev:web": "npm run dev -w app_build/frontend",
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  }
+}

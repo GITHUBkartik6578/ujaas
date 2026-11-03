@@ -1,0 +1,57 @@
+/*
+ * UJAAS design tokens. The ONLY place hex colours may appear (checked by src/__tests__/tokens.test.ts).
+ * Values and contrast: docs/design-tokens.md (palette measured from designs/UJAAS_HTML_Design_Reference_Pack).
+ * ASSUMPTION D-09: owner instructed to take the palette from the design pack; hex values are measured from AI mockups.
+ */
+:root {
+  /* brand colours */
+  --color-cream: #fdf9f3;
+  --color-panel: #fef6ee;
+  --color-blush: #f4e2d1;
+  --color-sand: #ceb194;
+  --color-notice: #fee9cc;
+  --color-white: #ffffff;
+  --color-ink: #362815;
+  --color-maroon: #620206;
+  --color-copper: #925d43;
+  --color-rust: #793423;
+  --color-saffron: #f5bf89;
+
+  /* roles */
+  --bg: var(--color-cream);
+  --surface: var(--color-panel);
+  --tone-1: var(--color-blush);
+  --tone-2: var(--color-sand);
+  --text: var(--color-ink);
+  --text-muted: var(--color-copper);
+  --accent: var(--color-maroon);
+  --accent-hover: color-mix(in srgb, var(--color-maroon) 88%, black);
+  --on-accent: var(--color-cream);
+  --focus-ring: var(--color-maroon);
+  --error-text: var(--color-rust);
+
+  /* type: two families at most (D: fonts are a proposal pending the design direction session) */
+  --font-reading: 'Noto Serif Devanagari', 'Noto Serif', Georgia, serif;
+  --font-ui: 'Noto Sans Devanagari', 'Noto Sans', system-ui, sans-serif;
+
+  /* five sizes at most; body 18px or more for reading pages */
+  --text-sm: 1rem;
+  --text-base: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+
+  /* space and layout */
+  --frame: 16px; /* one pair of equal outer margins at every width */
+  --radius: 6px; /* one corner radius for buttons and panels */
+  --gap: 12px;
+  --measure: 66ch;
+  --page-max: 1600px;
+}
+
+@media (min-width: 768px) {
+  :root { --frame: 24px; }
+}
+@media (min-width: 1200px) {
+  :root { --frame: 32px; }
+}

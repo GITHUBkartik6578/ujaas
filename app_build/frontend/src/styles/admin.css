@@ -1,0 +1,146 @@
+/*
+ * Admin screens (an app screen, not a page): quiet 1px borders, row rules, noun titles, one filled primary
+ * per screen, status as a pale tint plus the word. Colours come from tokens only; no gradients, no resting shadows.
+ */
+.admin { min-height: 100svh; background: var(--bg); color: var(--text); font-size: var(--text-sm); line-height: 1.6; }
+.admin h1 { font-family: var(--font-ui); font-size: 1.5rem; margin: 0; color: var(--text); line-height: 1.5; }
+.admin h2 { font-family: var(--font-ui); font-size: 1.125rem; margin: 0 0 0.75rem; color: var(--text); }
+.admin h3 { font-family: var(--font-ui); font-size: 1rem; margin: 1rem 0 0.5rem; color: var(--text); }
+.admin p { max-width: none; margin: 0 0 0.75rem; }
+.admin a { color: var(--accent); }
+.admin code { font-size: 0.875rem; }
+.admin .muted { color: var(--text-muted); }
+.admin .sub { font-size: 0.875rem; color: var(--text); margin: 0.1rem 0 0; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* shell */
+.shell { display: grid; grid-template-columns: 15rem minmax(0, 1fr); min-height: 100svh; }
+.sidebar { border-right: 1px solid var(--tone-1); padding: 1.25rem 1rem; display: flex; flex-direction: column; gap: 1.25rem; position: sticky; top: 0; height: 100svh; overflow-y: auto; } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+.brand-line { margin: 0; font-size: var(--text-base); }
+.brand-name { font-family: var(--font-reading); font-weight: 700; color: var(--accent); font-size: var(--text-lg); }
+.brand-scope { color: var(--text-muted); }
+.sidebar ul { display: grid; gap: 0.125rem; }
+.sidebar nav a { display: block; padding: 0.4rem 0.75rem; border-radius: var(--radius); color: var(--text); text-decoration: none; }
+.sidebar nav a:hover { background: var(--surface); }
+.sidebar nav a[aria-current='page'] { background: var(--tone-1); font-weight: 700; }
+.me { margin-top: auto; border-top: 1px solid var(--tone-1); padding-top: 1rem; } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+.me-name { margin: 0; font-weight: 700; }
+.me-role { margin: 0 0 0.75rem; color: var(--text-muted); }
+.canvas { padding: 1.5rem 2rem 4rem; max-width: 80rem; width: 100%; }
+@media (max-width: 899px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--tone-1); } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+  .sidebar nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 0.5rem; }
+  .me { margin-top: 0; border-top: 0; padding-top: 0; }
+  .canvas { padding: 1rem var(--frame) 3rem; }
+}
+
+/* title row, toolbar, states */
+.page-title { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.page-title h2 { margin: 0; }
+.toolbar { display: flex; gap: 0.75rem 1rem; align-items: flex-end; flex-wrap: wrap; margin-bottom: 1rem; }
+.state { padding: 1rem 0; }
+.banner { background: var(--color-notice); border-radius: var(--radius); padding: 0.6rem 0.9rem; margin-bottom: 1rem; }
+.alert-strip { background: var(--color-notice); border-radius: var(--radius); padding: 0.75rem 1rem; margin-bottom: 1.5rem; }
+.alert-strip ul { display: grid; gap: 0.25rem; }
+.toast { min-height: 1.5rem; margin: 0; color: var(--text); }
+.field-error { color: var(--error-text); margin: 0.25rem 0 0; font-weight: 700; }
+.hint { color: var(--text-muted); font-size: 0.875rem; margin: 0.25rem 0 0; }
+
+/* controls: one height, white fields with a stronger 1px border */
+.admin input:not([type='checkbox']):not([type='file']), .admin select, .admin textarea {
+  font: inherit; color: var(--text); background: var(--color-white); border: 1px solid var(--tone-2); /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+  border-radius: var(--radius); padding: 0.45rem 0.7rem; width: 100%; min-height: 2.5rem;
+}
+.admin textarea { min-height: 0; line-height: 1.7; }
+.admin input[type='file'] { font: inherit; }
+.admin input:disabled, .admin select:disabled, .admin textarea:disabled { background: var(--surface); color: var(--text); opacity: 1; }
+.admin :focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+.field { margin-bottom: 1rem; min-width: 0; }
+.field label { display: block; font-weight: 700; margin-bottom: 0.35rem; }
+.field.inline { margin-bottom: 0; min-width: 9rem; }
+.field.grow { flex: 1 1 14rem; }
+.row { display: grid; gap: 0 1rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); }
+.check { display: flex; gap: 0.5rem; align-items: center; margin: 0.4rem 0; }
+.check input { width: 1.1rem; height: 1.1rem; min-height: 0; }
+.btn {
+  font: inherit; color: var(--text); background: var(--color-white); border: 1px solid var(--tone-2); border-radius: var(--radius); /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+  padding: 0.45rem 1rem; min-height: 2.5rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+}
+.btn:hover { background: var(--surface); }
+.btn:disabled { cursor: not-allowed; color: var(--text); opacity: 0.55; }
+.admin a.btn { color: var(--text); }
+.btn-primary, .admin a.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 700; }
+.btn-primary:hover, .admin a.btn-primary:hover { background: var(--accent-hover); color: var(--on-accent); }
+.btn-danger { color: var(--error-text); border-color: var(--error-text); }
+.linklike { font: inherit; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em; text-align: left; }
+
+/* tables: rules and alignment, no zebra, no header band */
+.table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+.table th { text-align: left; font-weight: 400; color: var(--text-muted); padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--tone-2); } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+.table td { padding: 0.7rem 0.75rem 0.7rem 0; border-bottom: 1px solid var(--tone-1); vertical-align: top; } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+.table .num { text-align: right; font-variant-numeric: tabular-nums; padding-right: 0; }
+.pager { display: flex; gap: 1rem; align-items: center; justify-content: flex-end; }
+
+/* status pills: pale tint, dark text, the word carries the meaning */
+.pill { display: inline-block; padding: 0 0.6rem; border-radius: 999px; font-size: 0.875rem; line-height: 1.5rem; white-space: nowrap; flex: none; }
+.pill-draft { background: var(--tone-1); color: var(--text); }
+.pill-in_review, .pill-scheduled { background: var(--color-notice); color: var(--text); }
+.pill-approved { background: var(--surface); color: var(--accent); border: 1px solid var(--tone-2); } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+.pill-published { background: var(--accent); color: var(--on-accent); }
+.pill-unpublished, .pill-archived { background: var(--tone-2); color: var(--text); }
+
+/* counts as type, not tiles */
+.counts { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; margin: 0 0 2rem; }
+.counts dt { color: var(--text-muted); }
+.counts dd { margin: 0; font-size: 1.75rem; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.two-col, .split { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 1100px) { .two-col { grid-template-columns: 1fr 1fr; } .split { grid-template-columns: minmax(0, 1fr) minmax(20rem, 28rem); } }
+
+/* editor */
+.editor-grid { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 1100px) { .editor-grid { grid-template-columns: minmax(0, 1fr) 20rem; } .editor-side { position: sticky; top: 1rem; } }
+.body-input { font-family: var(--font-reading); font-size: var(--text-base); line-height: 2; }
+.group { border: 1px solid var(--tone-1); border-radius: var(--radius); padding: 0.75rem 1rem 0.25rem; margin: 0 0 1.25rem; } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+.group legend { padding: 0 0.4rem; font-weight: 700; }
+.credit-list { display: grid; gap: 0.5rem; margin-bottom: 0.75rem; }
+.credit-list li { display: grid; grid-template-columns: 1fr 9rem auto; gap: 0.5rem; align-items: center; }
+.actions { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin: 1rem 0; }
+.panel { border: 1px solid var(--tone-1); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; background: var(--bg); } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+.panel.narrow { max-width: 40rem; }
+.panel h2, .panel h3 { margin-top: 0; }
+.stack { display: grid; gap: 0.5rem; }
+.rev-list { display: grid; gap: 0.5rem; }
+.rev-list li { display: flex; justify-content: space-between; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+
+.ordered { display: grid; gap: 0.5rem; margin-bottom: 1rem; }
+.ordered li { display: flex; justify-content: space-between; gap: 0.75rem; align-items: center; border-bottom: 1px solid var(--tone-1); padding-bottom: 0.5rem; flex-wrap: wrap; } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+.ordered-actions { display: flex; gap: 0.4rem; }
+.media-list { display: grid; gap: 1.5rem; }
+.media-item { display: grid; gap: 1rem; grid-template-columns: 9rem minmax(0, 1fr); align-items: start; border-bottom: 1px solid var(--tone-1); padding-bottom: 1.5rem; } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+.media-item img { width: 100%; height: auto; border-radius: var(--radius); }
+
+/* login and the in-place relogin dialog */
+.login { min-height: 100svh; display: grid; place-items: center; padding: 2rem var(--frame); }
+.login form { width: min(100%, 24rem); }
+.modal-backdrop { position: fixed; inset: 0; background: color-mix(in srgb, var(--color-ink) 45%, transparent); display: grid; place-items: center; padding: 1rem; z-index: 20; }
+.modal { background: var(--bg); border-radius: var(--radius); padding: 1.5rem; width: min(100%, 26rem); box-shadow: 0 8px 24px color-mix(in srgb, var(--color-ink) 30%, transparent); } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+
+/* Hindi words must not break letter by letter in narrow cells: tables become stacked rows on phones. */
+.admin td, .admin th { overflow-wrap: normal; word-break: normal; }
+@media (max-width: 699px) {
+  .table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .table, .table tbody { display: block; }
+  .table tr { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; padding: 0.75rem 0; border-bottom: 1px solid var(--tone-1); } /* taste-skill-ignore: app screen, row rules and 1px borders (app-screens 13); dialog shadow */
+  .table td { display: block; border: 0; padding: 0; }
+  .table td:first-child { flex-basis: 100%; }
+  .table .num { text-align: left; }
+}
+
+/* submissions and messages */
+.submission-body { font-family: var(--font-reading); font-size: var(--text-base); line-height: 2; white-space: pre-wrap; margin: 1rem 0 0; overflow-wrap: break-word; }
+.timeline { display: grid; gap: 0.75rem; }
+.timeline li { border-left: 2px solid var(--tone-2); padding-left: 0.75rem; }
+.timeline p { margin: 0; }
+.timeline .note { background: var(--surface); border-radius: var(--radius); padding: 0.4rem 0.6rem; margin-top: 0.25rem; }
+.messages { display: grid; gap: 1rem; }

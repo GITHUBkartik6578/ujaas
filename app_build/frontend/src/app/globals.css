@@ -1,0 +1,69 @@
+@import '../styles/fonts.css';
+@import '../styles/tokens.css';
+@import '../styles/home.css';
+@import '../styles/pages.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  /* Devanagari matras above and below the line need more room than Latin. */
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-reading);
+  font-weight: 700;
+  line-height: 1.4; /* not tightened: conjuncts and matras can clip (hindi_content) */
+  margin: 0 0 0.5em;
+  color: var(--accent);
+}
+h1 { font-size: var(--text-2xl); }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-lg); }
+
+p { margin: 0 0 1em; max-width: var(--measure); }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+a { color: var(--accent); text-underline-offset: 0.2em; }
+a:hover { color: var(--accent-hover); }
+
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute;
+  left: var(--frame);
+  top: -4rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.5rem 1rem;
+  z-index: 10;
+}
+.skip-link:focus { top: var(--frame); }
+
+/* one pair of equal outer margins, used by every section */
+.frame { max-width: var(--page-max); margin-inline: auto; padding-inline: var(--frame); }
+
+.button {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.7rem 1.6rem;
+  border: 0;
+  border-radius: var(--radius);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.button:hover { background: var(--accent-hover); color: var(--on-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

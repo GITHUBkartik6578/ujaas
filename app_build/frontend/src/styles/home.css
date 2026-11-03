@@ -1,0 +1,133 @@
+/*
+ * Home page: direction "The split stage" (docs/design-direction.md). Colours come from tokens only.
+ * Motion: opacity and transform only, once, short; reading text never animates.
+ */
+
+/* ---------- header ---------- */
+.site-header { padding-block: 0.75rem; }
+.header-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 2rem; }
+.wordmark { font-family: var(--font-reading); font-weight: 700; font-size: var(--text-xl); color: var(--accent); text-decoration: none; line-height: 1.4; }
+.dev-flag { margin-inline-start: 0.5rem; font-family: var(--font-reading); font-weight: 400; font-size: var(--text-sm); color: var(--text-muted); }
+nav { flex: 1 1 100%; min-width: 0; }
+@media (min-width: 900px) { nav { flex: 0 1 auto; } }
+.nav-list { display: flex; flex-wrap: wrap; gap: 0 1.5rem; font-size: var(--text-sm); }
+@media (max-width: 699px) { .nav-list { justify-content: space-between; } }
+.nav-list a { color: var(--text); text-decoration: none; }
+.nav-list a:hover { color: var(--accent); }
+.is-unbuilt { cursor: not-allowed; text-decoration: underline dotted; text-underline-offset: 0.25em; }
+
+/* ---------- split stage ---------- */
+.stage-layout { display: grid; gap: var(--gap); padding: 0 var(--frame) var(--frame); max-width: var(--page-max); margin-inline: auto; }
+
+.stage {
+  background: var(--color-maroon);
+  color: var(--color-cream);
+  border-radius: var(--radius);
+  min-height: 46svh;
+  padding: 2rem var(--frame);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.stage-inner { animation: stage-in 0.5s ease both; width: 100%; }
+.stage-title { font-family: var(--font-reading); font-weight: 700; font-size: var(--text-2xl); line-height: 1.4; margin: 0 0 1rem; }
+.stage-lines { font-family: var(--font-reading); font-size: var(--text-lg); line-height: 1.9; margin: 0 0 1.5rem; }
+.stage-by { font-size: var(--text-base); color: var(--color-blush); margin: 0; }
+.stage-word { font-family: var(--font-reading); font-weight: 700; font-size: clamp(6rem, 15vw, 15rem); line-height: 1.3; margin: 0; color: var(--color-saffron); }
+
+.sheet { background: var(--surface); border-radius: var(--radius); padding: 2rem var(--frame) 3rem; }
+.sheet-hero { padding-block: 1rem 3rem; }
+.sheet-hero h1 { font-size: clamp(2rem, 4.2vw, 3.5rem); max-width: 14ch; }
+.lead { font-size: var(--text-lg); font-family: var(--font-reading); max-width: 28ch; }
+.dev-note { font-size: var(--text-sm); color: var(--text-muted); margin: 1rem 0 0; }
+
+.picks h2 { margin-bottom: 1rem; }
+.pick-list { display: grid; gap: 0.5rem; }
+.pick { display: grid; gap: 0.15rem; border-radius: var(--radius); padding: 1rem 1.25rem; }
+.pick:hover, .pick[data-active='true'] { background: var(--tone-1); }
+.pick-title { margin: 0; font-size: var(--text-lg); }
+.pick-title button {
+  font: inherit; color: var(--accent); background: transparent; border: 0; padding: 0; text-align: left; cursor: pointer;
+}
+.pick-meta, .pick-lines { margin: 0; font-size: var(--text-sm); color: var(--text); max-width: none; }
+
+@media (min-width: 900px) {
+  .stage-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .sheet { order: 1; min-height: calc(100svh - var(--frame)); padding: 3rem 4rem 4rem; }
+  .stage { order: 2; position: sticky; top: var(--gap); height: calc(100svh - 2 * var(--gap)); padding: 3rem; }
+  .pick-lines { display: none; } /* the stage shows the lines on large screens */
+}
+
+@keyframes stage-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* ---------- issue showcase (breaks the split, full width) ---------- */
+.showcase { margin-block: 7.5rem; }
+.showcase-grid { display: grid; gap: 2rem; align-items: center; animation: rise 0.6s ease-out both; }
+.plate {
+  aspect-ratio: 1; background: var(--tone-1); border-radius: var(--radius);
+  display: grid; place-items: center; font-size: var(--text-lg); color: var(--text);
+}
+.showcase-title { font-family: var(--font-reading); font-weight: 700; font-size: var(--text-xl); margin: 0 0 0.25rem; }
+.muted { color: var(--text); }
+.showcase-text p:not(.showcase-title) { max-width: 36rem; }
+.cells { display: grid; gap: var(--gap); margin-top: 2rem; }
+.cell {
+  display: grid; place-items: center; min-height: 4.5rem; border-radius: var(--radius);
+  text-decoration: none; font-weight: 700; text-align: center;
+}
+.cell-primary { background: var(--accent); color: var(--on-accent); }
+.cell-secondary { background: var(--tone-1); color: var(--text); }
+a.cell-primary:hover { background: var(--accent-hover); color: var(--on-accent); }
+a.cell-secondary:hover { background: var(--tone-2); color: var(--text); }
+@media (min-width: 700px) {
+  .showcase-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .cells { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- authors (drag row) ---------- */
+.authors { margin-block: 7.5rem; }
+.authors-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; animation: rise 0.6s ease-out both; }
+.authors-row { display: grid; gap: var(--gap); padding-block: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); align-items: start; }
+.author-module { background: var(--tone-1); border-radius: var(--radius); }
+.author-module:nth-child(odd) { min-height: 15rem; }
+.author-module:nth-child(even) { min-height: 11rem; background: var(--surface); }
+.author-module a, .author-module > span { display: grid; align-content: end; gap: 0.25rem; min-height: inherit; padding: 1.5rem; text-decoration: none; color: var(--text); }
+.author-name { font-family: var(--font-reading); font-weight: 700; font-size: var(--text-lg); color: var(--accent); }
+.author-role { font-size: var(--text-base); }
+
+/* ---------- closing action and footer ---------- */
+.cta { background: var(--color-maroon); color: var(--color-cream); padding-block: 6rem 4rem; }
+.cta h2 { color: var(--color-cream); }
+.cta-text { animation: rise 0.6s ease-out both; max-width: 34rem; }
+.cta .button-light { background: var(--color-cream); color: var(--color-ink); }
+.cta .button-light:hover { background: var(--color-blush); color: var(--color-ink); }
+.site-footer { background: var(--color-maroon); color: var(--color-blush); padding-block: 2rem 3rem; }
+.footer-name { margin: 0; font-family: var(--font-reading); font-weight: 700; font-size: var(--text-lg); }
+.footer-tag { font-family: var(--font-ui); font-weight: 400; font-size: var(--text-base); margin-inline-start: 0.75rem; }
+@media (min-width: 900px) {
+  .cta { padding-block: 9rem 5rem; }
+  .cta-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .cta-text { grid-column: 2; }
+}
+
+/* ---------- scroll entrance (subtle: 16px rise + fade, once, transform and opacity only) ---------- */
+/* Everything is visible by default; browsers without scroll-driven animation simply show the content. */
+@supports (animation-timeline: view()) {
+  .sheet-hero > *, .pick-list > li, .showcase-text > *, .plate, .cells > *, .authors-head > *, .author-module, .cta-text > * {
+    animation: rise linear forwards; /* no backwards fill: content stays visible before it enters */
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+  .showcase-grid, .authors-head, .cta-text { animation: none; }
+}
+
+/* On phones text runs to the right margin like everything else (equal margins). */
+@media (max-width: 699px) {
+  p, .lead { max-width: none; }
+  .cta-text, .showcase-text p:not(.showcase-title) { max-width: none; }
+}
+
+.plate-cover { padding: 0; overflow: hidden; display: block; aspect-ratio: auto; }
+.plate-cover img { width: 100%; height: auto; display: block; }

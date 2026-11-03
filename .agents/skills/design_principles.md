@@ -14,7 +14,7 @@ If two layers disagree, the higher one wins and the conflict is reported to the 
 ## Direction (from the client)
 Premium, literary, warm; a contemporary literary institution, **not** a blog or news portal; not commercial or cluttered; no heavy animation; comfortable reading; its own original look (do not copy Hindwi or any reference).
 
-## Tokens (measured from the mockups; palette still to be confirmed in D-09)
+## Tokens (measured from the mockups; D-09 answered by owner instruction, full table and contrast in `docs/design-tokens.md`)
 cream `#FDF9F3` · maroon `#620206` · blush `#F4E2D1` · sand `#CEB194` · dark brown `#362815` · copper `#925D43` · rust `#793423` · saffron `#F5BF89`. No green. Define once as design tokens (CSS custom properties); never scatter hex values.
 Proposed roles for design review (not approved): ground cream, ink dark brown, accent maroon, tone steps blush and sand. Rust, copper and saffron are brand colours that the taste skill's palette rule flags, so they are an owner-confirmed brand exception (`taste_house_rules` #12).
 
