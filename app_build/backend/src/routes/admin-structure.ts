@@ -13,7 +13,7 @@ import { ROLES } from '../lib/workflow.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 import { requireCsrf } from '../middleware/security.js';
 import {
-  AuditLog, Author, Category, Collection, CollectionItem, Content, MediaAsset, SiteSetting, Submission, Topic,
+  AdminUser, AuditLog, Author, Category, Collection, CollectionItem, Content, MediaAsset, SiteSetting, Submission, Topic,
 } from '../models/index.js';
 import { writeAudit } from '../services/audit.js';
 import { withTx } from '../services/content.js';
@@ -306,6 +306,39 @@ export function createAdminStructureRouter(env: Env): Router {
     scheduler: { started: schedulerState.started, last_run_at: schedulerState.last_run_at, last_error: schedulerState.last_error },
     node: process.version,
   })));
+
+  // ---------- admin accounts (site_admin only) ----------
+  // Lets a site admin shut out a lost or compromised account at once, without touching the database.
+  r.get('/users', adminOnly, ah(async () => {
+    const rows = (await AdminUser.find({}).sort({ display_name: 1 }).lean()) as unknown as Array<{
+      _id: Types.ObjectId; email: string; display_name: string; role: string; is_active: boolean; last_login_at?: Date;
+    }>;
+    return {
+      items: rows.map((u) => ({
+        id: String(u._id), email: u.email, display_name: u.display_name, role: u.role, is_active: u.is_active, last_login_at: u.last_login_at ?? null,
+      })),
+    };
+  }));
+
+  r.patch('/users/:id', adminOnly, ah(async (req) => {
+    const id = String(req.params.id);
+    if (!OBJECT_ID.test(id)) throw notFound();
+    const b = parseWith(z.object({ is_active: z.boolean() }).strict(), req.body);
+    if (id === req.admin!.id) {
+      throw validationFailed([{ field: 'id', code: 'self', message_hi: 'आप अपना ही खाता निष्क्रिय नहीं कर सकते' }]);
+    }
+    const user = (await AdminUser.findById(id).lean()) as unknown as { role: string; is_active: boolean } | null;
+    if (!user) throw notFound();
+    if (!b.is_active && user.role === 'site_admin' && user.is_active) {
+      const others = await AdminUser.countDocuments({ role: 'site_admin', is_active: true, _id: mongoose.trusted({ $ne: id }) as never });
+      if (others === 0) throw validationFailed([{ field: 'id', code: 'last_site_admin', message_hi: 'अंतिम सक्रिय साइट व्यवस्थापक को निष्क्रिय नहीं किया जा सकता' }]);
+    }
+    await AdminUser.updateOne({ _id: id }, { $set: { is_active: b.is_active } });
+    // Deactivation ends every session of that account now (requireAuth would also refuse it on the next call).
+    if (!b.is_active) await mongoose.connection.collection('sessions').deleteMany({ 'session.user_id': id });
+    await audit(req, b.is_active ? 'admin.reactivated' : 'admin.deactivated', 'admin_user', id);
+    return { id, is_active: b.is_active };
+  }));
 
   return r;
 }

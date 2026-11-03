@@ -3,6 +3,17 @@ import { headers } from 'next/headers';
 
 const API_URL = process.env.API_URL ?? 'http://localhost:4000';
 
+/**
+ * The visitor's address as the nearest proxy saw it: only the LAST X-Forwarded-For entry.
+ * Earlier entries are whatever the browser sent and can be forged, so they are never passed on.
+ * This is only trustworthy when the reverse proxy in front of Next.js sets the header itself
+ * (docs/deployment.md section 3); Next.js keeps an incoming header as it is.
+ */
+export function clientAddress(h: Headers): string | undefined {
+  const last = h.get('x-forwarded-for')?.split(',').pop()?.trim();
+  return last && /^[0-9a-fA-F:.]{2,45}$/.test(last) ? last : undefined;
+}
+
 export class ApiError extends Error {
   constructor(public status: number, public code: string) {
     super(`API ${status} ${code}`);
@@ -16,7 +27,7 @@ export class ApiError extends Error {
  */
 export async function api<T>(path: string): Promise<T> {
   const h = await headers();
-  const fwd = h.get('x-forwarded-for');
+  const fwd = clientAddress(h);
   let res: Response;
   try {
     res = await fetch(`${API_URL}/api/v1${path}`, {

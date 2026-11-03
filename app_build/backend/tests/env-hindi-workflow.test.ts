@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { parseEnv } from '../src/config/env.js';
 import { graphemeLength, hasForbiddenControlChars, searchFolded, searchNormalise, toStoredText } from '../src/lib/hindi.js';
-import { sanitizeRichText, stripHtml } from '../src/lib/sanitize.js';
+import { stripHtml } from '../src/lib/sanitize.js';
 import { passwordProblems } from '../src/lib/password.js';
 import { newReferenceId, saltedHash } from '../src/lib/hash.js';
 import { assertContentTransition, assertSubmissionTransition, publishBlockers } from '../src/lib/workflow.js';
@@ -87,13 +87,6 @@ describe('sanitisers', () => {
   it('strips every tag from plain text', () => {
     expect(stripHtml('<b>नमस्ते</b><script>alert(1)</script>')).toBe('नमस्ते');
   });
-  it('keeps only allow-listed rich text and removes scripts and handlers', () => {
-    const out = sanitizeRichText('<p onclick="x()">पाठ</p><script>alert(1)</script><a href="javascript:alert(1)">l</a>');
-    expect(out).not.toContain('script');
-    expect(out).not.toContain('onclick');
-    expect(out).not.toContain('javascript:');
-    expect(out).toContain('<p>पाठ</p>');
-  });
 });
 
 describe('passwords, hashing and references', () => {
@@ -160,5 +153,15 @@ describe('T-PUB-04 workflow rules', () => {
     const f = publishedFilter(now);
     expect(f.status).toBe('published');
     expect(JSON.stringify(f.published_at)).toBe(JSON.stringify({ $lte: now }));
+  });
+});
+
+describe('canonical_url', () => {
+  it('accepts only https addresses', async () => {
+    const { updateContentInput } = await import('../src/services/content.js');
+    expect(updateContentInput.safeParse({ canonical_url: 'https://example.org/a' }).success).toBe(true);
+    expect(updateContentInput.safeParse({ canonical_url: 'javascript:alert(1)' }).success).toBe(false);
+    expect(updateContentInput.safeParse({ canonical_url: 'http://example.org/a' }).success).toBe(false);
+    expect(updateContentInput.safeParse({ canonical_url: null }).success).toBe(true);
   });
 });

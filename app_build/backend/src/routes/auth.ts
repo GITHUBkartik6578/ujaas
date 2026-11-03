@@ -34,7 +34,7 @@ const genericLoginError = () =>
 export function createAuthRouter(env: Env): Router {
   const r = Router();
 
-  r.post('/login', limits.login(), async (req, res, next) => {
+  r.post('/login', limits.loginIp(env.RATE_LIMIT_SCALE), limits.login(), async (req, res, next) => {
     try {
       const parsed = loginBody.safeParse(req.body);
       if (!parsed.success) return next(genericLoginError());
@@ -110,15 +110,20 @@ export function createAuthRouter(env: Env): Router {
       }
       user.password_hash = await hashPassword(parsed.data.new_password);
       await user.save();
-      // Kill every other session of this user; keep the current one (rotated below).
+      // Rotate the current session (new id, new CSRF token), then kill every other session of this user.
+      const createdAt = req.session.created_at;
+      await regenerate(req);
+      req.session.user_id = String(user._id);
+      req.session.created_at = createdAt ?? Date.now(); // the 24 h absolute limit still counts from login
+      req.session.csrf = randomBytes(32).toString('hex');
+      await new Promise<void>((resolve, reject) => req.session.save((e) => (e ? reject(e) : resolve())));
       await mongoose.connection.collection('sessions').deleteMany({ 'session.user_id': String(user._id), _id: { $ne: req.sessionID as never } });
       await writeAudit({ actor_id: String(user._id), action: 'auth.password_changed', entity: 'admin_user', entity_id: String(user._id), request_id: (req as { id?: string }).id });
-      res.status(204).end();
+      res.json({ csrf_token: req.session.csrf }); // the old token died with the old session
     } catch (err) {
       next(err);
     }
   });
 
-  void env;
   return r;
 }

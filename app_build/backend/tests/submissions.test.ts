@@ -182,7 +182,11 @@ describe('T-SUB-04 failures leave nothing half saved', () => {
     expect(b.status).toBe(201);
     expect(b.body.reference_id).toBe(a.body.reference_id);
     expect(await Submission.countDocuments({ email: 'idem@example.org' })).toBe(1);
-    expect(await IdempotencyKey.countDocuments({ key: 'key-abc-123' })).toBe(1);
+    // Stored bound to the sender, never as the raw key.
+    expect(await IdempotencyKey.countDocuments({ key: 'key-abc-123' })).toBe(0);
+    const stored = await IdempotencyKey.find({ 'response.reference_id': a.body.reference_id }).lean();
+    expect(stored).toHaveLength(1);
+    expect(String((stored[0] as unknown as { key: string }).key)).toMatch(/^[0-9a-f]{64}$/);
   });
   it('a database failure is a 503, nothing is stored, and the same form can be sent again', async () => {
     const body = fresh({ email: 'down@example.org' });

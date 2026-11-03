@@ -3,11 +3,14 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 import { AdminUser, AuditLog } from '../src/models/index.js';
 import { ABSOLUTE_SESSION_MS } from '../src/middleware/auth.js';
-import { ORIGIN, PASSWORD, loginAgent, makeAdmin, startHarness, type Harness } from './helpers.js';
+import { ORIGIN, PASSWORD, loginAgent, makeAdmin, startHarness, testEnv, type Harness } from './helpers.js';
+import { createApp } from '../src/app.js';
 
 let h: Harness;
 beforeAll(async () => {
-  h = await startHarness({ ENABLED_ROLES: 'site_admin,editor' });
+  // Many logins from one test IP: the per-IP login limit is scaled here (it has its own test below at scale 1).
+  // The per-account limit is never scaled, so the lockout and per-email tests still run at production values.
+  h = await startHarness({ ENABLED_ROLES: 'site_admin,editor', RATE_LIMIT_SCALE: '100' });
 });
 afterAll(async () => {
   await h.close();
@@ -64,6 +67,18 @@ describe('T-ADM-01 login', () => {
     }
     expect(last).toBe(429);
     expect(retry).toBeTruthy();
+  });
+
+  it('limits one IP trying many different accounts (password spraying)', async () => {
+    const strict = createApp(testEnv()); // RATE_LIMIT_SCALE defaults to 1, as in production
+    let last = 0;
+    for (let i = 0; i < 22; i++) {
+      // A different email each time, so only the per-IP limit can stop it.
+      const r = await request(strict).post('/api/v1/admin/auth/login').set('Origin', ORIGIN)
+        .send({ email: `spray${i}@example.org`, password: 'whatever-whatever' });
+      last = r.status;
+    }
+    expect(last).toBe(429);
   });
 });
 
@@ -146,8 +161,15 @@ describe('T-ADM-02 sessions', () => {
     expect(weak.status).toBe(422);
     const ok = await second.agent.post('/api/v1/admin/auth/change-password').set('Origin', ORIGIN).set('X-CSRF-Token', second.csrf!)
       .send({ old_password: PASSWORD, new_password: 'a-new-long-passphrase-42' });
-    expect(ok.status).toBe(204);
-    expect((await second.agent.get('/api/v1/admin/auth/me')).status).toBe(200);
+    expect(ok.status).toBe(200);
+    // The current session is rotated: a fresh CSRF token replaces the old one, which no longer works.
+    expect(ok.body.csrf_token).toMatch(/^[0-9a-f]{64}$/);
+    expect(ok.body.csrf_token).not.toBe(second.csrf);
+    const me = await second.agent.get('/api/v1/admin/auth/me');
+    expect(me.status).toBe(200);
+    expect(me.body.csrf_token).toBe(ok.body.csrf_token);
+    const stale = await second.agent.post('/api/v1/admin/auth/logout').set('Origin', ORIGIN).set('X-CSRF-Token', second.csrf!);
+    expect(stale.status).toBe(403);
     expect((await first.agent.get('/api/v1/admin/auth/me')).status).toBe(401);
   });
 });
@@ -215,5 +237,36 @@ describe('audit and error shape', () => {
     await makeAdmin();
     const res = await post('/api/v1/admin/auth/login').send({ email: { $ne: '' }, password: { $ne: '' } });
     expect(res.status).toBe(401);
+  });
+});
+
+describe('admin accounts', () => {
+  it('a site admin can deactivate another admin, which ends their sessions at once', async () => {
+    const boss = await loginAgent(h.app, (await makeAdmin('site_admin')).email);
+    const { email, user } = await makeAdmin('editor');
+    const target = await loginAgent(h.app, email);
+    expect((await target.agent.get('/api/v1/admin/auth/me')).status).toBe(200);
+    const id = String(user._id);
+    const list = await boss.agent.get('/api/v1/admin/users');
+    expect(list.status).toBe(200);
+    expect(JSON.stringify(list.body)).not.toMatch(/password_hash|totp/);
+    const off = await boss.agent.patch(`/api/v1/admin/users/${id}`).set('Origin', ORIGIN).set('X-CSRF-Token', boss.csrf!).send({ is_active: false });
+    expect(off.status).toBe(200);
+    expect((await target.agent.get('/api/v1/admin/auth/me')).status).toBe(401);
+    expect((await post('/api/v1/admin/auth/login').send({ email, password: PASSWORD })).status).toBe(401);
+    const on = await boss.agent.patch(`/api/v1/admin/users/${id}`).set('Origin', ORIGIN).set('X-CSRF-Token', boss.csrf!).send({ is_active: true });
+    expect(on.status).toBe(200);
+    expect((await post('/api/v1/admin/auth/login').send({ email, password: PASSWORD })).status).toBe(200);
+  });
+
+  it('refuses self-deactivation, unknown ids and non-site-admins', async () => {
+    const { email, user } = await makeAdmin('site_admin');
+    const me = await loginAgent(h.app, email);
+    const self = await me.agent.patch(`/api/v1/admin/users/${String(user._id)}`).set('Origin', ORIGIN).set('X-CSRF-Token', me.csrf!).send({ is_active: false });
+    expect(self.status).toBe(422);
+    expect((await me.agent.patch('/api/v1/admin/users/nope').set('Origin', ORIGIN).set('X-CSRF-Token', me.csrf!).send({ is_active: false })).status).toBe(404);
+    const editor = await loginAgent(h.app, (await makeAdmin('editor')).email);
+    expect((await editor.agent.get('/api/v1/admin/users')).status).toBe(403);
+    expect((await editor.agent.patch(`/api/v1/admin/users/${String(user._id)}`).set('Origin', ORIGIN).set('X-CSRF-Token', editor.csrf!).send({ is_active: false })).status).toBe(403);
   });
 });

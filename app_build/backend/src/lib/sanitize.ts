@@ -9,16 +9,3 @@ export function stripHtml(input: string): string {
     .replace(/&#39;/g, "'")
     .replace(/&amp;/g, '&');
 }
-
-/** Allow-list sanitiser for rich text bodies written in the admin editor. */
-export function sanitizeRichText(input: string): string {
-  return sanitizeHtml(input, {
-    allowedTags: ['p', 'br', 'strong', 'em', 'blockquote', 'ul', 'ol', 'li', 'h2', 'h3', 'a', 'hr'],
-    allowedAttributes: { a: ['href', 'title'] },
-    allowedSchemes: ['http', 'https', 'mailto'],
-    allowProtocolRelative: false,
-    transformTags: {
-      a: sanitizeHtml.simpleTransform('a', { rel: 'noopener noreferrer nofollow' }),
-    },
-  });
-}

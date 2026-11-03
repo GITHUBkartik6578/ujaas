@@ -9,6 +9,7 @@ import type { Env } from './config/env.js';
 import { errorHandler, notFoundHandler } from './lib/errors.js';
 import { IDLE_SESSION_MS, SESSION_COOKIE } from './middleware/auth.js';
 import { limits, originCheck, permissionsPolicy, requestId, securityHeaders } from './middleware/security.js';
+import { mediaAccess } from './middleware/media.js';
 import { createAuthRouter } from './routes/auth.js';
 import { createAdminContentRouter } from './routes/admin-content.js';
 import { createAdminStructureRouter } from './routes/admin-structure.js';
@@ -43,20 +44,7 @@ export function createApp(env: Env): Express {
   app.use(securityHeaders(env));
   app.use(permissionsPolicy);
 
-  // Uploaded images: separate static path, no directory listing, no sniffing, never executed.
-  app.use(
-    env.MEDIA_BASE_URL,
-    express.static(path.resolve(env.MEDIA_DIR), {
-      index: false,
-      dotfiles: 'deny',
-      fallthrough: false,
-      maxAge: '7d',
-      setHeaders: (res) => res.setHeader('X-Content-Type-Options', 'nosniff'),
-    }),
-  );
-
-  app.use(express.json({ limit: '100kb' }));
-
+  // The session comes before the images, so a signed-in admin can see private images (middleware/media.ts).
   app.use(
     session({
       name: SESSION_COOKIE,
@@ -77,6 +65,27 @@ export function createApp(env: Env): Express {
       },
     }),
   );
+
+  // Uploaded images: separate static path, no directory listing, no sniffing, never executed.
+  // mediaAccess decides first: unknown/deleted files are 404, private ones need an admin or a signed preview link.
+  app.use(
+    env.MEDIA_BASE_URL,
+    limits.media(env.RATE_LIMIT_SCALE),
+    mediaAccess(env),
+    express.static(path.resolve(env.MEDIA_DIR), {
+      index: false,
+      dotfiles: 'deny',
+      fallthrough: false,
+      setHeaders: (res) => {
+        res.setHeader('X-Content-Type-Options', 'nosniff');
+        // Public images may be cached; private ones must never sit in a shared cache.
+        const isPublic = Boolean((res as unknown as { locals?: { mediaPublic?: boolean } }).locals?.mediaPublic);
+        res.setHeader('Cache-Control', isPublic ? 'public, max-age=604800' : 'private, no-store');
+      },
+    }),
+  );
+
+  app.use(express.json({ limit: '100kb' }));
 
   app.use(originCheck(env));
 

@@ -1,4 +1,4 @@
-import type { RequestHandler } from 'express';
+import type { Request, RequestHandler } from 'express';
 import type { Env } from '../config/env.js';
 import { AdminUser } from '../models/index.js';
 import { forbidden, sessionExpired, unauthenticated } from '../lib/errors.js';
@@ -29,8 +29,29 @@ declare module 'express-serve-static-core' {
   }
 }
 
+const toContext = (user: { _id: unknown; email: string; display_name: string; role: string }): AdminContext => ({
+  id: String(user._id),
+  email: user.email,
+  display_name: user.display_name,
+  role: user.role as Role,
+});
+
+/**
+ * The signed-in, active admin for this request, or null. Read-only: unlike requireAuth it never ends the session.
+ * Used where a login is optional (for example private images).
+ */
+export async function sessionAdmin(req: Request): Promise<AdminContext | null> {
+  if (req.admin) return req.admin;
+  const s = req.session;
+  if (!s?.user_id || !s.created_at || Date.now() - s.created_at > ABSOLUTE_SESSION_MS) return null;
+  const user = await AdminUser.findById(s.user_id).lean();
+  return user && user.is_active ? toContext(user) : null;
+}
+
 /** Deny by default: loads the admin from the session, enforces the absolute timeout and is_active. */
 export const requireAuth: RequestHandler = async (req, _res, next) => {
+  // Several admin routers share /admin; the first one to authenticate the request does the database lookup.
+  if (req.admin) return next();
   try {
     const s = req.session;
     const hadCookie = Boolean(req.headers.cookie?.includes(`${SESSION_COOKIE}=`));
@@ -44,12 +65,7 @@ export const requireAuth: RequestHandler = async (req, _res, next) => {
       await new Promise<void>((resolve) => s.destroy(() => resolve()));
       return next(sessionExpired());
     }
-    req.admin = {
-      id: String(user._id),
-      email: user.email,
-      display_name: user.display_name,
-      role: user.role as Role,
-    };
+    req.admin = toContext(user);
     next();
   } catch (err) {
     next(err);

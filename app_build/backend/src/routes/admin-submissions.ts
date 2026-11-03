@@ -34,7 +34,8 @@ interface Sub {
  */
 export function createAdminSubmissionsRouter(env: Env): Router {
   const r = Router();
-  r.use(requireAuth, requireRole(env, 'site_admin', 'editor_in_chief', 'editor'), requireCsrf);
+  // Scoped to this router's own paths: a router-wide guard would also block other /admin routers mounted after it.
+  r.use(['/submissions', '/staff', '/messages'], requireAuth, requireRole(env, 'site_admin', 'editor_in_chief', 'editor'), requireCsrf);
   const idOf = (req: { params: Record<string, string | string[] | undefined> }) => {
     const id = String(req.params.id);
     if (!OBJECT_ID.test(id)) throw notFound();

@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import request from 'supertest';
 import { runSchedulerOnce, schedulerState } from '../src/jobs/scheduler.js';
 import { publishDue } from '../src/services/content.js';
-import { signPreview } from '../src/lib/preview.js';
+import { previewKey, signPreview } from '../src/lib/preview.js';
 import { AuditLog, Content, ContentRevision, MediaAsset, Category } from '../src/models/index.js';
 import type { Role } from '../src/lib/workflow.js';
 import { ORIGIN, loginAgent, makeAdmin, startHarness, type Harness } from './helpers.js';
@@ -277,17 +277,20 @@ describe('previews', () => {
     expect(res.status).toBe(200);
     expect(res.body.title).toBe(draft.title);
     expect(res.body.preview).toBe(true);
-    expect(res.body.cover.url).toBe('/media/cms-cover.png'); // a private cover is visible in preview
+    // A private cover is visible in preview, through a short-lived signed link.
+    expect(res.body.cover.url).toMatch(/^\/media\/cms-cover\.png\?t=\d+\.[\w-]+$/);
     expect(res.headers['x-robots-tag']).toMatch(/noindex/);
     expect(res.headers['cache-control']).toBe('no-store');
     expect(JSON.stringify(res.body)).not.toMatch(/rights_note|निजी नोट|lang_checked|revision_no/);
   });
   it('rejects tampered and expired tokens', async () => {
     const draft = (await call(clients.content_manager, 'post', '/contents', baseDraft())).body;
-    const token = signPreview(draft.id, h.env.SESSION_SECRET);
+    const token = signPreview(draft.id, previewKey(h.env));
     expect((await pub(`/preview/${token}x`)).status).toBe(404);
     expect((await pub(`/preview/${signPreview(draft.id, 'another-secret-another-secret-1234')}`)).status).toBe(404);
-    expect((await pub(`/preview/${signPreview(draft.id, h.env.SESSION_SECRET, Date.now() - 31 * 60_000)}`)).status).toBe(404);
+    expect((await pub(`/preview/${signPreview(draft.id, previewKey(h.env), Date.now() - 31 * 60_000)}`)).status).toBe(404);
+    // The raw session secret no longer signs preview links (a separate key is derived from it).
+    expect((await pub(`/preview/${signPreview(draft.id, h.env.SESSION_SECRET)}`)).status).toBe(404);
     expect((await pub('/preview/garbage')).status).toBe(404);
   });
 });

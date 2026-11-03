@@ -133,7 +133,8 @@ export function createPublicIssuesRouter(env: Env): Router {
 /** Issue manager (editors and above). Publishing an issue is for the chief and above, like publishing a creation. */
 export function createAdminIssuesRouter(env: Env): Router {
   const r = Router();
-  r.use(requireAuth, requireRole(env, 'site_admin', 'editor_in_chief', 'editor'), requireCsrf);
+  // Scoped to /issues so this guard never applies to another /admin router.
+  r.use('/issues', requireAuth, requireRole(env, 'site_admin', 'editor_in_chief', 'editor'), requireCsrf);
   const idOf = (req: { params: Record<string, string | string[] | undefined> }) => {
     const id = String(req.params.id);
     if (!OBJECT_ID.test(id)) throw notFound();

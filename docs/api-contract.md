@@ -69,7 +69,9 @@ Prefix `/api/v1/admin`. Every route checks the role server-side; non-GET needs C
 | `POST /auth/login` | `email`, `password` | `200` session cookie, rotated; `{user}` | generic `unauthenticated`; 429 lockout |
 | `POST /auth/logout` | — | 204, session destroyed | — |
 | `GET /auth/me` | — | `{user, csrf_token}` | 401 `session_expired` |
-| `POST /auth/change-password` | old, new | 204; other sessions killed | 422 |
+| `POST /auth/change-password` | old, new | 200 `{csrf_token}`; current session rotated (new id and CSRF token), other sessions killed | 422 |
+| `GET /users` | site_admin | `{items:[{id,email,display_name,role,is_active,last_login_at}]}` | 403 |
+| `PATCH /users/{id}` | site_admin; `{is_active}` | 200; deactivation ends that admin's sessions at once; refuses self and the last active site_admin (422) | 403, 404, 422 |
 First admin: one-time CLI command or single-use setup link; no default credentials.
 
 ### 3.2 Content and revisions
@@ -103,7 +105,7 @@ First admin: one-time CLI command or single-use setup link; no default credentia
 | settings | `GET/PUT /settings` | site_admin |
 
 ### 3.5 Media
-`POST /media` (multipart, field `file`): JPEG/PNG/WebP ≤ 5 MB, magic-byte check, re-encode; returns `{id,url,width,height}`; alt required later. Errors 413, 415, 422 with specific Hindi message (size, type, network handled by client with retry). `PATCH /media/{id}` (alt, credit, permission). `DELETE /media/{id}` only when unused, site_admin.
+`POST /media` (multipart, field `file`): JPEG/PNG/WebP ≤ 5 MB, magic-byte check, re-encode; returns `{id,url,width,height}`; alt required later. Errors 413, 415, 422 with specific Hindi message (size, type, network handled by client with retry). `PATCH /media/{id}` (alt, credit, permission). `DELETE /media/{id}` only when unused, site_admin; removes the file as well. Serving `GET /media/{key}`: a file without a media record is 404; public images are served to anyone (`Cache-Control: public`); private images only to a signed-in admin or with the short-lived `?t=` link a preview carries (`private, no-store`), otherwise 404.
 
 ### 3.6 Audit and ops
 `GET /audit` (filters `entity`, `actor`, `from`, `to`, `page`) read-only. `GET /ops/health`, `GET /ops/scheduler`. Admin users `GET/POST/PATCH /users` hidden until D-05.

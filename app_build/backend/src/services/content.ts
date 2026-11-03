@@ -38,7 +38,7 @@ export const contentFields = z.object({
   cover_media_id: oidStr.nullable(),
   seo_title: plain(160).nullable(),
   seo_description: plain(300).nullable(),
-  canonical_url: z.string().url().max(300).nullable(),
+  canonical_url: z.string().url().max(300).refine((u) => u.startsWith('https://'), { message: 'must be an https address' }).nullable(),
   lang_checked: z.boolean(),
   proof_checked: z.boolean(),
   final_approved: z.boolean(),

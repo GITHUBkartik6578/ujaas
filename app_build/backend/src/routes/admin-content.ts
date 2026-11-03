@@ -6,7 +6,7 @@ import { actorOf, ah, OBJECT_ID, parseWith } from '../lib/admin.js';
 import { AppError, notFound, validationFailed } from '../lib/errors.js';
 import { escapeRegex, regex } from '../lib/queries.js';
 import { searchFolded } from '../lib/hindi.js';
-import { signPreview } from '../lib/preview.js';
+import { previewKey, signPreview } from '../lib/preview.js';
 import { ROLES, type ContentStatus } from '../lib/workflow.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 import { requireCsrf } from '../middleware/security.js';
@@ -157,7 +157,7 @@ export function createAdminContentRouter(env: Env): Router {
   r.post('/contents/:id/preview-link', ah(async (req) => {
     const id = idOf(req);
     if (!(await Content.exists({ _id: id }))) throw notFound();
-    const token = signPreview(id, env.SESSION_SECRET);
+    const token = signPreview(id, previewKey(env));
     await writeAudit({ actor_id: req.admin!.id, action: 'content.preview_link', entity: 'content', entity_id: id, request_id: (req as { id?: string }).id });
     return { token, path: `/preview/${token}`, expires_in_minutes: 30 };
   }));

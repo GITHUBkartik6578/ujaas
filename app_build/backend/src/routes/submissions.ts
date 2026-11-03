@@ -90,8 +90,13 @@ export function createSubmissionRouter(env: Env): Router {
       const consent = await activeConsent(env);
       if (!consent) throw new AppError(503, 'submissions_closed', 'Submissions are not open', 'रचनाएँ अभी स्वीकार नहीं की जा रहीं');
 
-      const key = req.header('idempotency-key');
-      if (key && key.length <= 80) {
+      // The stored key is bound to the sender (hashed IP + key), so someone who learns or guesses another
+      // writer's Idempotency-Key cannot replay it to read that writer's reference.
+      const rawKey = req.header('idempotency-key');
+      const key = rawKey && rawKey.length <= 80 ? hash(`idem
+${req.ip ?? 'unknown'}
+${rawKey}`) : undefined;
+      if (key) {
         const seen = await IdempotencyKey.findOne({ key }).lean();
         if (seen) return res.status(201).json((seen as unknown as { response: unknown }).response);
       }
@@ -145,7 +150,7 @@ export function createSubmissionRouter(env: Env): Router {
       if (!reference_id) throw unavailable();
 
       const response = { reference_id };
-      if (key && key.length <= 80) await IdempotencyKey.create({ key, response }).catch(() => undefined);
+      if (key) await IdempotencyKey.create({ key, response }).catch(() => undefined);
       res.status(201).json(response);
     } catch (err) {
       next(err);

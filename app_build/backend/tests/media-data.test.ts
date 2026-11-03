@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import mongoose from 'mongoose';
@@ -8,6 +8,7 @@ import { AuditLog, Content, ContactMessage, MediaAsset, Submission, SubmissionEv
 import { runMigrations } from '../src/db/migrate.js';
 import { runRetention } from '../src/jobs/retention.js';
 import { publishedFilter } from '../src/lib/queries.js';
+import { mediaKey, signMediaToken } from '../src/lib/preview.js';
 import { ORIGIN, loginAgent, makeAdmin, startHarness, testEnv, type Harness } from './helpers.js';
 
 let h: Harness;
@@ -101,11 +102,55 @@ describe('T-MED-01 upload validation', () => {
 
   it('serves uploads with nosniff and no directory listing', async () => {
     const up = await upload(await png(), 'serve.png');
-    const get = await request(h.app).get(up.body.url);
+    const get = await agent.get(up.body.url); // a new upload is private: the signed-in admin sees it
     expect(get.status).toBe(200);
     expect(get.headers['x-content-type-options']).toBe('nosniff');
     expect(get.headers['content-type']).toMatch(/image\/png/);
+    expect(get.headers['cache-control']).toBe('private, no-store');
     expect((await request(h.app).get('/media/')).status).toBe(404);
+  });
+
+  it('hides private images from anonymous visitors, except through a signed preview link', async () => {
+    const up = await upload(await png(), 'private.png');
+    const key = String(up.body.url).split('/').pop()!;
+    expect((await request(h.app).get(up.body.url)).status).toBe(404); // same answer as a missing file
+    const t = signMediaToken(key, mediaKey(h.env));
+    expect((await request(h.app).get(`${up.body.url}?t=${t}`)).status).toBe(200);
+    expect((await request(h.app).get(`${up.body.url}?t=${t}x`)).status).toBe(404);
+    const expired = signMediaToken(key, mediaKey(h.env), Date.now() - 31 * 60_000);
+    expect((await request(h.app).get(`${up.body.url}?t=${expired}`)).status).toBe(404);
+    const otherKey = signMediaToken('0'.repeat(32) + '.png', mediaKey(h.env)); // a token is bound to one file
+    expect((await request(h.app).get(`${up.body.url}?t=${otherKey}`)).status).toBe(404);
+  });
+
+  it('serves public images to anyone, with a cacheable header', async () => {
+    const up = await upload(await png(), 'public.png');
+    await agent.patch(`/api/v1/admin/media/${up.body.id}`).set('Origin', ORIGIN).set('X-CSRF-Token', csrf).send({ is_public: true });
+    const get = await request(h.app).get(up.body.url);
+    expect(get.status).toBe(200);
+    expect(get.headers['cache-control']).toBe('public, max-age=604800');
+  });
+
+  it('never serves a file that has no media record', async () => {
+    expect((await request(h.app).get('/media/' + 'a'.repeat(32) + '.png')).status).toBe(404);
+    expect((await request(h.app).get('/media/../package.json')).status).toBe(404);
+  });
+
+  it('deleting an image removes the file and its address', async () => {
+    const up = await upload(await png(), 'gone.png');
+    const key = String(up.body.url).split('/').pop()!;
+    await agent.patch(`/api/v1/admin/media/${up.body.id}`).set('Origin', ORIGIN).set('X-CSRF-Token', csrf).send({ is_public: true });
+    expect(existsSync(path.join(h.env.MEDIA_DIR, key))).toBe(true);
+    const del = await agent.delete(`/api/v1/admin/media/${up.body.id}`).set('Origin', ORIGIN).set('X-CSRF-Token', csrf);
+    expect(del.status).toBe(204);
+    expect(existsSync(path.join(h.env.MEDIA_DIR, key))).toBe(false);
+    expect((await request(h.app).get(up.body.url)).status).toBe(404);
+    expect((await agent.get(up.body.url)).status).toBe(404);
+  });
+
+  it('a malformed id on update is a 404, not a server error', async () => {
+    const res = await agent.patch('/api/v1/admin/media/not-an-id').set('Origin', ORIGIN).set('X-CSRF-Token', csrf).send({ alt_text: 'x' });
+    expect(res.status).toBe(404);
   });
 });
 

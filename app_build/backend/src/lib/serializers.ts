@@ -18,6 +18,8 @@ export interface Ctx {
   authors: Map<string, { name: string; slug: string; is_public: boolean; photo_media_id?: Types.ObjectId }>;
   media: Map<string, { storage_key: string; alt_text: string; credit?: string; width: number; height: number }>;
   mediaBase: string;
+  /** Preview only: adds a short-lived signed `?t=` to each image address so private images load (middleware/media.ts). */
+  signMedia?: (storageKey: string) => string;
 }
 
 const idStr = (x: unknown) => String(x);
@@ -30,7 +32,7 @@ export async function loadContext(
     cover_media_id?: Types.ObjectId | null;
   }>,
   mediaBase: string,
-  extra: { authorIds?: Types.ObjectId[]; mediaIds?: Types.ObjectId[]; allowPrivateMedia?: boolean } = {},
+  extra: { authorIds?: Types.ObjectId[]; mediaIds?: Types.ObjectId[]; allowPrivateMedia?: boolean; signMedia?: (storageKey: string) => string } = {},
 ): Promise<Ctx> {
   const catIds = [...new Set(contents.map((c) => idStr(c.category_id)))];
   const authorIds = [
@@ -63,6 +65,7 @@ export async function loadContext(
       ]),
     ),
     mediaBase,
+    ...(extra.signMedia ? { signMedia: extra.signMedia } : {}),
   };
 }
 
@@ -71,7 +74,8 @@ export function coverOf(ctx: Ctx, mediaId?: Types.ObjectId | null): PublicCover 
   if (!mediaId) return null;
   const m = ctx.media.get(idStr(mediaId));
   if (!m || !m.alt_text.trim()) return null;
-  return { url: `${ctx.mediaBase}/${m.storage_key}`, alt: m.alt_text, credit: m.credit ?? null, width: m.width, height: m.height };
+  const url = `${ctx.mediaBase}/${m.storage_key}`;
+  return { url: ctx.signMedia ? `${url}?t=${ctx.signMedia(m.storage_key)}` : url, alt: m.alt_text, credit: m.credit ?? null, width: m.width, height: m.height };
 }
 
 interface ContentLike {

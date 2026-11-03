@@ -90,12 +90,17 @@ export function makeLimiter(opts: LimiterOptions): RequestHandler {
   });
 }
 
-// docs/api-contract.md §1.3. `scale` multiplies public limits (RATE_LIMIT_SCALE); login is never scaled.
+// docs/api-contract.md §1.3. `scale` multiplies public limits (RATE_LIMIT_SCALE); the per-account login limit is never scaled.
 export const limits = {
   publicGeneral: (scale = 1) => makeLimiter({ windowMs: 60_000, limit: 120 * scale }),
+  // Images: a page shows many, so the limit is high; it only stops someone hammering the media lookup.
+  media: (scale = 1) => makeLimiter({ windowMs: 60_000, limit: 600 * scale }),
   search: (scale = 1) => makeLimiter({ windowMs: 60_000, limit: 30 * scale }),
   submissions: (scale = 1) => makeLimiter({ windowMs: 3_600_000, limit: 5 * scale }),
   contact: (scale = 1) => makeLimiter({ windowMs: 3_600_000, limit: 5 * scale }),
+  // Per address, across all emails: stops one machine trying many accounts (password spraying).
+  // The per-account limit below still applies to each email.
+  loginIp: (scale = 1) => makeLimiter({ windowMs: 15 * 60_000, limit: 20 * scale }),
   login: () =>
     makeLimiter({
       windowMs: 15 * 60_000,

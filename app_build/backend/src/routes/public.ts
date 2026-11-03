@@ -8,7 +8,7 @@ import { openingLines } from '../lib/content.js';
 import { escapeRegex, inList, publishedFilter, regex } from '../lib/queries.js';
 import { authorCard, contentCard, contentFull, loadContext } from '../lib/serializers.js';
 import { SETTING_KEYS } from '../lib/settings.js';
-import { verifyPreview } from '../lib/preview.js';
+import { mediaKey, previewKey, signMediaToken, verifyPreview } from '../lib/preview.js';
 import { limits } from '../middleware/security.js';
 import { currentIssueBlock, issueSitemapPaths } from './issues.js';
 import {
@@ -49,6 +49,7 @@ const paged = <T>(items: T[], total: number, page: number, page_size: number) =>
 export function createPublicRouter(env: Env): Router {
   const r = Router();
   const mediaBase = env.MEDIA_BASE_URL;
+  const mediaSecret = mediaKey(env);
 
   type Lean = Parameters<typeof contentCard>[0] & {
     _id: Types.ObjectId; body: string; body_format: 'verse' | 'prose';
@@ -204,12 +205,18 @@ export function createPublicRouter(env: Env): Router {
       Collection.find(f).sort({ published_at: -1 }).skip((q.page - 1) * q.page_size).limit(q.page_size).lean(),
       Collection.countDocuments(f),
     ]);
-    const items = await Promise.all(
-      docs.map(async (c) => ({
-        slug: c.slug, title: c.title, description: c.description ?? null,
-        works_count: (await memberCards(c._id)).length,
-      })),
+    // One count query for the whole page instead of loading every member's full card per collection.
+    const memberRows = await CollectionItem.find({ collection_id: inList(docs.map((c) => c._id)) }).select('collection_id content_id').lean();
+    const live = new Set(
+      (await Content.find({ _id: inList(memberRows.map((m) => m.content_id)), ...publishedFilter() }).select('_id').lean()).map((d) => String(d._id)),
     );
+    const counts = new Map<string, number>();
+    for (const m of memberRows) {
+      if (live.has(String(m.content_id))) counts.set(String(m.collection_id), (counts.get(String(m.collection_id)) ?? 0) + 1);
+    }
+    const items = docs.map((c) => ({
+      slug: c.slug, title: c.title, description: c.description ?? null, works_count: counts.get(String(c._id)) ?? 0,
+    }));
     return paged(items, total, q.page, q.page_size);
   }));
 
@@ -296,11 +303,14 @@ export function createPublicRouter(env: Env): Router {
     try {
       res.setHeader('Cache-Control', 'no-store');
       res.setHeader('X-Robots-Tag', 'noindex, nofollow');
-      const id = verifyPreview(String(req.params.token), env.SESSION_SECRET);
+      const id = verifyPreview(String(req.params.token), previewKey(env));
       if (!id || !/^[a-f0-9]{24}$/i.test(id)) throw notFound();
       const doc = await Content.findById(id).lean();
       if (!doc) throw notFound();
-      const ctx = await loadContext([doc as unknown as Lean], mediaBase, { allowPrivateMedia: true });
+      const ctx = await loadContext([doc as unknown as Lean], mediaBase, {
+        allowPrivateMedia: true,
+        signMedia: (key) => signMediaToken(key, mediaSecret),
+      });
       res.json({ ...contentFull(doc as unknown as Parameters<typeof contentFull>[0], ctx), preview: true, status: (doc as unknown as { status: string }).status });
     } catch (err) {
       next(err);

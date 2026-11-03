@@ -1,3 +1,5 @@
+import { unlink } from 'node:fs/promises';
+import path from 'node:path';
 import { Router } from 'express';
 import multer from 'multer';
 import { z } from 'zod';
@@ -9,6 +11,8 @@ import { stripHtml } from '../lib/sanitize.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 import { requireCsrf } from '../middleware/security.js';
 import { MAX_BYTES, processImage, storeImage } from '../services/media.js';
+import { STORAGE_KEY } from '../middleware/media.js';
+import { OBJECT_ID } from '../lib/admin.js';
 import { writeAudit } from '../services/audit.js';
 
 const patchBody = z.object({
@@ -50,8 +54,8 @@ export function createMediaRouter(env: Env): Router {
   r.delete('/:id', requireRoleOnly(env, 'site_admin'), async (req, res, next) => {
     try {
       const id = String(req.params.id);
-      if (!/^[a-f0-9]{24}$/i.test(id)) return next(notFound());
-      const doc = await MediaAsset.findById(id).lean();
+      if (!OBJECT_ID.test(id)) return next(notFound());
+      const doc = (await MediaAsset.findById(id).lean()) as { storage_key: string } | null;
       if (!doc) return next(notFound());
       const uses = await Promise.all([
         Content.countDocuments({ cover_media_id: id }), Author.countDocuments({ photo_media_id: id }),
@@ -61,6 +65,13 @@ export function createMediaRouter(env: Env): Router {
         return next(validationFailed([{ field: 'id', code: 'in_use', message_hi: 'यह चित्र उपयोग में है, इसे हटाया नहीं जा सकता' }]));
       }
       await MediaAsset.deleteOne({ _id: id });
+      // Remove the file too: a deleted image must not stay reachable at its old address or fill the disk.
+      // (The record is gone first, so the media gate already answers 404 even if the unlink fails.)
+      if (STORAGE_KEY.test(doc.storage_key)) {
+        await unlink(path.join(path.resolve(env.MEDIA_DIR), doc.storage_key)).catch((e: NodeJS.ErrnoException) => {
+          if (e.code !== 'ENOENT') req.log?.warn({ media_id: id, err_code: e.code }, 'media file could not be removed');
+        });
+      }
       await writeAudit({ actor_id: req.admin!.id, action: 'media.delete', entity: 'media_asset', entity_id: id, request_id: (req as { id?: string }).id });
       res.status(204).end();
     } catch (err) {
@@ -109,6 +120,7 @@ export function createMediaRouter(env: Env): Router {
 
   r.patch('/:id', async (req, res, next) => {
     try {
+      if (!OBJECT_ID.test(String(req.params.id))) return next(notFound());
       const parsed = patchBody.safeParse(req.body);
       if (!parsed.success) return next(validationFailed([{ field: 'body', code: 'invalid' }]));
       const set: Record<string, unknown> = {};
@@ -116,7 +128,7 @@ export function createMediaRouter(env: Env): Router {
       if (parsed.data.credit !== undefined) set.credit = stripHtml(parsed.data.credit).trim();
       if (parsed.data.permission_note !== undefined) set.permission_note = stripHtml(parsed.data.permission_note).trim();
       if (parsed.data.is_public !== undefined) set.is_public = parsed.data.is_public;
-      const doc = await MediaAsset.findByIdAndUpdate(req.params.id, { $set: set }, { returnDocument: 'after' });
+      const doc = await MediaAsset.findByIdAndUpdate(String(req.params.id), { $set: set }, { returnDocument: 'after' });
       if (!doc) return next(notFound());
       await writeAudit({ actor_id: req.admin!.id, action: 'media.update', entity: 'media_asset', entity_id: String(doc._id), request_id: (req as { id?: string }).id });
       res.json({ id: String(doc._id), alt_text: doc.alt_text, credit: doc.credit, is_public: doc.is_public });

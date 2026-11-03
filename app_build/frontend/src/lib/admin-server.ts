@@ -1,5 +1,6 @@
 import 'server-only';
 import { headers } from 'next/headers';
+import { clientAddress } from './api';
 
 const API_URL = process.env.API_URL ?? 'http://localhost:4000';
 
@@ -13,10 +14,11 @@ export async function getAdminMe(): Promise<AdminMe | null> {
   const h = await headers();
   const cookie = h.get('cookie');
   if (!cookie) return null;
+  const ip = clientAddress(h);
   try {
     const res = await fetch(`${API_URL}/api/v1/admin/auth/me`, {
       cache: 'no-store',
-      headers: { cookie, ...(h.get('x-forwarded-for') ? { 'x-forwarded-for': h.get('x-forwarded-for')! } : {}) },
+      headers: { cookie, ...(ip ? { 'x-forwarded-for': ip } : {}) },
     });
     if (!res.ok) return null;
     return (await res.json()) as AdminMe;
