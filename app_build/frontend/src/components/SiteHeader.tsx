@@ -5,7 +5,7 @@ import { getSubmissionConfig } from '@/lib/submission';
 import { HeaderNav, type NavItem } from './HeaderNav';
 import { GENRES } from './home/LiteraryCategories';
 
-// Header order from the approved homepage design. "गतिविधियाँ" stays out until D-25 allows it (ASSUMPTION D-25, D-29).
+// Header order from the approved canvas design (owner instruction 2026-11-04: गतिविधियाँ is shown, D-25 set aside).
 const NAV: NavItem[] = [
   { label: 'मुख्य पृष्ठ', href: '/' },
   { label: 'हमारे बारे में', href: '/hamare-bare-mein' },
@@ -13,6 +13,7 @@ const NAV: NavItem[] = [
   { label: 'साहित्य', href: '/sahitya', children: GENRES.map((g) => ({ label: g.label, href: g.href })) },
   { label: 'विचार', href: '/sahitya/vichar' },
   { label: 'रचनाकार', href: '/rachnakar' },
+  { label: 'गतिविधियाँ', href: '/gatividhiyan' },
   { label: 'अपनी रचना भेजें', href: '/rachna-bhejein' },
   { label: 'संपर्क', href: '/sampark' },
 ];

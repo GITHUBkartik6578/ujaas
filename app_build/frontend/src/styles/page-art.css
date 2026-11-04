@@ -1,0 +1,221 @@
+/*
+ * Hero artwork motion for the inner pages, generated from the approved canvas "UJAAS Homepage" (one artboard per page).
+ * Each rule is scoped to its page art; keyframes carry the page key. No colours here: they live in public/art.
+ */
+
+/* About */
+.art-about .ab-flame{transform-box:view-box;transform-origin:738px 298px;animation:ujFlicker-about 2.2s ease-in-out infinite}
+.art-about .ab-flame-glow{animation:abGlow-about 2.2s ease-in-out infinite}
+@keyframes ujFlicker-about{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
+@keyframes abGlow-about{0%,100%{opacity:.75}45%{opacity:1}}
+
+/* Editorial */
+.art-editorial .ed-flame{transform-box:view-box;transform-origin:792px 330px;animation:ujFlicker-editorial 2.4s ease-in-out infinite}
+.art-editorial .ed-flame-glow{animation:edGlow-editorial 2.4s ease-in-out infinite}
+@keyframes ujFlicker-editorial{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
+@keyframes edGlow-editorial{0%,100%{opacity:.7}45%{opacity:1}}
+
+/* Privacy */
+.art-privacy .pv-glint{transform-box:view-box;transform-origin:690px 420px;opacity:0;animation:pvGlint-privacy 5.5s ease-in-out 2s infinite}
+.art-privacy .pv-lamp{animation:pvLamp-privacy 3s ease-in-out infinite}
+@keyframes pvGlint-privacy{0%,70%,100%{opacity:0;transform:scale(.3) rotate(0deg)}80%{opacity:1;transform:scale(1.1) rotate(30deg)}90%{opacity:0;transform:scale(.6) rotate(60deg)}}
+@keyframes pvLamp-privacy{0%,100%{opacity:.75}50%{opacity:1}}
+
+/* Terms */
+.art-terms .tm-beam{transform-box:view-box;transform-origin:690px 254px;animation:tmBeam-terms 6s ease-in-out infinite}
+.art-terms .tm-pan-l{animation:tmPanL-terms 6s ease-in-out infinite}
+.art-terms .tm-pan-r{animation:tmPanR-terms 6s ease-in-out infinite}
+.art-terms .tm-warm{animation:tmWarm-terms 5s ease-in-out infinite}
+@keyframes tmBeam-terms{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes tmPanL-terms{0%,100%{transform:translateY(6.8px)}50%{transform:translateY(-6.8px)}}
+@keyframes tmPanR-terms{0%,100%{transform:translateY(-6.8px)}50%{transform:translateY(6.8px)}}
+@keyframes tmWarm-terms{0%,100%{opacity:.7}50%{opacity:1}}
+
+/* Copyright */
+.art-copyright .cp-stamp{animation:cpStamp-copyright 5.5s ease-in-out 1s infinite}
+.art-copyright .cp-imprint{opacity:.9;animation:cpImprint-copyright 5.5s ease-in-out 1s infinite}
+.art-copyright .cp-warm{animation:cpWarm-copyright 5s ease-in-out infinite}
+@keyframes cpStamp-copyright{0%,58%{transform:translateY(0px)}68%{transform:translateY(40px)}76%{transform:translateY(38px)}88%,100%{transform:translateY(0px)}}
+@keyframes cpImprint-copyright{0%,66%{opacity:0}72%,94%{opacity:.92}100%{opacity:0}}
+@keyframes cpWarm-copyright{0%,100%{opacity:.7}50%{opacity:1}}
+
+/* Events */
+.art-events .ev-f{transform-box:fill-box;transform-origin:50% 100%;animation:ujFlicker-events 2.3s ease-in-out infinite}
+.art-events .ev-f2{animation-duration:2.7s;animation-delay:-.6s}
+.art-events .ev-f3{animation-duration:2.1s;animation-delay:-1.1s}
+.art-events .ev-f4{animation-duration:2.5s;animation-delay:-.3s}
+.art-events .ev-f5{animation-duration:2.9s;animation-delay:-1.6s}
+.art-events .ev-glow{animation:evGlow-events 2.4s ease-in-out infinite}
+.art-events .ev-toran{transform-box:view-box;transform-origin:640px 0px;animation:evToran-events 6s ease-in-out infinite}
+@keyframes ujFlicker-events{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
+@keyframes evGlow-events{0%,100%{opacity:.75}45%{opacity:1}}
+@keyframes evToran-events{0%,100%{transform:rotate(0deg)}50%{transform:rotate(.8deg)}}
+
+/* Literature */
+.art-literature .sh-flip{transform-box:view-box;transform-origin:535px 400px;animation:shFlip-literature 6.5s ease-in-out 1.2s infinite}
+.art-literature .sh-flip-shade{animation:shShade-literature 6.5s ease-in-out 1.2s infinite;opacity:0}
+.art-literature .sh-diya{transform-box:view-box;transform-origin:262px 432px;animation:ujFlicker-literature 2.3s ease-in-out infinite}
+.art-literature .sh-glow{animation:shGlow-literature 2.3s ease-in-out infinite}
+@keyframes shFlip-literature{0%,55%{transform:scaleX(1)}76%{transform:scaleX(.04)}96%{transform:scaleX(-1)}96.01%,100%{transform:scaleX(1)}}
+@keyframes shShade-literature{0%,55%{opacity:0}70%{opacity:.35}82%{opacity:.2}96%,100%{opacity:0}}
+@keyframes ujFlicker-literature{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
+@keyframes shGlow-literature{0%,100%{opacity:.75}45%{opacity:1}}
+
+/* Category */
+.art-category .ct-star{animation:ctTwinkle-category 3.2s ease-in-out infinite}
+.art-category .ct-star:nth-child(2n){animation-duration:4.1s;animation-delay:-1.3s}
+.art-category .ct-star:nth-child(3n){animation-duration:2.7s;animation-delay:-2.1s}
+.art-category .ct-star:nth-child(5n){animation-duration:4.8s;animation-delay:-.7s}
+.art-category .ct-moon{animation:ctMoon-category 8s ease-in-out infinite}
+.art-category .ct-diya{transform-box:view-box;transform-origin:800px 498px;animation:ujFlicker-category 2.3s ease-in-out infinite}
+.art-category .ct-garland{transform-box:view-box;transform-origin:630px 512px;animation:ctSway-category 5s ease-in-out infinite}
+@keyframes ctTwinkle-category{0%,100%{opacity:.95}50%{opacity:.2}}
+@keyframes ctMoon-category{0%,100%{opacity:.75}50%{opacity:1}}
+@keyframes ujFlicker-category{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
+@keyframes ctSway-category{0%,100%{transform:rotate(0deg)}50%{transform:rotate(.6deg)}}
+
+/* Reading */
+.art-reading .rd-steam{opacity:0;animation:rdSteam-reading 4.5s ease-out infinite}
+.art-reading .rd-steam:nth-child(2){animation-delay:1.5s}
+.art-reading .rd-steam:nth-child(3){animation-delay:3s}
+.art-reading .rd-beam{animation:rdBeam-reading 9s ease-in-out infinite}
+.art-reading .rd-beam:nth-child(2){animation-delay:-3s}
+.art-reading .rd-beam:nth-child(3){animation-delay:-6s}
+@keyframes rdSteam-reading{0%{opacity:0;transform:translateY(10px) scaleX(.9)}25%{opacity:.75}100%{opacity:0;transform:translateY(-46px) scaleX(1.15)}}
+@keyframes rdBeam-reading{0%,100%{opacity:.25}50%{opacity:.6}}
+
+/* Writers */
+.art-writers .rk-lantern{transform-box:view-box;transform-origin:604px 214px;animation:rkSwing-writers 5s ease-in-out infinite}
+.art-writers .rk-lglow{animation:rkGlow-writers 2.4s ease-in-out infinite}
+.art-writers .rk-lflame{transform-box:fill-box;transform-origin:50% 100%;animation:ujFlicker-writers 2.1s ease-in-out infinite}
+.art-writers .rk-root{transform-box:fill-box;transform-origin:50% 0%;animation:rkRoot-writers 6s ease-in-out infinite}
+.art-writers .rk-root:nth-child(2n){animation-duration:7.5s;animation-delay:-2s}
+.art-writers .rk-root:nth-child(3n){animation-duration:5.2s;animation-delay:-3.4s}
+.art-writers .rk-canopy{transform-box:view-box;transform-origin:700px 300px;animation:rkCanopy-writers 9s ease-in-out infinite}
+@keyframes rkSwing-writers{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes rkGlow-writers{0%,100%{opacity:.7}45%{opacity:1}}
+@keyframes ujFlicker-writers{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
+@keyframes rkRoot-writers{0%,100%{transform:rotate(-1.5deg)}50%{transform:rotate(1.5deg)}}
+@keyframes rkCanopy-writers{0%,100%{transform:rotate(0deg)}50%{transform:rotate(.5deg)}}
+
+/* Profile */
+.art-profile .wp-flutter{transform-box:view-box;transform-origin:528px 384px;animation:wpFlutter-profile 4s ease-in-out infinite}
+.art-profile .wp-lamp{animation:wpLamp-profile 3s ease-in-out infinite}
+.art-profile .wp-curtain{transform-box:view-box;transform-origin:392px 66px;animation:wpCurtain-profile 6s ease-in-out infinite}
+@keyframes wpFlutter-profile{0%,60%,100%{transform:rotate(0deg) skewX(0deg)}72%{transform:rotate(-5deg) skewX(-3deg)}82%{transform:rotate(-2deg) skewX(2deg)}90%{transform:rotate(-3.5deg) skewX(-1deg)}}
+@keyframes wpLamp-profile{0%,100%{opacity:.75}50%{opacity:1}}
+@keyframes wpCurtain-profile{0%,100%{transform:skewX(0deg)}50%{transform:skewX(-2.5deg)}}
+
+/* Collections */
+.art-collections .sg-pull{transform-box:view-box;transform-origin:724px 440px;animation:sgPull-collections 6s ease-in-out 1s infinite}
+.art-collections .sg-diya{transform-box:view-box;transform-origin:440px 432px;animation:ujFlicker-collections 2.3s ease-in-out infinite}
+.art-collections .sg-glow{animation:sgGlow-collections 2.3s ease-in-out infinite}
+@keyframes sgPull-collections{0%,55%,100%{transform:rotate(0deg) translateY(0px)}70%,82%{transform:rotate(-9deg) translateY(-10px)}}
+@keyframes ujFlicker-collections{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
+@keyframes sgGlow-collections{0%,100%{opacity:.75}45%{opacity:1}}
+
+/* Search */
+.art-search .kj-lens{animation:kjLens-search 9s ease-in-out infinite}
+.art-search .kj-glint{animation:kjGlint-search 3s ease-in-out infinite}
+.art-search .kj-diya{transform-box:view-box;transform-origin:150px 470px;animation:ujFlicker-search 2.3s ease-in-out infinite}
+@keyframes kjLens-search{0%,100%{transform:translate(-120px,-8px) rotate(-4deg)}25%{transform:translate(-30px,6px) rotate(0deg)}50%{transform:translate(60px,-4px) rotate(3deg)}75%{transform:translate(-10px,14px) rotate(-1deg)}}
+@keyframes kjGlint-search{0%,100%{opacity:.35}50%{opacity:.8}}
+@keyframes ujFlicker-search{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
+
+/* EPatrika */
+.art-epatrika .kp-bunting{transform-box:view-box;transform-origin:670px 60px;animation:kpSway-epatrika 6s ease-in-out infinite}
+.art-epatrika .kp-flag{transform-box:fill-box;transform-origin:50% 0;animation:kpFlag-epatrika 3.4s ease-in-out infinite}
+.art-epatrika .kp-flag:nth-child(2n){animation-duration:2.9s;animation-delay:-1s}
+.art-epatrika .kp-flag:nth-child(3n){animation-duration:3.8s;animation-delay:-2s}
+.art-epatrika .kp-tag{transform-box:view-box;transform-origin:712px 238px;animation:kpTag-epatrika 4s ease-in-out infinite}
+.art-epatrika .kp-glint{animation:kpGlint-epatrika 6s ease-in-out infinite}
+.art-epatrika .kp-sun{transform-box:view-box;transform-origin:660px 206px;animation:ujRays-epatrika 7s ease-in-out infinite}
+@keyframes kpSway-epatrika{0%,100%{transform:rotate(0deg)}35%{transform:rotate(1.4deg)}70%{transform:rotate(-1deg)}}
+@keyframes kpFlag-epatrika{0%,100%{transform:rotate(0deg)}30%{transform:rotate(7deg)}65%{transform:rotate(-5deg)}}
+@keyframes kpTag-epatrika{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(7deg)}}
+@keyframes kpGlint-epatrika{0%,55%{transform:translateX(-170px)}85%,100%{transform:translateX(190px)}}
+@keyframes ujRays-epatrika{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}
+
+/* Issue */
+.art-issue .ki-smoke path{stroke-dasharray:60 240;animation:kiSmoke-issue 7s linear infinite}
+.art-issue .ki-smoke path:nth-child(2){animation-delay:-2.4s;animation-duration:8s}
+.art-issue .ki-smoke path:nth-child(3){animation-delay:-4.8s;animation-duration:9s}
+.art-issue .ki-ember{animation:ujGlowPulse-issue 2s ease-in-out infinite}
+.art-issue .ki-ribbon{transform-box:view-box;transform-origin:641px 500px;animation:kiRibbon-issue 4.6s ease-in-out infinite}
+.art-issue .ki-garland{transform-box:view-box;transform-origin:456px 520px;animation:kiRibbon-issue 5.4s ease-in-out infinite}
+.art-issue .ki-page{transform-box:view-box;transform-origin:640px 450px;animation:kiPage-issue 6s ease-in-out infinite}
+.art-issue .ki-sun{transform-box:view-box;transform-origin:760px 420px;animation:ujRays-issue 7s ease-in-out infinite}
+@keyframes kiSmoke-issue{0%{stroke-dashoffset:300;opacity:0}12%{opacity:.75}80%{opacity:.35}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes ujGlowPulse-issue{0%,100%{opacity:.2}45%{opacity:.6}}
+@keyframes kiRibbon-issue{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(4deg)}}
+@keyframes kiPage-issue{0%,70%,100%{transform:skewY(0deg) scaleX(1)}82%{transform:skewY(-2deg) scaleX(.96)}}
+@keyframes ujRays-issue{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}
+
+/* Submit */
+.art-submit .kr-env{transform-box:view-box;transform-origin:540px 326px;animation:krPost-submit 6s ease-in-out infinite}
+.art-submit .kr-slotglow{animation:krSlot-submit 6s ease-in-out infinite}
+.art-submit .kr-head{transform-box:view-box;transform-origin:742px 226px;animation:krPeck-submit 3.2s ease-in-out infinite}
+.art-submit .kr-tail{transform-box:view-box;transform-origin:682px 236px;animation:kpTail-submit 4s ease-in-out infinite}
+@keyframes krPost-submit{0%{opacity:0;transform:translate(-50px,40px) rotate(-10deg)}14%{opacity:1;transform:translate(0px,0px) rotate(-5deg)}52%{opacity:1;transform:translate(160px,-4px) rotate(0deg) scale(1,1)}64%{opacity:1;transform:translate(160px,-4px) rotate(0deg) scale(.86,.12)}68%,100%{opacity:0;transform:translate(160px,-4px) rotate(0deg) scale(.86,.12)}}
+@keyframes krSlot-submit{0%,58%{opacity:0}66%{opacity:.85}82%,100%{opacity:0}}
+@keyframes krPeck-submit{0%,60%,100%{transform:translate(0px,0px) rotate(0deg)}70%{transform:translate(3px,3px) rotate(10deg)}80%{transform:translate(0px,0px) rotate(0deg)}88%{transform:translate(3px,2px) rotate(8deg)}}
+@keyframes kpTail-submit{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-5deg)}}
+
+/* Receipt */
+.art-receipt .kg-sunrays{transform-box:view-box;transform-origin:760px 306px;animation:kgSpin-receipt 60s linear infinite}
+.art-receipt .kg-sun{transform-box:view-box;transform-origin:760px 306px;animation:ujRays-receipt 7s ease-in-out infinite}
+.art-receipt .kg-pl2, .art-receipt .kg-pl1, .art-receipt .kg-pr1, .art-receipt .kg-pr2{transform-box:view-box;transform-origin:600px 356px;animation-duration:7s;animation-timing-function:ease-in-out;animation-iteration-count:infinite;animation-direction:alternate}
+.art-receipt .kg-pl2{animation-name:kgL2-receipt}
+.art-receipt .kg-pl1{animation-name:kgL1-receipt}
+.art-receipt .kg-pr1{animation-name:kgR1-receipt}
+.art-receipt .kg-pr2{animation-name:kgR2-receipt}
+.art-receipt .kg-glowl{animation:kgGlow-receipt 7s ease-in-out infinite alternate}
+.art-receipt .kg-ripple{transform-box:fill-box;transform-origin:50% 50%;animation:kgRipple-receipt 4s ease-out infinite}
+.art-receipt .kg-ripple:nth-child(2){animation-delay:-2s}
+.art-receipt .kg-flyer{animation:kgFly-receipt 16s linear infinite}
+.art-receipt .kg-bob{animation:kgBob-receipt 1.2s ease-in-out infinite}
+.art-receipt .kg-wing{transform-box:fill-box;transform-origin:50% 100%;animation:ujFlap-receipt .6s ease-in-out infinite}
+@keyframes kgSpin-receipt{to{transform:rotate(360deg)}}
+@keyframes ujRays-receipt{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}
+@keyframes kgL2-receipt{0%,15%{transform:rotate(-8deg)}85%,100%{transform:rotate(-58deg)}}
+@keyframes kgL1-receipt{0%,15%{transform:rotate(-4deg)}85%,100%{transform:rotate(-28deg)}}
+@keyframes kgR1-receipt{0%,15%{transform:rotate(4deg)}85%,100%{transform:rotate(28deg)}}
+@keyframes kgR2-receipt{0%,15%{transform:rotate(8deg)}85%,100%{transform:rotate(58deg)}}
+@keyframes kgGlow-receipt{0%,20%{opacity:0}85%,100%{opacity:.8}}
+@keyframes kgRipple-receipt{0%{opacity:.8;transform:scale(.6)}100%{opacity:0;transform:scale(1.6)}}
+@keyframes kgFly-receipt{0%{transform:translate(-160px,40px)}50%{transform:translate(500px,-10px)}100%{transform:translate(1160px,30px)}}
+@keyframes kgBob-receipt{0%,100%{transform:translateY(0px)}50%{transform:translateY(-5px)}}
+@keyframes ujFlap-receipt{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
+
+/* Contact */
+.art-contact .ks-bell{transform-box:view-box;transform-origin:838px 202px;animation:ksBell-contact 3.6s ease-in-out infinite}
+.art-contact .ks-clap{transform-box:view-box;transform-origin:838px 240px;animation:ksBell-contact 3.6s ease-in-out -.12s infinite}
+.art-contact .ks-wave path{opacity:0;transform-box:fill-box;transform-origin:0 50%;animation:ksWave-contact 3.6s ease-out infinite}
+.art-contact .ks-wave path:nth-child(2){animation-delay:.15s}
+.art-contact .ks-wave path:nth-child(3){animation-delay:.3s}
+.art-contact .ks-light{animation:ujSun-contact 5s ease-in-out infinite}
+.art-contact .ks-door{transform-box:view-box;transform-origin:756px 400px;animation:ksDoor-contact 9s ease-in-out infinite}
+.art-contact .ks-tulsi path{transform-box:fill-box;transform-origin:50% 100%;animation:ujFlutter-contact 4s ease-in-out infinite}
+.art-contact .ks-tulsi path:nth-child(2n){animation-duration:3.4s;animation-delay:-1s}
+.art-contact .ks-tulsi path:nth-child(3n){animation-duration:4.6s;animation-delay:-2s}
+@keyframes ksBell-contact{0%,40%,100%{transform:rotate(0deg)}50%{transform:rotate(14deg)}60%{transform:rotate(-11deg)}70%{transform:rotate(7deg)}80%{transform:rotate(-4deg)}90%{transform:rotate(1.5deg)}}
+@keyframes ksWave-contact{0%,46%{opacity:0;transform:scale(.6)}56%{opacity:.9}86%,100%{opacity:0;transform:scale(1.25)}}
+@keyframes ujSun-contact{0%,100%{opacity:.8}50%{opacity:1}}
+@keyframes ksDoor-contact{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.82)}}
+@keyframes ujFlutter-contact{0%,100%{transform:rotate(0deg)}25%{transform:rotate(4deg)}55%{transform:rotate(-3deg)}80%{transform:rotate(1.5deg)}}
+
+/* NotFound */
+.art-notfound .kn-page{animation:knPage-notfound 11s ease-in-out infinite}
+.art-notfound .kn-flap{transform-box:fill-box;transform-origin:0 50%;animation:knFlap-notfound 1.4s ease-in-out infinite}
+.art-notfound .kn-wind path{stroke-dasharray:40 160;animation:knWind-notfound 5s linear infinite}
+.art-notfound .kn-wind path:nth-child(2){animation-delay:-1.7s}
+.art-notfound .kn-wind path:nth-child(3){animation-delay:-3.4s}
+.art-notfound .kn-sign{transform-box:view-box;transform-origin:820px 560px;animation:knSign-notfound 6s ease-in-out infinite}
+.art-notfound .kn-board1{transform-box:view-box;transform-origin:820px 266px;animation:knBoard-notfound 4.5s ease-in-out infinite}
+.art-notfound .kn-board2{transform-box:view-box;transform-origin:820px 330px;animation:knBoard-notfound 5.2s ease-in-out -1.5s infinite}
+.art-notfound .kn-board3{transform-box:view-box;transform-origin:820px 394px;animation:knBoard-notfound 4.8s ease-in-out -3s infinite}
+@keyframes knPage-notfound{0%{transform:translate(0px,0px) rotate(0deg)}20%{transform:translate(-60px,-70px) rotate(-24deg)}40%{transform:translate(-150px,-120px) rotate(14deg)}60%{transform:translate(-230px,-90px) rotate(-18deg)}80%{transform:translate(-160px,-150px) rotate(22deg)}100%{transform:translate(0px,0px) rotate(0deg)}}
+@keyframes knFlap-notfound{0%,100%{transform:skewY(0deg) scaleX(1)}50%{transform:skewY(-8deg) scaleX(.88)}}
+@keyframes knWind-notfound{0%{stroke-dashoffset:200;opacity:0}15%{opacity:.8}85%{opacity:.6}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes knSign-notfound{0%,100%{transform:rotate(0deg)}50%{transform:rotate(1.2deg)}}
+@keyframes knBoard-notfound{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-2.5deg)}}

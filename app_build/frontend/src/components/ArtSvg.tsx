@@ -20,11 +20,13 @@ function load(file: string) {
 /**
  * Inlines a decorative SVG from public/art so the page stylesheet can animate its parts (flame, birds, petals,
  * leaves) and the global reduced-motion rule stops them. Hex colours stay in the art files, never in src.
- * `scope` suffixes every id, so the same file can appear more than once on a page.
+ * `scope` suffixes every id, so the same file can appear more than once on a page. `vars` fills `{{name}}` text slots
+ * (the writer's initial in the profile portrait) and is escaped; an unfilled slot is left empty.
  */
-export function ArtSvg({ file, scope, className, slice = false }: { file: string; scope: string; className?: string; slice?: boolean }) {
+export function ArtSvg({ file, scope, className, slice = false, vars = {} }: { file: string; scope: string; className?: string; slice?: boolean; vars?: Record<string, string> }) {
   const { viewBox, inner } = load(file);
-  const html = inner.replace(/id="([^"]+)"/g, `id="$1-${scope}"`).replace(/url\(#([^)]+)\)/g, `url(#$1-${scope})`);
+  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const html = inner.replace(/\{\{([\w.]+)\}\}/g, (_, k: string) => esc(vars[k] ?? '')).replace(/id="([^"]+)"/g, `id="$1-${scope}"`).replace(/url\(#([^)]+)\)/g, `url(#$1-${scope})`);
   return (
     <svg
       className={className}

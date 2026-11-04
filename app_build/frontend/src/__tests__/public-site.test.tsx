@@ -7,12 +7,12 @@ import { jsonLd } from '@/lib/site';
 
 describe('T-NAV-01 route registry: no link to a page that does not exist', () => {
   it('knows the built routes and dynamic prefixes', () => {
-    for (const ok of ['/', '/sahitya', '/rachnakar', '/sangrah', '/khoj', '/rachna-bhejein', '/sampark', '/e-patrika', '/e-patrika/ank-1', '/rachna/abc', '/sahitya/kavita', '/rachnakar/ek', '/sangrah/x']) {
+    for (const ok of ['/', '/sahitya', '/rachnakar', '/sangrah', '/khoj', '/rachna-bhejein', '/sampark', '/e-patrika', '/hamare-bare-mein', '/sampadkiya', '/gatividhiyan', '/niti/gopniyata', '/e-patrika/ank-1', '/rachna/abc', '/sahitya/kavita', '/rachnakar/ek', '/sangrah/x']) {
       expect(isBuilt(ok), ok).toBe(true);
     }
   });
   it('rejects unbuilt and malformed destinations', () => {
-    for (const no of ['/e-patrika/', '/hamare-bare-mein', '/rachna/', '/admin', '#', '']) {
+    for (const no of ['/e-patrika/', '/rss.xml', '/rachna/', '/admin', '#', '']) {
       expect(isBuilt(no), no).toBe(false);
     }
   });

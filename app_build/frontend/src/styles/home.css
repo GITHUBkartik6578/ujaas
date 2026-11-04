@@ -252,6 +252,7 @@
   transition: background 0.2s, color 0.2s;
 }
 .genre:hover { background: var(--color-linen); color: var(--color-wine-deep); }
+.genre-current, .genre-current:hover { background: var(--color-linen); color: var(--color-wine-deep); box-shadow: inset 0 -3px 0 var(--color-wine); }
 .genre-icon { display: block; transition: transform 0.2s; }
 .genre:hover .genre-icon { transform: translateY(-2px); }
 .genre-icon svg { display: block; fill: none; stroke: var(--color-wine); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -412,6 +413,10 @@
 .footer-links a:hover { color: var(--color-saffron-warm); }
 .footer-base { margin-top: 3rem; padding-top: 1.4rem; border-top: 1px solid color-mix(in srgb, var(--color-saffron-warm) 30%, transparent); }
 .footer-base p { margin: 0; max-width: none; font-size: var(--text-sm); color: var(--color-sandstone); }
+.footer-base { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; }
+.footer-policy { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: var(--text-sm); }
+.footer-policy a { color: var(--color-linen); text-decoration: none; }
+.footer-policy a:hover { color: var(--color-saffron-warm); }
 @media (max-width: 900px) {
   .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .footer-brand { grid-column: 1 / -1; }

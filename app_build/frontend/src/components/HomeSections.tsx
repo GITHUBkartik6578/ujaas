@@ -168,12 +168,21 @@ export async function SubmitCta() {
 
 const FOOTER_LINKS: Array<{ label: string; href: string }> = [
   { label: 'मुख्य पृष्ठ', href: '/' },
+  { label: 'हमारे बारे में', href: '/hamare-bare-mein' },
+  { label: 'संपादकीय', href: '/sampadkiya' },
   { label: 'ई-पत्रिका', href: '/e-patrika' },
   { label: 'साहित्य', href: '/sahitya' },
   { label: 'रचनाकार', href: '/rachnakar' },
   { label: 'संग्रह', href: '/sangrah' },
   { label: 'खोज', href: '/khoj' },
+  { label: 'गतिविधियाँ', href: '/gatividhiyan' },
   { label: 'संपर्क', href: '/sampark' },
+];
+
+const POLICY_LINKS: Array<{ label: string; href: string }> = [
+  { label: 'गोपनीयता नीति', href: '/niti/gopniyata' },
+  { label: 'उपयोग की शर्तें', href: '/niti/upyog-ki-sharten' },
+  { label: 'कॉपीराइट और रचना नीति', href: '/niti/copyright-aur-rachna-niti' },
 ];
 
 const FOOTER_GENRES: Array<{ label: string; type: string }> = [
@@ -218,6 +227,9 @@ export function SiteFooter() {
       </div>
       <div className="frame footer-base">
         <p>उजास — अपनी बात, अपना मंच</p>
+        <nav className="footer-policy" aria-label="नीतियाँ">
+          {POLICY_LINKS.filter((l) => isBuilt(l.href)).map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
+        </nav>
       </div>
     </footer>
   );

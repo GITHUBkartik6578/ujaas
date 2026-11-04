@@ -37,7 +37,8 @@ export const GENRES: Array<{ label: string; href: string; icon: React.ReactNode 
   },
 ];
 
-export function LiteraryCategories() {
+/** `current` marks the chosen genre when the bar filters the literature list. */
+export function LiteraryCategories({ current, title = 'साहित्यिक विधाएँ' }: { current?: string; title?: string } = {}) {
   return (
     <section className="genres" aria-labelledby="genres-h">
       <svg className="genres-band" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true">
@@ -48,7 +49,7 @@ export function LiteraryCategories() {
       </svg>
       <Mandala className="genres-mandala genres-mandala-l" />
       <Mandala className="genres-mandala genres-mandala-r" />
-      <h2 id="genres-h" className="visually-hidden">साहित्यिक विधाएँ</h2>
+      <h2 id="genres-h" className="visually-hidden">{title}</h2>
       <div className="genres-wrap">
         <div className="genres-panel">
           <Flourish className="genres-orn genres-orn-l" />
@@ -56,7 +57,7 @@ export function LiteraryCategories() {
           <ul className="genres-list">
             {GENRES.map((g) => (
               <li key={g.label}>
-                <Link className="genre" href={g.href}>
+                <Link className={current === g.href ? 'genre genre-current' : 'genre'} href={g.href} aria-current={current === g.href ? 'page' : undefined}>
                   <span className="genre-icon" aria-hidden="true">{g.icon}</span>
                   {g.label}
                 </Link>

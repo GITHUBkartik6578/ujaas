@@ -86,48 +86,54 @@ export function SubmissionForm({ config }: { config: Config }) {
   const err = (k: string) => errors[k];
   const bodyLen = [...f.body].length;
 
-  return (
-    <form onSubmit={submit} className="form" noValidate={false}>
-      {banner && <p className="form-banner" role="alert">{banner}</p>}
+  const inv = (k: string) => (err(k) ? true : undefined);
 
-      <div className="field">
-        <label htmlFor="display_name">आपका नाम *</label>
-        <input id="display_name" value={f.display_name} onChange={(e) => set('display_name', e.target.value)} maxLength={80} required autoComplete="name" aria-describedby={err('display_name') ? 'display_name-e' : undefined} />
-        {err('display_name') && <p className="form-error" id="display_name-e" role="alert">{err('display_name')}</p>}
+  return (
+    <form onSubmit={submit} className="pg-form" noValidate={false}>
+      {banner && <p className="pg-banner" role="alert">{banner}</p>}
+
+      <div className="pg-two">
+        <div className="pg-field">
+          <label htmlFor="display_name">आपका नाम *</label>
+          <input id="display_name" className="pg-in" value={f.display_name} onChange={(e) => set('display_name', e.target.value)} maxLength={80} required autoComplete="name" aria-invalid={inv('display_name')} aria-describedby={err('display_name') ? 'display_name-e' : undefined} />
+          {err('display_name') && <p className="pg-err" id="display_name-e" role="alert">{err('display_name')}</p>}
+        </div>
+        <div className="pg-field">
+          <label htmlFor="pen_name">उपनाम (वैकल्पिक)</label>
+          <input id="pen_name" className="pg-in" value={f.pen_name} onChange={(e) => set('pen_name', e.target.value)} maxLength={80} />
+        </div>
       </div>
-      <div className="field">
-        <label htmlFor="pen_name">उपनाम (वैकल्पिक)</label>
-        <input id="pen_name" value={f.pen_name} onChange={(e) => set('pen_name', e.target.value)} maxLength={80} />
+      <div className="pg-two">
+        <div className="pg-field">
+          <label htmlFor="email">ईमेल *</label>
+          <input id="email" type="email" className="pg-in" value={f.email} onChange={(e) => set('email', e.target.value)} maxLength={254} required autoComplete="email" aria-invalid={inv('email')} aria-describedby="email-h" />
+          <p className="pg-hint" id="email-h">यह सार्वजनिक नहीं होगा।</p>
+          {err('email') && <p className="pg-err" role="alert">{err('email')}</p>}
+        </div>
+        <div className="pg-field">
+          <label htmlFor="creation_type">रचना का प्रकार *</label>
+          <select id="creation_type" className="pg-in" value={f.creation_type} onChange={(e) => set('creation_type', e.target.value)} required aria-invalid={inv('creation_type')}>
+            {Object.entries(TYPE_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
+          </select>
+          {err('creation_type') && <p className="pg-err" role="alert">{err('creation_type')}</p>}
+        </div>
       </div>
-      <div className="field">
-        <label htmlFor="email">ईमेल *</label>
-        <input id="email" type="email" value={f.email} onChange={(e) => set('email', e.target.value)} maxLength={254} required autoComplete="email" aria-describedby="email-h" />
-        <p className="form-hint" id="email-h">यह सार्वजनिक नहीं होगा।</p>
-        {err('email') && <p className="form-error" role="alert">{err('email')}</p>}
-      </div>
-      <div className="field">
-        <label htmlFor="creation_type">रचना का प्रकार *</label>
-        <select id="creation_type" value={f.creation_type} onChange={(e) => set('creation_type', e.target.value)} required>
-          {Object.entries(TYPE_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-        </select>
-        {err('creation_type') && <p className="form-error" role="alert">{err('creation_type')}</p>}
-      </div>
-      <div className="field">
+      <div className="pg-field">
         <label htmlFor="title">रचना का शीर्षक *</label>
-        <input id="title" value={f.title} onChange={(e) => set('title', e.target.value)} maxLength={160} required />
-        {err('title') && <p className="form-error" role="alert">{err('title')}</p>}
+        <input id="title" className="pg-in" value={f.title} onChange={(e) => set('title', e.target.value)} maxLength={160} required aria-invalid={inv('title')} />
+        {err('title') && <p className="pg-err" role="alert">{err('title')}</p>}
       </div>
-      <div className="field">
+      <div className="pg-field">
         <label htmlFor="description">संक्षिप्त परिचय (वैकल्पिक)</label>
-        <textarea id="description" rows={2} value={f.description} onChange={(e) => set('description', e.target.value)} maxLength={300} />
-        <p className="form-hint">{[...f.description].length} / 300</p>
-        {err('description') && <p className="form-error" role="alert">{err('description')}</p>}
+        <textarea id="description" className="pg-in" rows={2} value={f.description} onChange={(e) => set('description', e.target.value)} maxLength={300} aria-invalid={inv('description')} />
+        <p className="pg-count">{[...f.description].length} / 300</p>
+        {err('description') && <p className="pg-err" role="alert">{err('description')}</p>}
       </div>
-      <div className="field">
+      <div className="pg-field">
         <label htmlFor="body">आपकी रचना *</label>
-        <textarea id="body" className="body-input" rows={14} value={f.body} onChange={(e) => set('body', e.target.value)} maxLength={config.body_max} required lang="hi" />
-        <p className="form-hint">{bodyLen} / {config.body_max}</p>
-        {err('body') && <p className="form-error" role="alert">{err('body')}</p>}
+        <textarea id="body" className="pg-in kr-body" rows={12} value={f.body} onChange={(e) => set('body', e.target.value)} maxLength={config.body_max} required lang="hi" placeholder="यहाँ अपनी रचना लिखें या चिपकाएँ…" aria-invalid={inv('body')} />
+        <p className="pg-count">{bodyLen} / {config.body_max}</p>
+        {err('body') && <p className="pg-err" role="alert">{err('body')}</p>}
       </div>
 
       {/* Honeypot: off screen, not focusable, ignored by assistive technology. People never fill it. */}
@@ -136,22 +142,26 @@ export function SubmissionForm({ config }: { config: Config }) {
         <input id="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
       </div>
 
-      <fieldset className="consents">
+      <fieldset className="kr-consents">
         <legend>सहमति (तीनों आवश्यक हैं)</legend>
         {(['original', 'publication', 'privacy'] as const).map((k) => (
-          <div key={k} className="field">
-            <label className="check">
+          <div key={k}>
+            <label className="pg-check">
               <input type="checkbox" checked={consents[k]} onChange={(e) => setConsents({ ...consents, [k]: e.target.checked })} required />
               <span>{config.consents[k]}</span>
             </label>
-            {err(`consent_${k}`) && <p className="form-error" role="alert">इस सहमति के बिना रचना नहीं भेजी जा सकती।</p>}
+            {err(`consent_${k}`) && <p className="pg-err kr-consent-err" role="alert">इस सहमति के बिना रचना नहीं भेजी जा सकती।</p>}
           </div>
         ))}
       </fieldset>
 
-      <p>
-        <button className="button" type="submit" disabled={busy}>{busy ? 'भेजी जा रही है…' : 'रचना भेजें'}</button>
-      </p>
+      <div className="pg-submit">
+        <button className="cta-btn cta-primary" type="submit" disabled={busy}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 2 2 10.5l7 2.6L19 5l-8.2 9.4V21l3.6-4.4L18 19z" /></svg>
+          {busy ? 'भेजी जा रही है…' : 'रचना भेजें'}
+        </button>
+        <span className="pg-hint">आपका लिखा हुआ भेजे जाने तक इसी ब्राउज़र में सुरक्षित रहता है।</span>
+      </div>
     </form>
   );
 }

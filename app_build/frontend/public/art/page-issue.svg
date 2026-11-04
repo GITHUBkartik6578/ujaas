@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+<defs>
+<linearGradient id="kiSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7CD"></stop><stop offset=".55" stop-color="#F3E0BF"></stop><stop offset="1" stop-color="#EFD8B2"></stop></linearGradient>
+<radialGradient id="kiSkyGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF3D6"></stop><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="kiPal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C79C"></stop><stop offset="1" stop-color="#C9A576"></stop></linearGradient>
+<linearGradient id="kiRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEDCBC"></stop><stop offset="1" stop-color="#E5CDA3"></stop></linearGradient>
+<linearGradient id="kiFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAD5AF"></stop><stop offset="1" stop-color="#D9BB8C"></stop></linearGradient>
+<linearGradient id="kiWoodTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9A6438"></stop><stop offset="1" stop-color="#7A4A28"></stop></linearGradient>
+<linearGradient id="kiWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6E4325"></stop><stop offset="1" stop-color="#4A2A15"></stop></linearGradient>
+<linearGradient id="kiPage" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F7EBD2"></stop><stop offset=".8" stop-color="#FFF7E6"></stop><stop offset="1" stop-color="#E9D6B2"></stop></linearGradient>
+<linearGradient id="kiPage2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E9D6B2"></stop><stop offset=".2" stop-color="#FFF7E6"></stop><stop offset="1" stop-color="#F4E5C8"></stop></linearGradient>
+<linearGradient id="kiGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3CB6A"></stop><stop offset=".5" stop-color="#C99A52"></stop><stop offset="1" stop-color="#8A5E22"></stop></linearGradient>
+<radialGradient id="kiMari" cx=".4" cy=".4" r=".6"><stop offset="0" stop-color="#FFC24A"></stop><stop offset=".7" stop-color="#F28A1C"></stop><stop offset="1" stop-color="#C9600E"></stop></radialGradient>
+<radialGradient id="kiMari2" cx=".4" cy=".4" r=".6"><stop offset="0" stop-color="#FFE07A"></stop><stop offset=".7" stop-color="#F5B323"></stop><stop offset="1" stop-color="#C98A12"></stop></radialGradient>
+</defs>
+<rect width="960" height="600" fill="url(#kiSky)"></rect>
+<circle class="uj-sunglow" cx="380" cy="190" r="300" fill="url(#kiSkyGlow)"></circle>
+<g fill="url(#kiPal)" opacity=".85">
+<rect x="20" y="236" width="96" height="64"></rect><path d="M32 238 Q68 208 104 238Z"></path>
+<rect x="116" y="188" width="230" height="112"></rect>
+<rect x="132" y="158" width="56" height="34"></rect><path d="M126 160 Q160 114 194 160Z"></path>
+<rect x="276" y="158" width="56" height="34"></rect><path d="M270 160 Q304 114 338 160Z"></path>
+<rect x="208" y="122" width="46" height="70"></rect><path d="M202 124 Q231 70 260 124Z"></path><rect x="229" y="54" width="4" height="26"></rect>
+<rect x="346" y="222" width="100" height="78"></rect><path d="M356 224 Q396 194 436 224Z"></path>
+<rect x="640" y="250" width="80" height="50"></rect><path d="M648 252 Q680 226 712 252Z"></path>
+</g>
+<g stroke="#C4A070" stroke-width="2.2" opacity=".8"><line x1="0" y1="300" x2="740" y2="300"></line><line x1="0" y1="306" x2="750" y2="306"></line></g>
+<rect x="0" y="310" width="960" height="66" fill="url(#kiRiver)"></rect>
+<g class="uj-shimmer" stroke="#FFF9EC" stroke-width="2" stroke-linecap="round" opacity=".85"><line x1="60" y1="324" x2="120" y2="324"></line><line x1="220" y1="334" x2="300" y2="334"></line><line x1="560" y1="326" x2="630" y2="326"></line><line x1="820" y1="336" x2="880" y2="336"></line></g>
+<g fill="#7A1424">
+<g class="uj-b1" transform="translate(560 96)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b2" transform="translate(620 140) scale(.7)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+</g>
+<path d="M0 378 Q480 358 960 370 V600 H0Z" fill="url(#kiFloor)"></path>
+<g stroke="#C9A578" stroke-width="1" opacity=".45" fill="none"><path d="M0 430 Q400 414 960 424"></path><path d="M0 560 Q420 544 960 552"></path></g>
+
+<!-- Chowki -->
+<ellipse cx="650" cy="594" rx="300" ry="12" fill="#5A3A1E" opacity=".16"></ellipse>
+<path d="M350 490 L940 490 L918 520 L372 520Z" fill="url(#kiWoodTop)"></path>
+<line x1="350" y1="490" x2="940" y2="490" stroke="url(#kiGold)" stroke-width="2"></line>
+<rect x="372" y="520" width="546" height="22" fill="url(#kiWood)"></rect>
+<g fill="none" stroke="#C99A52" stroke-width="1.2" opacity=".75"><path d="M392 531 H898"></path><circle cx="645" cy="531" r="6"></circle></g>
+<path d="M392 542 H420 L416 592 H398Z" fill="url(#kiWood)"></path>
+<path d="M870 542 H898 L892 592 H874Z" fill="url(#kiWood)"></path>
+
+<!-- Open issue -->
+<ellipse cx="640" cy="500" rx="250" ry="12" fill="#5A3A1E" opacity=".16"></ellipse>
+<path d="M640 410 Q520 378 400 416 L378 496 Q510 468 638 504 Q766 464 880 478 L862 390 Q750 374 640 410Z" fill="#DCC49A"></path>
+<path d="M640 402 Q530 370 406 406 L384 488 Q510 460 638 496Z" fill="url(#kiPage)" stroke="#CDB48A" stroke-width="1"></path>
+<g class="ki-page"><path d="M640 402 Q750 364 856 380 L874 470 Q766 454 638 496Z" fill="url(#kiPage2)" stroke="#CDB48A" stroke-width="1"></path>
+<g class="ki-sun"><g fill="#E7A64D"><path d="M760 398 L763 408 L757 408Z"></path><path d="M744 404 L752 410 L748 413Z"></path><path d="M776 404 L768 410 L772 413Z"></path></g><path d="M744 424 A16 16 0 0 1 776 424Z" fill="#F2B04A"></path></g>
+<g fill="none" stroke="#6A4A2E" stroke-width="1.4" stroke-linecap="round" opacity=".6" stroke-dasharray="14 4 8 4 20 5">
+<path d="M690 440 Q770 418 846 424"></path><path d="M676 452 Q770 430 848 436"></path><path d="M664 464 Q770 442 850 448"></path><path d="M660 476 Q740 458 820 462"></path>
+</g></g>
+<path d="M640 402 L638 496" stroke="#BFA172" stroke-width="2"></path>
+<text x="520" y="406" text-anchor="middle" font-family="Noto Serif Devanagari, serif" font-size="15" font-weight="700" fill="#7A1424" transform="rotate(-5 520 406)">अनुक्रम</text>
+<g transform="rotate(-6 510 440)">
+<g fill="#B9853D"><circle cx="430" cy="424" r="3.5"></circle><circle cx="428" cy="440" r="3.5"></circle><circle cx="426" cy="456" r="3.5"></circle><circle cx="424" cy="472" r="3.5"></circle></g>
+<g stroke="#6A4A2E" stroke-width="1.5" stroke-linecap="round" opacity=".7"><line x1="440" y1="424" x2="530" y2="424"></line><line x1="438" y1="440" x2="510" y2="440"></line><line x1="436" y1="456" x2="540" y2="456"></line><line x1="434" y1="472" x2="500" y2="472"></line></g>
+<g stroke="#B9853D" stroke-width="1.3" stroke-dasharray="1.5 4" stroke-linecap="round"><line x1="536" y1="424" x2="604" y2="424"></line><line x1="516" y1="440" x2="604" y2="440"></line><line x1="546" y1="456" x2="604" y2="456"></line><line x1="506" y1="472" x2="604" y2="472"></line></g>
+</g>
+
+<!-- Bookmark ribbon -->
+<g class="ki-ribbon"><path d="M636 404 H646 L648 566 L642 558 L635 568Z" fill="#7A1424"></path><path d="M640 404 V560" stroke="#E7A64D" stroke-width="1" opacity=".6"></path></g>
+
+<!-- Marigold garland -->
+<g>
+<path d="M386 470 Q420 500 462 518" fill="none" stroke="#5E8A3A" stroke-width="2"></path>
+<g fill="#6E9A42"><path d="M398 478 q-10 -2 -14 6 q10 2 14 -6Z"></path><path d="M440 508 q-6 10 0 16 q6 -8 0 -16Z"></path></g>
+<g stroke="#B5530C" stroke-width=".8"><circle cx="388" cy="468" r="9" fill="url(#kiMari)"></circle><circle cx="402" cy="482" r="9" fill="url(#kiMari2)"></circle><circle cx="417" cy="494" r="9" fill="url(#kiMari)"></circle><circle cx="432" cy="504" r="9" fill="url(#kiMari2)"></circle><circle cx="448" cy="512" r="9" fill="url(#kiMari)"></circle></g>
+<g class="ki-garland" stroke="#B5530C" stroke-width=".8">
+<line x1="462" y1="516" x2="456" y2="586" stroke="#5E8A3A" stroke-width="2"></line>
+<circle cx="462" cy="520" r="9" fill="url(#kiMari2)"></circle><circle cx="460" cy="536" r="9" fill="url(#kiMari)"></circle><circle cx="459" cy="552" r="9" fill="url(#kiMari2)"></circle><circle cx="457" cy="568" r="9" fill="url(#kiMari)"></circle><circle cx="456" cy="584" r="8" fill="url(#kiMari2)"></circle>
+</g>
+</g>
+
+<!-- Incense -->
+<path d="M892 488 Q906 476 926 486 Q910 494 892 488Z" fill="url(#kiGold)"></path>
+<line x1="906" y1="484" x2="884" y2="394" stroke="#6A3A22" stroke-width="2.2" stroke-linecap="round"></line>
+<circle class="ki-ember" cx="884" cy="394" r="3.4" fill="#F2702A"></circle>
+<g class="ki-smoke" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round">
+<path d="M884 390 C872 362 898 340 884 312 C872 286 900 262 888 232 C878 206 904 186 896 160"></path>
+<path d="M884 390 C896 366 870 344 886 318 C900 294 874 270 890 244 C902 222 878 200 892 176"></path>
+<path d="M884 390 C876 370 892 352 880 330 C868 308 894 290 882 266"></path>
+</g>
+
+<g fill="#FFFCF4" stroke="#E2D3B6" stroke-width=".8">
+<g class="uj-p1" transform="translate(700 150)"><g class="uj-petal"><ellipse rx="6" ry="3"></ellipse></g></g>
+<g class="uj-p2" transform="translate(500 120)"><g class="uj-petal"><ellipse rx="5.5" ry="2.8"></ellipse></g></g>
+<g class="uj-p3" transform="translate(800 180)"><g class="uj-petal"><ellipse rx="5" ry="2.6"></ellipse></g></g>
+</g>
+</svg>

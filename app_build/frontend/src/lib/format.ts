@@ -4,6 +4,12 @@ export const TYPE_LABEL: Record<string, string> = {
   sansmaran: 'संस्मरण', vichar: 'विचार', vimarsh: 'विमर्श', samiksha: 'समीक्षा', other: 'अन्य',
 };
 export const typeLabel = (t: string) => TYPE_LABEL[t] ?? t;
+/** First letters shown in the round type marks on cards (approved canvas). */
+export const TYPE_LETTER: Record<string, string> = {
+  kavita: 'क', ghazal: 'ग़', geet: 'गी', kahani: 'क', laghukatha: 'ल', nibandh: 'नि',
+  sansmaran: 'सं', vichar: 'वि', vimarsh: 'वि', samiksha: 'स', other: 'अ',
+};
+export const typeLetter = (t: string) => TYPE_LETTER[t] ?? 'र';
 
 export function formatDate(iso: string | null): string | null {
   if (!iso) return null;

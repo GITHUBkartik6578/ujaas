@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+<defs>
+<linearGradient id="pvSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7CD"></stop><stop offset=".55" stop-color="#F3E0BF"></stop><stop offset="1" stop-color="#EFD8B2"></stop></linearGradient>
+<radialGradient id="pvGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF3D6"></stop><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"></stop></radialGradient>
+<radialGradient id="pvWarm" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD98A" stop-opacity=".7"></stop><stop offset="1" stop-color="#FFD98A" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="pvPal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C79C"></stop><stop offset="1" stop-color="#C9A576"></stop></linearGradient>
+<linearGradient id="pvRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEDCBC"></stop><stop offset="1" stop-color="#E5CDA3"></stop></linearGradient>
+<linearGradient id="pvTable" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAD5AF"></stop><stop offset="1" stop-color="#D9BB8C"></stop></linearGradient>
+<linearGradient id="pvWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A5530"></stop><stop offset=".5" stop-color="#6A3D20"></stop><stop offset="1" stop-color="#4A2814"></stop></linearGradient>
+<linearGradient id="pvLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A26A3E"></stop><stop offset="1" stop-color="#6E4224"></stop></linearGradient>
+<linearGradient id="pvBrass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3CB6A"></stop><stop offset=".5" stop-color="#C08A30"></stop><stop offset="1" stop-color="#7A4E18"></stop></linearGradient>
+<linearGradient id="pvScroll" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6E2"></stop><stop offset=".5" stop-color="#F1DFBC"></stop><stop offset="1" stop-color="#D9C39D"></stop></linearGradient>
+<linearGradient id="pvVelvet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9A1F33"></stop><stop offset=".5" stop-color="#741226"></stop><stop offset="1" stop-color="#480812"></stop></linearGradient>
+<linearGradient id="pvVelvet2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E1A2E"></stop><stop offset="1" stop-color="#4C0913"></stop></linearGradient>
+</defs>
+<rect width="960" height="600" fill="url(#pvSky)"></rect>
+<circle class="uj-sunglow" cx="360" cy="190" r="300" fill="url(#pvGlow)"></circle>
+<g fill="#FFFFFF" opacity=".35"><ellipse cx="200" cy="64" rx="170" ry="22"></ellipse><ellipse cx="560" cy="110" rx="190" ry="18"></ellipse></g>
+<g fill="url(#pvPal)" opacity=".9">
+<rect x="20" y="236" width="90" height="64"></rect><path d="M32 238 Q65 210 98 238Z"></path>
+<rect x="110" y="186" width="250" height="114"></rect>
+<rect x="124" y="156" width="56" height="34"></rect><path d="M118 158 Q152 112 186 158Z"></path><rect x="150" y="100" width="4" height="20"></rect>
+<rect x="290" y="156" width="56" height="34"></rect><path d="M284 158 Q318 112 352 158Z"></path><rect x="316" y="100" width="4" height="20"></rect>
+<rect x="212" y="118" width="46" height="72"></rect><path d="M206 120 Q235 66 264 120Z"></path><rect x="233" y="48" width="4" height="28"></rect><circle cx="235" cy="46" r="4.5"></circle>
+<rect x="360" y="220" width="104" height="80"></rect><path d="M370 222 Q412 190 454 222Z"></path>
+<rect x="464" y="250" width="66" height="50"></rect>
+</g>
+<g fill="#B48C5C" opacity=".5">
+<rect x="132" y="210" width="9" height="16" rx="4.5"></rect><rect x="152" y="210" width="9" height="16" rx="4.5"></rect><rect x="172" y="210" width="9" height="16" rx="4.5"></rect><rect x="221" y="206" width="28" height="30" rx="14"></rect><rect x="296" y="210" width="9" height="16" rx="4.5"></rect><rect x="316" y="210" width="9" height="16" rx="4.5"></rect><rect x="336" y="210" width="9" height="16" rx="4.5"></rect>
+<rect x="132" y="252" width="9" height="18" rx="4.5"></rect><rect x="152" y="252" width="9" height="18" rx="4.5"></rect><rect x="172" y="252" width="9" height="18" rx="4.5"></rect><rect x="221" y="250" width="28" height="36" rx="14"></rect><rect x="296" y="252" width="9" height="18" rx="4.5"></rect><rect x="316" y="252" width="9" height="18" rx="4.5"></rect><rect x="336" y="252" width="9" height="18" rx="4.5"></rect>
+</g>
+<g stroke="#C4A070" stroke-width="2.2" opacity=".8"><line x1="0" y1="300" x2="620" y2="300"></line><line x1="0" y1="306" x2="630" y2="306"></line></g>
+<rect x="0" y="310" width="960" height="66" fill="url(#pvRiver)"></rect>
+<g class="uj-shimmer" stroke="#FFF9EC" stroke-width="2" stroke-linecap="round" opacity=".85">
+<line x1="60" y1="324" x2="120" y2="324"></line><line x1="220" y1="334" x2="300" y2="334"></line><line x1="360" y1="322" x2="430" y2="322"></line><line x1="470" y1="344" x2="540" y2="344"></line><line x1="140" y1="354" x2="200" y2="354"></line>
+</g>
+<g fill="#7A1424">
+<g class="uj-b1" transform="translate(92 74)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b2" transform="translate(150 120) scale(.75)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b3" transform="translate(58 140) scale(.6) rotate(8)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+</g>
+<path d="M0 378 Q480 358 960 370 V600 H0Z" fill="url(#pvTable)"></path>
+<g stroke="#C9A578" stroke-width="1" opacity=".45" fill="none"><path d="M0 420 Q400 404 960 414"></path><path d="M0 470 Q420 452 960 462"></path><path d="M0 530 Q400 514 960 524"></path></g>
+
+<circle class="pv-lamp" cx="690" cy="380" r="220" fill="url(#pvWarm)"></circle>
+<ellipse cx="690" cy="492" rx="200" ry="14" fill="#3A2412" opacity=".22"></ellipse>
+<rect x="512" y="372" width="356" height="118" rx="8" fill="url(#pvWood)"></rect>
+<g stroke="#3A2212" stroke-width="1.2" opacity=".35"><line x1="512" y1="400" x2="868" y2="400"></line><line x1="512" y1="430" x2="868" y2="430"></line><line x1="512" y1="460" x2="868" y2="460"></line></g>
+<path d="M504 372 Q690 300 876 372 L876 384 L504 384Z" fill="url(#pvLid)"></path>
+<path d="M504 372 Q690 300 876 372" fill="none" stroke="#C99A52" stroke-width="3"></path>
+<rect x="504" y="378" width="372" height="10" rx="3" fill="url(#pvBrass)"></rect>
+<g fill="url(#pvBrass)"><path d="M512 388 H546 V398 H522 V478 H512Z"></path><path d="M868 388 H834 V398 H858 V478 H868Z"></path><path d="M512 490 H546 V480 H522 V410 H512Z" opacity=".0"></path></g>
+<g fill="#E7C27A"><circle cx="530" cy="440" r="3"></circle><circle cx="850" cy="440" r="3"></circle><circle cx="600" cy="444" r="2.5"></circle><circle cx="780" cy="444" r="2.5"></circle></g>
+<path d="M600 430 Q640 416 680 430 M700 430 Q740 416 780 430" fill="none" stroke="#C99A52" stroke-width="1.6"></path>
+<path d="M672 386 Q672 352 690 348 Q708 352 708 386" fill="none" stroke="url(#pvBrass)" stroke-width="7" stroke-linecap="round"></path>
+<rect x="660" y="384" width="60" height="58" rx="10" fill="url(#pvBrass)" stroke="#7A4E18" stroke-width="1.2"></rect>
+<circle cx="690" cy="408" r="6" fill="#3A2412"></circle><path d="M687 410 L693 410 L695 426 L685 426Z" fill="#3A2412"></path>
+<path d="M666 392 Q690 386 714 392" fill="none" stroke="#FFF1C4" stroke-width="1.6" opacity=".7"></path>
+<path class="pv-glint" d="M690 408 L693 417 L702 420 L693 423 L690 432 L687 423 L678 420 L687 417Z" fill="#FFF7DA"></path>
+
+<g transform="rotate(-8 400 470)">
+<rect x="300" y="452" width="200" height="40" rx="20" fill="url(#pvScroll)"></rect>
+<ellipse cx="300" cy="472" rx="12" ry="20" fill="#E9D6B2" stroke="#C9A06A" stroke-width="1.2"></ellipse>
+<ellipse cx="300" cy="472" rx="5" ry="9" fill="#C9A06A"></ellipse>
+<ellipse cx="500" cy="472" rx="12" ry="20" fill="#F1DFBC" stroke="#C9A06A" stroke-width="1.2"></ellipse>
+<rect x="392" y="450" width="16" height="44" fill="#7A1424"></rect>
+<path d="M400 494 L388 520 L398 516 L402 524 L406 516 L416 520 L404 494Z" fill="#650B18"></path>
+<circle cx="400" cy="472" r="13" fill="#650B18" stroke="#A92B42" stroke-width="1.4"></circle>
+<text x="400" y="478" text-anchor="middle" font-family="Yatra One, serif" font-size="15" fill="#E7C27A">उ</text>
+</g>
+
+<g transform="rotate(5 210 470)">
+<rect x="120" y="420" width="190" height="122" rx="4" fill="#F7E9CC" stroke="#D2B98C" stroke-width="1.2"></rect>
+<path d="M120 420 L215 488 L310 420" fill="none" stroke="#C9A878" stroke-width="1.6"></path>
+<path d="M120 542 L192 482 M310 542 L238 482" fill="none" stroke="#DCC59C" stroke-width="1.2"></path>
+<circle cx="215" cy="486" r="15" fill="#7A1424" stroke="#A92B42" stroke-width="1.4"></circle>
+<text x="215" y="492" text-anchor="middle" font-family="Yatra One, serif" font-size="16" fill="#E7C27A">उ</text>
+</g>
+
+<path d="M744 0 C780 56 772 132 820 192 C850 228 910 244 960 250 V0Z" fill="url(#pvVelvet)"></path>
+<g fill="none" stroke="#B0344A" stroke-width="2.5" opacity=".45"><path d="M784 0 C808 70 806 140 846 190"></path><path d="M826 0 C846 60 850 130 884 186"></path><path d="M880 0 C894 70 902 150 930 214"></path></g>
+<path d="M744 0 C780 56 772 132 820 192 C850 228 910 244 960 250" fill="none" stroke="#C99A52" stroke-width="9" opacity=".85"></path>
+<path d="M744 0 C780 56 772 132 820 192 C850 228 910 244 960 250" fill="none" stroke="#7A1424" stroke-width="3" stroke-dasharray="3 7"></path>
+
+<path d="M420 600 C520 574 620 560 720 534 C800 512 880 486 960 462 V600Z" fill="url(#pvVelvet2)"></path>
+<path d="M420 600 C520 574 620 560 720 534 C800 512 880 486 960 462" fill="none" stroke="#C99A52" stroke-width="10" opacity=".9"></path>
+<path d="M420 600 C520 574 620 560 720 534 C800 512 880 486 960 462" fill="none" stroke="#6A0F1C" stroke-width="3" stroke-dasharray="2 8"></path>
+
+<g fill="#FFFCF4" stroke="#E2D3B6" stroke-width=".8">
+<g class="uj-p1" transform="translate(600 110)"><g class="uj-petal"><ellipse rx="6.5" ry="3.2"></ellipse></g></g>
+<g class="uj-p2" transform="translate(470 96)"><g class="uj-petal"><ellipse rx="5.5" ry="2.8"></ellipse></g></g>
+<g class="uj-p3" transform="translate(540 150)"><g class="uj-petal"><ellipse rx="6" ry="3"></ellipse></g></g>
+</g>
+</svg>

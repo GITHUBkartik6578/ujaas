@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+<defs>
+<linearGradient id="wpWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1DDB8"></stop><stop offset="1" stop-color="#E2C391"></stop></linearGradient>
+<linearGradient id="wpSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7CD"></stop><stop offset="1" stop-color="#F0D9B0"></stop></linearGradient>
+<linearGradient id="wpPal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C79C"></stop><stop offset="1" stop-color="#C9A576"></stop></linearGradient>
+<linearGradient id="wpWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A5530"></stop><stop offset="1" stop-color="#4A2814"></stop></linearGradient>
+<linearGradient id="wpDesk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9A6036"></stop><stop offset=".3" stop-color="#7A4A28"></stop><stop offset="1" stop-color="#4A2814"></stop></linearGradient>
+<linearGradient id="wpCane" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E3BD7E"></stop><stop offset="1" stop-color="#B88A4E"></stop></linearGradient>
+<linearGradient id="wpPaper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF8E8"></stop><stop offset="1" stop-color="#EFDCB8"></stop></linearGradient>
+<linearGradient id="wpBrass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A5A1E"></stop><stop offset=".45" stop-color="#F0C25E"></stop><stop offset="1" stop-color="#9A6A24"></stop></linearGradient>
+<linearGradient id="wpShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A1A2C"></stop><stop offset="1" stop-color="#4C0913"></stop></linearGradient>
+<radialGradient id="wpGlowG" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD98A" stop-opacity=".85"></stop><stop offset="1" stop-color="#FFD98A" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="wpRug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A1424"></stop><stop offset="1" stop-color="#4C0913"></stop></linearGradient>
+<clipPath id="wpWin"><path d="M400 330 V150 Q400 74 490 66 Q580 74 580 150 V330Z"></path></clipPath>
+</defs>
+<rect width="960" height="600" fill="url(#wpWall)"></rect>
+<g stroke="#D4B482" stroke-width="1" opacity=".5"><line x1="0" y1="120" x2="960" y2="120"></line><line x1="0" y1="124" x2="960" y2="124"></line></g>
+
+<g clip-path="url(#wpWin)">
+<rect x="390" y="60" width="200" height="280" fill="url(#wpSky)"></rect>
+<g fill="url(#wpPal)" opacity=".85"><rect x="400" y="230" width="60" height="70"></rect><rect x="450" y="200" width="80" height="100"></rect><path d="M462 202 Q490 168 518 202Z"></path><rect x="486" y="150" width="8" height="30"></rect><rect x="530" y="240" width="50" height="60"></rect></g>
+<rect x="390" y="296" width="200" height="40" fill="#EAD5AF"></rect>
+<g class="uj-shimmer" stroke="#FFF9EC" stroke-width="2" stroke-linecap="round"><line x1="420" y1="310" x2="460" y2="310"></line><line x1="500" y1="320" x2="550" y2="320"></line></g>
+<g fill="#7A1424"><g class="uj-b1" transform="translate(440 110) scale(.6)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g></g>
+</g>
+<path d="M392 334 V148 Q392 66 490 56 Q588 66 588 148 V334" fill="none" stroke="url(#wpWood)" stroke-width="14"></path>
+<path d="M490 62 V330 M400 200 H580" stroke="#6A3D20" stroke-width="5"></path>
+<rect x="380" y="332" width="220" height="14" rx="3" fill="url(#wpWood)"></rect>
+<g class="wp-curtain"><path d="M380 50 Q420 60 410 140 Q402 220 420 340 L380 340Z" fill="#7A1424" opacity=".9"></path><path d="M380 50 Q420 60 410 140 Q402 220 420 340" fill="none" stroke="#C99A52" stroke-width="3"></path></g>
+
+<g>
+<ellipse cx="672" cy="208" rx="44" ry="56" fill="#3A2412" opacity=".12" transform="translate(4 6)"></ellipse>
+<ellipse cx="672" cy="208" rx="44" ry="56" fill="url(#wpBrass)"></ellipse>
+<ellipse cx="672" cy="208" rx="35" ry="46" fill="#7A1424"></ellipse>
+<ellipse cx="672" cy="208" rx="31" ry="42" fill="none" stroke="#E7C27A" stroke-width="1.2"></ellipse>
+<text x="672" y="222" text-anchor="middle" font-family="Yatra One, serif" font-size="38" fill="#F3D9A8">{{work0.initial}}</text>
+<path d="M672 146 L666 140 L672 132 L678 140Z" fill="#C99A52"></path>
+</g>
+
+<rect x="760" y="150" width="200" height="12" fill="url(#wpWood)"></rect>
+<g><rect x="772" y="98" width="16" height="52" fill="#7A1424"></rect><rect x="790" y="106" width="14" height="44" fill="#C99A52"></rect><rect x="806" y="94" width="18" height="56" fill="#5A2F1B"></rect><path d="M828 150 L838 104 L852 108 L842 150Z" fill="#A3283C"></path><rect x="862" y="110" width="14" height="40" fill="#E7C27A"></rect>
+<path d="M906 150 Q896 132 906 116 L922 116 Q932 132 922 150Z" fill="#C47A44"></path><g fill="#FFFDF6"><circle cx="908" cy="108" r="5"></circle><circle cx="918" cy="102" r="5"></circle><circle cx="924" cy="112" r="4.5"></circle></g></g>
+
+<circle class="wp-lamp" cx="830" cy="350" r="170" fill="url(#wpGlowG)"></circle>
+
+<rect x="0" y="470" width="960" height="130" fill="#C9A26E"></rect>
+<path d="M60 540 H960 V600 H40Z" fill="url(#wpRug)"></path>
+<path d="M72 548 H960" stroke="#C99A52" stroke-width="3"></path>
+<path d="M84 560 H960" stroke="#E7A64D" stroke-width="1.2" stroke-dasharray="4 6"></path>
+
+<rect x="440" y="402" width="520" height="20" fill="url(#wpDesk)"></rect>
+<rect x="460" y="420" width="500" height="64" fill="#5A3018"></rect>
+<g fill="#C99A52"><circle cx="560" cy="452" r="5"></circle><circle cx="720" cy="452" r="5"></circle><circle cx="880" cy="452" r="5"></circle></g>
+<g stroke="#3A1E10" stroke-width="1.4" opacity=".6"><line x1="640" y1="422" x2="640" y2="484"></line><line x1="800" y1="422" x2="800" y2="484"></line></g>
+<rect x="470" y="484" width="16" height="70" fill="#4A2814"></rect><rect x="930" y="484" width="16" height="70" fill="#4A2814"></rect>
+
+<g>
+<rect x="526" y="388" width="140" height="14" rx="2" fill="#E9D6B2"></rect>
+<rect x="522" y="382" width="140" height="10" rx="2" fill="#F1E2C4"></rect>
+<g class="wp-flutter">
+<path d="M528 384 L670 380 L668 386 L530 390Z" fill="url(#wpPaper)" stroke="#D2BB8F" stroke-width="1"></path>
+<g stroke="#6A4A2E" stroke-width="1" opacity=".6"><line x1="546" y1="384" x2="640" y2="382"></line></g>
+</g>
+</g>
+<g transform="translate(700 400)">
+<rect x="-14" y="-24" width="28" height="24" rx="5" fill="#231A17"></rect>
+<rect x="-10" y="-30" width="20" height="8" rx="3" fill="#3A2A22"></rect>
+<path d="M2 -28 L30 -86" stroke="#6E4F30" stroke-width="2.2"></path>
+<path d="M4 -34 C10 -60 22 -78 30 -86 C30 -70 22 -52 10 -38Z" fill="#E8CFA2" stroke="#B88E58" stroke-width=".8"></path>
+</g>
+
+<g>
+<ellipse cx="830" cy="402" rx="40" ry="6" fill="#3A2412" opacity=".25"></ellipse>
+<path d="M806 402 Q830 410 854 402 L846 390 Q830 394 814 390Z" fill="url(#wpBrass)"></path>
+<rect x="826" y="300" width="8" height="92" rx="3" fill="url(#wpBrass)"></rect>
+<path d="M790 304 L870 304 L850 254 L810 254Z" fill="url(#wpShade)"></path>
+<path d="M790 304 L870 304" stroke="#C99A52" stroke-width="3"></path>
+<path d="M810 254 L850 254" stroke="#C99A52" stroke-width="2"></path>
+<ellipse cx="830" cy="308" rx="34" ry="6" fill="#FFE6A6" opacity=".8"></ellipse>
+</g>
+
+<g>
+<path d="M300 370 Q300 330 330 330 L430 330 Q460 330 460 370 L452 470 L308 470Z" fill="url(#wpCane)" stroke="#8A5A2E" stroke-width="4"></path>
+<g stroke="#9A6A34" stroke-width="1.2" opacity=".7"><path d="M318 350 L440 460 M340 340 L452 440 M310 380 L420 470 M440 350 L318 460 M418 340 L308 440 M450 380 L340 470"></path></g>
+<path d="M284 470 L476 470 L486 494 L274 494Z" fill="#B88A4E" stroke="#8A5A2E" stroke-width="3"></path>
+<g fill="#8A5A2E"><rect x="290" y="494" width="10" height="70"></rect><rect x="460" y="494" width="10" height="70"></rect></g>
+<path d="M286 420 Q270 440 284 470 M474 420 Q490 440 476 470" fill="none" stroke="#8A5A2E" stroke-width="6" stroke-linecap="round"></path>
+<rect x="318" y="448" width="124" height="22" rx="8" fill="#7A1424"></rect>
+<g fill="#E2AE4A"><circle cx="332" cy="459" r="2"></circle><circle cx="380" cy="459" r="2"></circle><circle cx="428" cy="459" r="2"></circle></g>
+</g>
+</svg>

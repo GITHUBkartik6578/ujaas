@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+<defs>
+<linearGradient id="knSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7CD"></stop><stop offset=".55" stop-color="#F3E0BF"></stop><stop offset="1" stop-color="#EFD8B2"></stop></linearGradient>
+<radialGradient id="knSkyGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF3D6"></stop><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="knPal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C79C"></stop><stop offset="1" stop-color="#C9A576"></stop></linearGradient>
+<linearGradient id="knRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEDCBC"></stop><stop offset="1" stop-color="#E5CDA3"></stop></linearGradient>
+<linearGradient id="knFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAD5AF"></stop><stop offset="1" stop-color="#D9BB8C"></stop></linearGradient>
+<linearGradient id="knStep" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DCC6A0"></stop><stop offset="1" stop-color="#C4A87E"></stop></linearGradient>
+<linearGradient id="knPage" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F7EBD2"></stop><stop offset=".8" stop-color="#FFF7E6"></stop><stop offset="1" stop-color="#E9D6B2"></stop></linearGradient>
+<linearGradient id="knPage2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E9D6B2"></stop><stop offset=".2" stop-color="#FFF7E6"></stop><stop offset="1" stop-color="#F4E5C8"></stop></linearGradient>
+<linearGradient id="knWood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6E4325"></stop><stop offset=".5" stop-color="#8E5C33"></stop><stop offset="1" stop-color="#5E3820"></stop></linearGradient>
+<linearGradient id="knBoard" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9A6438"></stop><stop offset="1" stop-color="#7A4A28"></stop></linearGradient>
+<linearGradient id="knGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3CB6A"></stop><stop offset=".5" stop-color="#C99A52"></stop><stop offset="1" stop-color="#8A5E22"></stop></linearGradient>
+</defs>
+<rect width="960" height="600" fill="url(#knSky)"></rect>
+<circle class="uj-sunglow" cx="380" cy="190" r="300" fill="url(#knSkyGlow)"></circle>
+<g fill="url(#knPal)" opacity=".85">
+<rect x="20" y="236" width="96" height="64"></rect><path d="M32 238 Q68 208 104 238Z"></path>
+<rect x="116" y="188" width="230" height="112"></rect>
+<rect x="132" y="158" width="56" height="34"></rect><path d="M126 160 Q160 114 194 160Z"></path>
+<rect x="276" y="158" width="56" height="34"></rect><path d="M270 160 Q304 114 338 160Z"></path>
+<rect x="208" y="122" width="46" height="70"></rect><path d="M202 124 Q231 70 260 124Z"></path><rect x="229" y="54" width="4" height="26"></rect>
+<rect x="346" y="222" width="100" height="78"></rect><path d="M356 224 Q396 194 436 224Z"></path>
+<rect x="640" y="250" width="80" height="50"></rect><path d="M648 252 Q680 226 712 252Z"></path>
+</g>
+<g stroke="#C4A070" stroke-width="2.2" opacity=".8"><line x1="0" y1="300" x2="960" y2="300"></line><line x1="0" y1="306" x2="960" y2="306"></line></g>
+<rect x="0" y="310" width="960" height="66" fill="url(#knRiver)"></rect>
+<g class="uj-shimmer" stroke="#FFF9EC" stroke-width="2" stroke-linecap="round" opacity=".85"><line x1="60" y1="324" x2="120" y2="324"></line><line x1="220" y1="334" x2="300" y2="334"></line><line x1="500" y1="326" x2="560" y2="326"></line><line x1="860" y1="340" x2="920" y2="340"></line></g>
+<g fill="#7A1424">
+<g class="uj-b1" transform="translate(110 84)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b2" transform="translate(62 128) scale(.7)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+</g>
+<!-- Ghat steps -->
+<path d="M0 378 Q480 358 960 370 V600 H0Z" fill="url(#knFloor)"></path>
+<rect x="0" y="378" width="960" height="14" fill="url(#knStep)" opacity=".7"></rect>
+<rect x="0" y="398" width="960" height="14" fill="url(#knStep)" opacity=".5"></rect>
+<g stroke="#C9A578" stroke-width="1" opacity=".45" fill="none"><path d="M0 470 Q400 454 960 464"></path><path d="M0 540 Q420 522 960 532"></path></g>
+
+<!-- Wind -->
+<g class="kn-wind" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" opacity=".8">
+<path d="M760 170 Q680 150 610 180 Q560 200 520 170"></path>
+<path d="M820 230 Q720 210 640 240 Q590 258 540 236"></path>
+<path d="M700 120 Q620 104 560 126"></path>
+</g>
+
+<!-- Open book with a torn page -->
+<ellipse cx="560" cy="530" rx="210" ry="14" fill="#5A3A1E" opacity=".14"></ellipse>
+<path d="M560 450 Q450 418 340 452 L320 526 Q440 500 558 534 Q676 496 780 508 L764 430 Q660 414 560 450Z" fill="#DCC49A"></path>
+<path d="M560 442 Q458 410 346 444 L326 518 Q440 492 558 526Z" fill="url(#knPage)" stroke="#CDB48A" stroke-width="1"></path>
+<path d="M560 442 Q664 404 758 420 L774 500 Q676 486 558 526Z" fill="url(#knPage2)" stroke="#CDB48A" stroke-width="1"></path>
+<path d="M560 442 L558 526" stroke="#BFA172" stroke-width="2"></path>
+<g fill="none" stroke="#6A4A2E" stroke-width="1.4" stroke-linecap="round" opacity=".65" stroke-dasharray="16 4 9 4 22 5">
+<path d="M364 458 Q450 434 546 454"></path><path d="M360 470 Q450 446 546 466"></path><path d="M356 482 Q450 458 546 478"></path><path d="M352 494 Q440 472 520 488"></path>
+</g>
+<path d="M566 446 L572 452 L568 460 L575 468 L569 478 L576 488 L570 498 L577 508 L571 520" fill="none" stroke="#E9D6B2" stroke-width="5" stroke-linejoin="round"></path>
+<path d="M566 446 L572 452 L568 460 L575 468 L569 478 L576 488 L570 498 L577 508 L571 520" fill="none" stroke="#BFA172" stroke-width="1.2" stroke-linejoin="round"></path>
+
+<!-- Flying page -->
+<g class="kn-page"><g transform="translate(680 300) rotate(-12)">
+<g class="kn-flap">
+<path d="M0 0 L58 -6 L62 64 L4 70 Z" fill="#FFF7E6" stroke="#CDB48A" stroke-width="1.2"></path>
+<path d="M58 -6 L52 4 L56 12 L50 22 L56 32 L50 42 L56 52 L50 62 L62 64" fill="none" stroke="#BFA172" stroke-width="1"></path>
+<g stroke="#6A4A2E" stroke-width="1.3" stroke-linecap="round" opacity=".6"><line x1="10" y1="12" x2="44" y2="9"></line><line x1="10" y1="22" x2="40" y2="19"></line><line x1="10" y1="32" x2="44" y2="29"></line><line x1="10" y1="42" x2="34" y2="40"></line></g>
+<text x="31" y="60" text-anchor="middle" font-family="Yatra One, serif" font-size="11" fill="#7A1424">४०४</text>
+</g>
+</g></g>
+
+<!-- Signpost -->
+<g class="kn-sign">
+<ellipse cx="820" cy="562" rx="44" ry="8" fill="#5A3A1E" opacity=".2"></ellipse>
+<rect x="812" y="236" width="16" height="326" rx="3" fill="url(#knWood)"></rect>
+<path d="M808 236 Q820 220 832 236Z" fill="url(#knGold)"></path>
+<g class="kn-board1"><path d="M826 252 H912 L930 270 L912 288 H826Z" fill="url(#knBoard)" stroke="#5E3820" stroke-width="1.4"></path><path d="M832 258 H908 L920 270 L908 282 H832Z" fill="none" stroke="#C99A52" stroke-width="1"></path><text x="872" y="276" text-anchor="middle" font-family="Noto Sans Devanagari, sans-serif" font-size="15" font-weight="700" fill="#FFF3D6">साहित्य</text></g>
+<g class="kn-board2"><path d="M814 316 H720 L702 334 L720 352 H814Z" fill="url(#knBoard)" stroke="#5E3820" stroke-width="1.4"></path><path d="M808 322 H724 L712 334 L724 346 H808Z" fill="none" stroke="#C99A52" stroke-width="1"></path><text x="762" y="340" text-anchor="middle" font-family="Noto Sans Devanagari, sans-serif" font-size="15" font-weight="700" fill="#FFF3D6">रचनाकार</text></g>
+<g class="kn-board3"><path d="M826 380 H904 L922 398 L904 416 H826Z" fill="url(#knBoard)" stroke="#5E3820" stroke-width="1.4"></path><path d="M832 386 H900 L912 398 L900 410 H832Z" fill="none" stroke="#C99A52" stroke-width="1"></path><text x="868" y="404" text-anchor="middle" font-family="Noto Sans Devanagari, sans-serif" font-size="15" font-weight="700" fill="#FFF3D6">संग्रह</text></g>
+<g fill="#6E9A42"><path d="M806 560 q-10 -18 -4 -32 q6 16 4 32Z"></path><path d="M834 560 q10 -16 6 -30 q-8 14 -6 30Z"></path><path d="M820 562 q-2 -20 4 -30 q2 16 -4 30Z"></path></g>
+</g>
+
+<g fill="#FFFCF4" stroke="#E2D3B6" stroke-width=".8">
+<g class="uj-p1" transform="translate(600 140)"><g class="uj-petal"><ellipse rx="6" ry="3"></ellipse></g></g>
+<g class="uj-p2" transform="translate(480 110)"><g class="uj-petal"><ellipse rx="5.5" ry="2.8"></ellipse></g></g>
+<g class="uj-p3" transform="translate(900 170)"><g class="uj-petal"><ellipse rx="5" ry="2.6"></ellipse></g></g>
+</g>
+</svg>

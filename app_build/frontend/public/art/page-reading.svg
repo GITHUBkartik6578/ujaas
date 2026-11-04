@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+<defs>
+<linearGradient id="rdSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7CD"></stop><stop offset=".55" stop-color="#F3E0BF"></stop><stop offset="1" stop-color="#EFD8B2"></stop></linearGradient>
+<radialGradient id="rdSkyGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF3D6"></stop><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="rdBeamG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF6DA" stop-opacity=".9"></stop><stop offset="1" stop-color="#FFF6DA" stop-opacity="0"></stop></linearGradient>
+<linearGradient id="rdPal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C79C"></stop><stop offset="1" stop-color="#C9A576"></stop></linearGradient>
+<linearGradient id="rdRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEDCBC"></stop><stop offset="1" stop-color="#E5CDA3"></stop></linearGradient>
+<linearGradient id="rdTable" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAD5AF"></stop><stop offset="1" stop-color="#D9BB8C"></stop></linearGradient>
+<linearGradient id="rdPage" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F7EBD2"></stop><stop offset=".8" stop-color="#FFF7E6"></stop><stop offset="1" stop-color="#E9D6B2"></stop></linearGradient>
+<linearGradient id="rdPage2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E9D6B2"></stop><stop offset=".2" stop-color="#FFF7E6"></stop><stop offset="1" stop-color="#F4E5C8"></stop></linearGradient>
+<linearGradient id="rdClay" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A4A22"></stop><stop offset=".45" stop-color="#C47A44"></stop><stop offset="1" stop-color="#8A4A22"></stop></linearGradient>
+<linearGradient id="rdLeather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6A3A22"></stop><stop offset="1" stop-color="#2E170D"></stop></linearGradient>
+<linearGradient id="rdLeather2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A2030"></stop><stop offset="1" stop-color="#3C0A14"></stop></linearGradient>
+<linearGradient id="rdVelvet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9A1F33"></stop><stop offset=".5" stop-color="#741226"></stop><stop offset="1" stop-color="#480812"></stop></linearGradient>
+</defs>
+<rect width="960" height="600" fill="url(#rdSky)"></rect>
+<circle class="uj-sunglow" cx="360" cy="180" r="300" fill="url(#rdSkyGlow)"></circle>
+<g fill="url(#rdPal)" opacity=".85">
+<rect x="20" y="236" width="96" height="64"></rect><path d="M32 238 Q68 208 104 238Z"></path>
+<rect x="116" y="188" width="230" height="112"></rect>
+<rect x="132" y="158" width="56" height="34"></rect><path d="M126 160 Q160 114 194 160Z"></path>
+<rect x="276" y="158" width="56" height="34"></rect><path d="M270 160 Q304 114 338 160Z"></path>
+<rect x="208" y="122" width="46" height="70"></rect><path d="M202 124 Q231 70 260 124Z"></path><rect x="229" y="54" width="4" height="26"></rect>
+<rect x="346" y="222" width="100" height="78"></rect><path d="M356 224 Q396 194 436 224Z"></path>
+<rect x="446" y="250" width="70" height="50"></rect>
+</g>
+<g stroke="#C4A070" stroke-width="2.2" opacity=".8"><line x1="0" y1="300" x2="560" y2="300"></line><line x1="0" y1="306" x2="570" y2="306"></line></g>
+<rect x="0" y="310" width="960" height="66" fill="url(#rdRiver)"></rect>
+<g class="uj-shimmer" stroke="#FFF9EC" stroke-width="2" stroke-linecap="round" opacity=".85"><line x1="60" y1="324" x2="120" y2="324"></line><line x1="220" y1="334" x2="300" y2="334"></line><line x1="380" y1="322" x2="440" y2="322"></line><line x1="140" y1="354" x2="200" y2="354"></line></g>
+<g fill="#7A1424">
+<g class="uj-b1" transform="translate(110 84)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b2" transform="translate(62 128) scale(.7)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+</g>
+<path d="M0 378 Q480 358 960 370 V600 H0Z" fill="url(#rdTable)"></path>
+<g stroke="#C9A578" stroke-width="1" opacity=".45" fill="none"><path d="M0 420 Q400 404 960 414"></path><path d="M0 470 Q420 452 960 462"></path><path d="M0 530 Q400 514 960 524"></path></g>
+
+<g>
+<path class="rd-beam" d="M560 0 L640 0 L420 600 L300 600Z" fill="url(#rdBeamG)"></path>
+<path class="rd-beam" d="M680 0 L730 0 L560 600 L480 600Z" fill="url(#rdBeamG)"></path>
+<path class="rd-beam" d="M470 0 L500 0 L250 600 L200 600Z" fill="url(#rdBeamG)"></path>
+</g>
+
+<rect x="780" y="452" width="200" height="40" rx="7" fill="url(#rdLeather)"></rect><rect x="780" y="456" width="12" height="32" rx="3" fill="#EEDCB8"></rect>
+<rect x="796" y="414" width="180" height="40" rx="7" fill="url(#rdLeather2)"></rect><rect x="796" y="418" width="12" height="32" rx="3" fill="#F2E2C2"></rect>
+<g stroke="#D3A65B" stroke-width="1.8"><line x1="820" y1="452" x2="820" y2="492"></line><line x1="834" y1="414" x2="834" y2="454"></line><line x1="940" y1="414" x2="940" y2="454"></line></g>
+
+<ellipse cx="480" cy="504" rx="230" ry="16" fill="#5A3A1E" opacity=".14"></ellipse>
+<path d="M480 418 Q380 388 270 424 L250 498 Q370 472 478 508 Q590 468 708 482 L690 396 Q580 380 480 418Z" fill="#DCC49A"></path>
+<path d="M480 410 Q390 378 276 414 L256 490 Q370 464 478 500Z" fill="url(#rdPage)" stroke="#CDB48A" stroke-width="1"></path>
+<path d="M480 410 Q580 372 686 388 L702 474 Q590 458 478 500Z" fill="url(#rdPage2)" stroke="#CDB48A" stroke-width="1"></path>
+<path d="M480 410 L478 500" stroke="#BFA172" stroke-width="2"></path>
+<g fill="none" stroke="#6A4A2E" stroke-width="1.5" stroke-linecap="round" opacity=".72" stroke-dasharray="16 4 9 4 22 5 12 4">
+<path d="M300 426 Q380 400 466 420"></path><path d="M298 438 Q380 412 466 432"></path><path d="M296 450 Q380 424 466 444"></path><path d="M294 462 Q380 436 440 452"></path>
+</g>
+<g transform="translate(596 430)">
+<path d="M-30 30 Q0 4 34 -24" fill="none" stroke="#7C8A4A" stroke-width="1.6"></path>
+<g fill="#FFFDF6" stroke="#E2D3B6" stroke-width=".8"><ellipse cx="34" cy="-34" rx="5" ry="10"></ellipse><ellipse cx="34" cy="-34" rx="5" ry="10" transform="rotate(72 34 -24)"></ellipse><ellipse cx="34" cy="-34" rx="5" ry="10" transform="rotate(144 34 -24)"></ellipse><ellipse cx="34" cy="-34" rx="5" ry="10" transform="rotate(216 34 -24)"></ellipse><ellipse cx="34" cy="-34" rx="5" ry="10" transform="rotate(288 34 -24)"></ellipse></g>
+<circle cx="34" cy="-24" r="4" fill="#E9B23E"></circle>
+<path d="M-6 14 Q-16 6 -14 -4 Q-4 2 -6 14Z" fill="#8F9B57"></path>
+</g>
+<path d="M484 500 Q490 530 482 556 L490 552 L494 560 Q500 532 492 500Z" fill="#7A1424"></path>
+
+<g transform="translate(196 470) rotate(-12)" fill="none" stroke="#3A2412" stroke-width="3">
+<circle cx="0" cy="0" r="22"></circle><circle cx="56" cy="0" r="22"></circle><path d="M22 -4 Q28 -10 34 -4"></path><path d="M-22 -4 L-52 -14"></path><path d="M78 -4 L108 -14"></path>
+</g>
+
+<g>
+<g fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round">
+<path class="rd-steam" d="M748 388 q-10 -14 0 -28 q10 -14 0 -28"></path>
+<path class="rd-steam" d="M766 386 q10 -14 0 -28 q-10 -14 0 -28"></path>
+<path class="rd-steam" d="M784 388 q-10 -14 0 -28 q10 -14 0 -28"></path>
+</g>
+<ellipse cx="766" cy="474" rx="50" ry="8" fill="#3A2412" opacity=".2"></ellipse>
+<path d="M726 396 L806 396 L794 470 Q766 480 738 470Z" fill="url(#rdClay)"></path>
+<ellipse cx="766" cy="396" rx="40" ry="8" fill="#A65E30"></ellipse>
+<ellipse cx="766" cy="397" rx="34" ry="5.5" fill="#8A5A34"></ellipse>
+<ellipse cx="760" cy="396" rx="12" ry="2" fill="#C9935E" opacity=".7"></ellipse>
+<path d="M730 418 Q766 426 802 418" fill="none" stroke="#6E3A1A" stroke-width="1.4" opacity=".6"></path>
+</g>
+
+<path d="M880 0 C900 60 920 120 960 170 V0Z" fill="url(#rdVelvet)"></path>
+<path d="M880 0 C900 60 920 120 960 170" fill="none" stroke="#C99A52" stroke-width="8"></path>
+
+<g fill="#FFFCF4" stroke="#E2D3B6" stroke-width=".8">
+<g class="uj-p1" transform="translate(620 160)"><g class="uj-petal"><ellipse rx="6" ry="3"></ellipse></g></g>
+<g class="uj-p2" transform="translate(540 120)"><g class="uj-petal"><ellipse rx="5.5" ry="2.8"></ellipse></g></g>
+<g class="uj-p3" transform="translate(680 190)"><g class="uj-petal"><ellipse rx="5" ry="2.6"></ellipse></g></g>
+</g>
+</svg>

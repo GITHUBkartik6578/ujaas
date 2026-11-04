@@ -1,35 +1,47 @@
-'use client';
+import type { Metadata } from 'next';
+import { ArtSvg } from '@/components/ArtSvg';
+import { ReceiptTicket } from '@/components/ReceiptTicket';
+import { CheckIcon, dev, SectionHead } from '@/components/page/Blocks';
+import { GoldBand, PageHero } from '@/components/page/PageHero';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+export const metadata: Metadata = { title: 'रचना प्राप्त हुई', robots: { index: false, follow: false } };
 
-/**
- * Receipt: shown only right after a successful send. The reference lives in this tab's session storage, not in the
- * address, so it never reaches a log or a shared link. Opening this page any other way goes back to the form.
- */
+const NEXT: Array<[string, string]> = [
+  ['समीक्षा की प्रतीक्षा', 'आपकी रचना संपादकीय कतार में है।'],
+  ['संपादकीय समीक्षा', 'संपादक रचना पढ़ते हैं और ज़रूरत हो तो संशोधन माँग सकते हैं।'],
+  ['निर्णय', 'स्वीकृत रचना प्रकाशन की तैयारी में जाती है; प्रकाशन की गारंटी नहीं है।'],
+];
+
+/** Receipt after a send. The ticket itself is client-side because the reference is kept in this tab only. */
 export default function ReceiptPage() {
-  const router = useRouter();
-  const [ref, setRef] = useState<string | null>(null);
-
-  useEffect(() => {
-    let value: string | null = null;
-    try { value = sessionStorage.getItem('ujaas.submission.ref'); } catch { /* treated as no receipt */ }
-    if (!value) { router.replace('/rachna-bhejein'); return; }
-    // The receipt lives in this tab's session storage, which only exists in the browser.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setRef(value);
-  }, [router]);
-
-  if (!ref) return <div className="frame page"><p aria-busy="true">लोड हो रहा है…</p></div>;
   return (
-    <div className="frame page">
-      <meta name="robots" content="noindex, nofollow" />
-      <h1>आपकी रचना प्राप्त हुई</h1>
-      <p className="lead-text">धन्यवाद। आपका संदर्भ क्रमांक:</p>
-      <p className="reference" aria-label="संदर्भ क्रमांक"><strong>{ref}</strong></p>
-      <p>इसे सुरक्षित रखें। संपादकीय समीक्षा के बाद ही कोई रचना प्रकाशित होती है, और प्रकाशन की कोई गारंटी नहीं है।</p>
-      <p><Link href="/sahitya">साहित्य पढ़ें</Link></p>
-    </div>
+    <>
+      <PageHero
+        art="receipt" id="kg-h1" size="sm" title="आपकी रचना प्राप्त हुई" eyebrow="धन्यवाद"
+        crumbs={[{ label: 'मुख्य पृष्ठ', href: '/' }, { label: 'अपनी रचना भेजें', href: '/rachna-bhejein' }, { label: 'प्राप्ति' }]}
+        badge={<span className="kg-badge" aria-hidden="true"><CheckIcon size={36} /></span>}
+        lead="आपकी रचना उजास तक पहुँच गई है। नीचे अपना संदर्भ क्रमांक देखें और उसे सुरक्षित रखें।"
+      />
+      <GoldBand />
+
+      <section className="pg-sec pg-glow" aria-labelledby="kg-ref-h">
+        <div className="pg-wrap pg-narrow">
+          <ReceiptTicket mark={<ArtSvg file="ujaas-mark-light.svg" scope="kg" className="kg-mark" />} />
+
+          <div className="kg-next">
+            <SectionHead title="आगे क्या होगा" id="kg-next-h" />
+            <ol className="pg-grid cols-3">
+              {NEXT.map(([title, text], i) => (
+                <li key={title} className="pg-card kg-step">
+                  <span className="pg-medal pg-medal-sm" aria-hidden="true">{dev(i + 1)}</span>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

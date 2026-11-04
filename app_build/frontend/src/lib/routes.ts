@@ -3,7 +3,10 @@
  * so navigation and buttons consult this list. Add a path here in the same change that adds its page.
  * Source of truth for the full list of planned routes: docs/sitemap.md.
  */
-export const BUILT_ROUTES = new Set<string>(['/', '/sahitya', '/rachnakar', '/sangrah', '/khoj', '/rachna-bhejein', '/sampark', '/e-patrika']);
+export const BUILT_ROUTES = new Set<string>([
+  '/', '/sahitya', '/rachnakar', '/sangrah', '/khoj', '/rachna-bhejein', '/sampark', '/e-patrika',
+  '/hamare-bare-mein', '/sampadkiya', '/gatividhiyan', '/niti/gopniyata', '/niti/upyog-ki-sharten', '/niti/copyright-aur-rachna-niti',
+]);
 /** Dynamic routes: `/rachna/<slug>` and so on. */
 export const BUILT_PREFIXES = ['/rachna/', '/sahitya/', '/rachnakar/', '/sangrah/', '/e-patrika/'];
 // Admin screens are not part of the public navigation and never appear in header, footer or sitemap.

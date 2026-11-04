@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+<defs>
+<linearGradient id="kgSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7CD"></stop><stop offset=".55" stop-color="#F6DDB8"></stop><stop offset="1" stop-color="#F2D2A2"></stop></linearGradient>
+<radialGradient id="kgSkyGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFEBC2"></stop><stop offset="1" stop-color="#FFEBC2" stop-opacity="0"></stop></radialGradient>
+<radialGradient id="kgSunG" cx=".5" cy=".6" r=".6"><stop offset="0" stop-color="#FFE7A0"></stop><stop offset=".6" stop-color="#F6B24A"></stop><stop offset="1" stop-color="#E5862C"></stop></radialGradient>
+<linearGradient id="kgPal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C79C"></stop><stop offset="1" stop-color="#C9A576"></stop></linearGradient>
+<linearGradient id="kgRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2DDB6"></stop><stop offset="1" stop-color="#E5CDA3"></stop></linearGradient>
+<linearGradient id="kgBank" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAD5AF"></stop><stop offset="1" stop-color="#D9BB8C"></stop></linearGradient>
+<linearGradient id="kgPetal" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#E28A9A"></stop><stop offset=".6" stop-color="#F6C3CB"></stop><stop offset="1" stop-color="#FFF1F2"></stop></linearGradient>
+<linearGradient id="kgPetalB" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#C9677A"></stop><stop offset="1" stop-color="#F3B6C1"></stop></linearGradient>
+<radialGradient id="kgPad" cx=".5" cy=".4" r=".6"><stop offset="0" stop-color="#8FB06A"></stop><stop offset="1" stop-color="#5E8A3A"></stop></radialGradient>
+<radialGradient id="kgLotusGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE3A0" stop-opacity=".9"></stop><stop offset="1" stop-color="#FFE3A0" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="kgDove" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2ECE6"></stop><stop offset="1" stop-color="#BDB2AA"></stop></linearGradient>
+</defs>
+<rect width="960" height="600" fill="url(#kgSky)"></rect>
+<circle class="uj-sunglow" cx="760" cy="290" r="320" fill="url(#kgSkyGlow)"></circle>
+<!-- Rising sun -->
+<g class="kg-sunrays" fill="#F6C46A" opacity=".5">
+<path d="M760 306 L752 150 L768 150Z"></path><path d="M760 306 L838 170 L850 180Z"></path><path d="M760 306 L900 230 L906 244Z"></path><path d="M760 306 L670 180 L682 170Z"></path><path d="M760 306 L614 236 L620 222Z"></path><path d="M760 306 L940 296 L940 312Z"></path><path d="M760 306 L580 300 L580 314Z"></path>
+</g>
+<circle class="kg-sun" cx="760" cy="306" r="70" fill="url(#kgSunG)"></circle>
+<g fill="url(#kgPal)" opacity=".85">
+<rect x="20" y="236" width="96" height="64"></rect><path d="M32 238 Q68 208 104 238Z"></path>
+<rect x="116" y="188" width="230" height="112"></rect>
+<rect x="132" y="158" width="56" height="34"></rect><path d="M126 160 Q160 114 194 160Z"></path>
+<rect x="276" y="158" width="56" height="34"></rect><path d="M270 160 Q304 114 338 160Z"></path>
+<rect x="208" y="122" width="46" height="70"></rect><path d="M202 124 Q231 70 260 124Z"></path><rect x="229" y="54" width="4" height="26"></rect>
+<rect x="346" y="222" width="100" height="78"></rect><path d="M356 224 Q396 194 436 224Z"></path>
+</g>
+<g stroke="#C4A070" stroke-width="2.2" opacity=".8"><line x1="0" y1="300" x2="470" y2="300"></line><line x1="0" y1="306" x2="480" y2="306"></line></g>
+<rect x="0" y="308" width="960" height="142" fill="url(#kgRiver)"></rect>
+<g stroke="#F6C46A" stroke-width="3" stroke-linecap="round" opacity=".55"><line x1="720" y1="322" x2="800" y2="322"></line><line x1="736" y1="336" x2="784" y2="336"></line><line x1="748" y1="350" x2="772" y2="350"></line></g>
+<g class="uj-shimmer" stroke="#FFF9EC" stroke-width="2" stroke-linecap="round" opacity=".85"><line x1="60" y1="324" x2="120" y2="324"></line><line x1="220" y1="340" x2="300" y2="340"></line><line x1="420" y1="400" x2="480" y2="400"></line><line x1="820" y1="388" x2="890" y2="388"></line><line x1="680" y1="420" x2="740" y2="420"></line></g>
+
+<!-- Lotus -->
+<g>
+<ellipse class="kg-ripple" cx="600" cy="362" rx="70" ry="10" fill="none" stroke="#FFF9EC" stroke-width="1.6"></ellipse>
+<ellipse class="kg-ripple" cx="600" cy="362" rx="70" ry="10" fill="none" stroke="#FFF9EC" stroke-width="1.6"></ellipse>
+<ellipse cx="520" cy="372" rx="46" ry="11" fill="url(#kgPad)"></ellipse><path d="M520 372 L560 368" stroke="#4E7630" stroke-width="1.4"></path>
+<ellipse cx="690" cy="378" rx="38" ry="9" fill="url(#kgPad)"></ellipse><path d="M690 378 L724 374" stroke="#4E7630" stroke-width="1.4"></path>
+<ellipse cx="600" cy="362" rx="50" ry="10" fill="url(#kgPad)"></ellipse>
+<circle class="kg-glowl" cx="600" cy="330" r="60" fill="url(#kgLotusGlow)"></circle>
+<path class="kg-pl2" d="M600 356 Q584 330 600 296 Q616 330 600 356Z" fill="url(#kgPetalB)"></path>
+<path class="kg-pr2" d="M600 356 Q584 330 600 296 Q616 330 600 356Z" fill="url(#kgPetalB)"></path>
+<path class="kg-pl1" d="M600 356 Q582 326 600 290 Q618 326 600 356Z" fill="url(#kgPetal)"></path>
+<path class="kg-pr1" d="M600 356 Q582 326 600 290 Q618 326 600 356Z" fill="url(#kgPetal)"></path>
+<path d="M600 356 Q584 324 600 286 Q616 324 600 356Z" fill="url(#kgPetal)" stroke="#E7A6B2" stroke-width=".8"></path>
+<ellipse cx="600" cy="356" rx="16" ry="4" fill="#5E8A3A"></ellipse>
+</g>
+
+<!-- Near bank -->
+<path d="M0 450 Q480 428 960 444 V600 H0Z" fill="url(#kgBank)"></path>
+<g stroke="#C9A578" stroke-width="1" opacity=".45" fill="none"><path d="M0 500 Q400 484 960 494"></path><path d="M0 560 Q420 544 960 552"></path></g>
+<g fill="#8FA460" opacity=".75"><path d="M820 452 q4 -30 10 -46 q-2 22 2 46Z"></path><path d="M834 452 q8 -26 18 -38 q-8 20 -10 38Z"></path><path d="M806 452 q-4 -22 -12 -34 q10 14 18 34Z"></path></g>
+
+<g fill="#7A1424">
+<g class="uj-b1" transform="translate(130 84)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b2" transform="translate(70 126) scale(.7)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+</g>
+
+<!-- Pigeon with envelope -->
+<g class="kg-flyer"><g transform="translate(0 150)"><g class="kg-bob">
+<path class="kg-wing" d="M-6 -4 Q-20 -38 -40 -44 Q-22 -16 -18 0Z" fill="#CFC5BE"></path>
+<path d="M-34 4 L-52 -2 L-50 10Z" fill="#A99E98"></path>
+<ellipse cx="-12" cy="4" rx="26" ry="11" fill="url(#kgDove)"></ellipse>
+<circle cx="14" cy="-2" r="8" fill="url(#kgDove)"></circle>
+<circle cx="17" cy="-4" r="1.6" fill="#2B211E"></circle>
+<path d="M21 -1 L28 1 L21 3Z" fill="#C99A52"></path>
+<g transform="translate(22 4) rotate(12)"><rect x="0" y="0" width="26" height="17" rx="2" fill="#FFF9EE" stroke="#CDB48A" stroke-width="1"></rect><path d="M0 1 L13 10 L26 1" fill="none" stroke="#CDB48A" stroke-width="1"></path><circle cx="13" cy="10" r="3.4" fill="#7A1424"></circle></g>
+<path class="kg-wing" d="M-2 -2 Q4 -40 -10 -52 Q14 -36 10 0Z" fill="#E4DBD4"></path>
+</g></g></g>
+
+<g fill="#FFFCF4" stroke="#E2D3B6" stroke-width=".8">
+<g class="uj-p1" transform="translate(500 150)"><g class="uj-petal"><ellipse rx="6" ry="3"></ellipse></g></g>
+<g class="uj-p2" transform="translate(680 120)"><g class="uj-petal"><ellipse rx="5.5" ry="2.8"></ellipse></g></g>
+<g class="uj-p3" transform="translate(880 180)"><g class="uj-petal"><ellipse rx="5" ry="2.6"></ellipse></g></g>
+</g>
+</svg>

@@ -7,7 +7,10 @@ const API_URL = process.env.API_URL ?? 'http://localhost:4000';
 
 /** Published public URLs only, straight from the API's single published-only helper. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const fixed = ['/', '/sahitya', '/rachnakar', '/sangrah', '/e-patrika'].map((p) => ({ url: absUrl(p) }));
+  const fixed = [
+    '/', '/sahitya', '/rachnakar', '/sangrah', '/e-patrika', '/hamare-bare-mein', '/sampadkiya', '/gatividhiyan',
+    '/niti/gopniyata', '/niti/upyog-ki-sharten', '/niti/copyright-aur-rachna-niti',
+  ].map((p) => ({ url: absUrl(p) }));
   try {
     const res = await fetch(`${API_URL}/api/v1/sitemap-data`, { cache: 'no-store' });
     if (!res.ok) return fixed;

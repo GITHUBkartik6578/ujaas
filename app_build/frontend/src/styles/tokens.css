@@ -36,6 +36,26 @@
   --color-ink-warm: #2b211e;
   --color-muted-warm: #6d5a50;
 
+  /* inner pages (approved canvas, 2026-11-04): cards, notes, fields and the reading sheet */
+  --color-card: #fffbf4;
+  --color-card-hover: #fbeedb;
+  --color-rose: #f6e3d6;
+  --color-blush-soft: #f6e6ce;
+  --color-note-bg: #fdf1dc;
+  --color-gold-light: #f3d9a8;
+  --color-tint-end: #f8ebd6;
+  --color-sheet: #fffbf2;
+  --color-sheet-deep: #fbf0dc;
+  --color-field: #fffdf8;
+  --color-field-line: #d7b47c;
+  --color-highlight: #f3d08a;
+  --color-night-sheet: #2b1a16;
+  --color-night-sheet-deep: #1f1310;
+  --color-err: #b3261e;
+  --color-err-bg: #fff0ec;
+  --color-err-line: #e3a49c;
+  --color-err-ink: #8c1d18;
+
   /* hero artwork: the interactive quill layer (the static layers live in public/art) */
   --art-feather-1: #8a6238;
   --art-feather-2: #c79a62;

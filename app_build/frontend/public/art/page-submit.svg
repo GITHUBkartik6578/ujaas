@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+<defs>
+<linearGradient id="krSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7CD"></stop><stop offset=".55" stop-color="#F3E0BF"></stop><stop offset="1" stop-color="#EFD8B2"></stop></linearGradient>
+<radialGradient id="krSkyGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF3D6"></stop><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="krPal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C79C"></stop><stop offset="1" stop-color="#C9A576"></stop></linearGradient>
+<linearGradient id="krRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEDCBC"></stop><stop offset="1" stop-color="#E5CDA3"></stop></linearGradient>
+<linearGradient id="krFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EAD5AF"></stop><stop offset="1" stop-color="#D9BB8C"></stop></linearGradient>
+<linearGradient id="krBox" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7A0F1C"></stop><stop offset=".35" stop-color="#C42B33"></stop><stop offset=".6" stop-color="#A51E29"></stop><stop offset="1" stop-color="#5E0A14"></stop></linearGradient>
+<linearGradient id="krCap" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6A0C17"></stop><stop offset=".4" stop-color="#B0242E"></stop><stop offset="1" stop-color="#520812"></stop></linearGradient>
+<linearGradient id="krGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3CB6A"></stop><stop offset=".5" stop-color="#C99A52"></stop><stop offset="1" stop-color="#8A5E22"></stop></linearGradient>
+<linearGradient id="krEnv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF9EE"></stop><stop offset="1" stop-color="#F1E1C3"></stop></linearGradient>
+<linearGradient id="krStone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D8C3A0"></stop><stop offset="1" stop-color="#B89E78"></stop></linearGradient>
+<linearGradient id="krDove" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8E1DA"></stop><stop offset="1" stop-color="#B9AEA6"></stop></linearGradient>
+</defs>
+<rect width="960" height="600" fill="url(#krSky)"></rect>
+<circle class="uj-sunglow" cx="380" cy="190" r="300" fill="url(#krSkyGlow)"></circle>
+<g fill="url(#krPal)" opacity=".85">
+<rect x="20" y="236" width="96" height="64"></rect><path d="M32 238 Q68 208 104 238Z"></path>
+<rect x="116" y="188" width="230" height="112"></rect>
+<rect x="132" y="158" width="56" height="34"></rect><path d="M126 160 Q160 114 194 160Z"></path>
+<rect x="276" y="158" width="56" height="34"></rect><path d="M270 160 Q304 114 338 160Z"></path>
+<rect x="208" y="122" width="46" height="70"></rect><path d="M202 124 Q231 70 260 124Z"></path><rect x="229" y="54" width="4" height="26"></rect>
+<rect x="346" y="222" width="100" height="78"></rect><path d="M356 224 Q396 194 436 224Z"></path>
+<rect x="820" y="236" width="110" height="64"></rect><path d="M830 238 Q875 204 920 238Z"></path>
+</g>
+<g stroke="#C4A070" stroke-width="2.2" opacity=".8"><line x1="0" y1="300" x2="960" y2="300"></line><line x1="0" y1="306" x2="960" y2="306"></line></g>
+<rect x="0" y="310" width="960" height="66" fill="url(#krRiver)"></rect>
+<g class="uj-shimmer" stroke="#FFF9EC" stroke-width="2" stroke-linecap="round" opacity=".85"><line x1="60" y1="324" x2="120" y2="324"></line><line x1="220" y1="334" x2="300" y2="334"></line><line x1="470" y1="326" x2="530" y2="326"></line><line x1="830" y1="334" x2="900" y2="334"></line></g>
+<g fill="#7A1424">
+<g class="uj-b1" transform="translate(520 92)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b2" transform="translate(880 130) scale(.7)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+</g>
+<path d="M0 378 Q480 358 960 370 V600 H0Z" fill="url(#krFloor)"></path>
+<g stroke="#C9A578" stroke-width="1" opacity=".45" fill="none"><path d="M0 440 Q400 424 960 434"></path><path d="M0 520 Q420 502 960 512"></path></g>
+
+<!-- Post box -->
+<ellipse cx="712" cy="572" rx="120" ry="14" fill="#5A3A1E" opacity=".22"></ellipse>
+<rect x="642" y="540" width="140" height="32" rx="4" fill="url(#krStone)"></rect>
+<rect x="652" y="528" width="120" height="16" rx="3" fill="url(#krCap)"></rect>
+<rect x="660" y="262" width="104" height="270" fill="url(#krBox)"></rect>
+<path d="M650 266 Q712 196 774 266Z" fill="url(#krCap)"></path>
+<rect x="648" y="258" width="128" height="16" rx="6" fill="url(#krCap)"></rect>
+<line x1="650" y1="262" x2="774" y2="262" stroke="url(#krGold)" stroke-width="2"></line>
+<circle cx="712" cy="214" r="7" fill="url(#krGold)"></circle>
+<rect x="672" y="312" width="80" height="16" rx="8" fill="#2A0509"></rect>
+<rect class="kr-slotglow" x="676" y="315" width="72" height="10" rx="5" fill="#FFE3A0" opacity="0"></rect>
+<rect x="666" y="306" width="92" height="28" rx="14" fill="none" stroke="url(#krGold)" stroke-width="2.5"></rect>
+<rect x="676" y="360" width="72" height="62" rx="6" fill="#FFF6E2" stroke="url(#krGold)" stroke-width="2"></rect>
+<text x="712" y="388" text-anchor="middle" font-family="Yatra One, serif" font-size="20" fill="#7A1424">उजास</text>
+<text x="712" y="410" text-anchor="middle" font-family="Noto Sans Devanagari, sans-serif" font-size="11" font-weight="700" fill="#7A1424">रचना-पेटी</text>
+<rect x="690" y="446" width="44" height="54" rx="4" fill="none" stroke="#5E0A14" stroke-width="2"></rect>
+<circle cx="712" cy="472" r="4" fill="url(#krGold)"></circle>
+<g stroke="#E85A5E" stroke-width="3" opacity=".35"><line x1="676" y1="270" x2="676" y2="526"></line></g>
+
+<!-- Pigeon on top -->
+<g>
+<g class="kr-tail"><path d="M688 232 L664 226 L670 240Z" fill="#9E938C"></path></g>
+<ellipse cx="710" cy="232" rx="28" ry="14" fill="url(#krDove)"></ellipse>
+<path d="M694 226 Q712 214 728 228 Q712 236 694 226Z" fill="#A79C95"></path>
+<g stroke="#C2565A" stroke-width="2" stroke-linecap="round"><line x1="704" y1="244" x2="702" y2="252"></line><line x1="716" y1="244" x2="716" y2="252"></line></g>
+<g class="kr-head">
+<path d="M726 228 Q734 214 742 218 Q748 222 744 232 Z" fill="#8F9A8E" opacity=".9"></path>
+<circle cx="742" cy="214" r="9" fill="url(#krDove)"></circle>
+<circle cx="745" cy="212" r="1.8" fill="#2B211E"></circle>
+<path d="M750 214 L758 217 L750 218Z" fill="#C99A52"></path>
+</g>
+</g>
+
+<!-- Envelope flying in -->
+<g class="kr-env">
+<rect x="500" y="300" width="80" height="52" rx="3" fill="url(#krEnv)" stroke="#CDB48A" stroke-width="1.2"></rect>
+<path d="M500 302 L540 330 L580 302" fill="none" stroke="#CDB48A" stroke-width="1.2"></path>
+<path d="M500 352 L530 326 M580 352 L550 326" stroke="#E2D0AE" stroke-width="1"></path>
+<circle cx="540" cy="330" r="8" fill="#7A1424"></circle>
+<text x="540" y="334" text-anchor="middle" font-family="Yatra One, serif" font-size="10" fill="#F3D9A8">उ</text>
+</g>
+
+<!-- Bundle of letters -->
+<g>
+<rect x="436" y="530" width="96" height="30" rx="3" fill="#F4E5C8" stroke="#CDB48A" stroke-width="1" transform="rotate(-4 484 545)"></rect>
+<rect x="444" y="514" width="88" height="26" rx="3" fill="#FBF0DC" stroke="#CDB48A" stroke-width="1" transform="rotate(3 488 527)"></rect>
+<g stroke="#7A1424" stroke-width="2.4"><line x1="486" y1="512" x2="484" y2="562"></line></g>
+<path d="M478 510 Q486 500 494 510" fill="none" stroke="#7A1424" stroke-width="2"></path>
+</g>
+
+<g fill="#FFFCF4" stroke="#E2D3B6" stroke-width=".8">
+<g class="uj-p1" transform="translate(600 150)"><g class="uj-petal"><ellipse rx="6" ry="3"></ellipse></g></g>
+<g class="uj-p2" transform="translate(840 170)"><g class="uj-petal"><ellipse rx="5.5" ry="2.8"></ellipse></g></g>
+<g class="uj-p3" transform="translate(480 200)"><g class="uj-petal"><ellipse rx="5" ry="2.6"></ellipse></g></g>
+</g>
+</svg>

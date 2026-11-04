@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600">
+<defs>
+<linearGradient id="edSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E7CD"></stop><stop offset=".55" stop-color="#F3E0BF"></stop><stop offset="1" stop-color="#EFD8B2"></stop></linearGradient>
+<radialGradient id="edGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFF3D6"></stop><stop offset="1" stop-color="#FFF3D6" stop-opacity="0"></stop></radialGradient>
+<radialGradient id="edLampGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFD98A" stop-opacity=".95"></stop><stop offset=".45" stop-color="#FFD98A" stop-opacity=".3"></stop><stop offset="1" stop-color="#FFD98A" stop-opacity="0"></stop></radialGradient>
+<linearGradient id="edPal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C79C"></stop><stop offset="1" stop-color="#C9A576"></stop></linearGradient>
+<linearGradient id="edRiver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EEDCBC"></stop><stop offset="1" stop-color="#E5CDA3"></stop></linearGradient>
+<linearGradient id="edDesk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A5A34"></stop><stop offset=".25" stop-color="#6E4426"></stop><stop offset="1" stop-color="#4A2C18"></stop></linearGradient>
+<linearGradient id="edPaper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF8E8"></stop><stop offset="1" stop-color="#F1DFBC"></stop></linearGradient>
+<linearGradient id="edLeather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6A3A22"></stop><stop offset=".5" stop-color="#4A2616"></stop><stop offset="1" stop-color="#2E170D"></stop></linearGradient>
+<linearGradient id="edLeather2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A2030"></stop><stop offset=".5" stop-color="#5E1220"></stop><stop offset="1" stop-color="#3C0A14"></stop></linearGradient>
+<linearGradient id="edBrass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8A5A1E"></stop><stop offset=".45" stop-color="#F0C25E"></stop><stop offset="1" stop-color="#9A6A24"></stop></linearGradient>
+<linearGradient id="edGlass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFF3D6" stop-opacity=".35"></stop><stop offset=".5" stop-color="#FFFFFF" stop-opacity=".6"></stop><stop offset="1" stop-color="#FFF3D6" stop-opacity=".3"></stop></linearGradient>
+<linearGradient id="edVelvet" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9A1F33"></stop><stop offset=".5" stop-color="#741226"></stop><stop offset="1" stop-color="#480812"></stop></linearGradient>
+</defs>
+<rect width="960" height="600" fill="url(#edSky)"></rect>
+<circle class="uj-sunglow" cx="380" cy="190" r="300" fill="url(#edGlow)"></circle>
+<g fill="#FFFFFF" opacity=".35"><ellipse cx="220" cy="60" rx="170" ry="22"></ellipse><ellipse cx="560" cy="104" rx="180" ry="18"></ellipse></g>
+<g fill="url(#edPal)" opacity=".92">
+<rect x="40" y="226" width="96" height="74"></rect><path d="M52 228 Q88 196 124 228Z"></path>
+<rect x="130" y="176" width="240" height="124"></rect>
+<rect x="146" y="146" width="56" height="34"></rect><path d="M140 148 Q174 104 208 148Z"></path><rect x="172" y="92" width="4" height="20"></rect>
+<rect x="298" y="146" width="56" height="34"></rect><path d="M292 148 Q326 104 360 148Z"></path><rect x="324" y="92" width="4" height="20"></rect>
+<rect x="228" y="110" width="44" height="70"></rect><path d="M222 112 Q250 60 278 112Z"></path><rect x="248" y="42" width="4" height="26"></rect><circle cx="250" cy="40" r="4.5"></circle>
+<rect x="370" y="214" width="110" height="86"></rect><path d="M380 216 Q424 182 468 216Z"></path>
+<rect x="480" y="244" width="70" height="56"></rect>
+</g>
+<g fill="#B48C5C" opacity=".5">
+<rect x="150" y="200" width="9" height="16" rx="4.5"></rect><rect x="170" y="200" width="9" height="16" rx="4.5"></rect><rect x="190" y="200" width="9" height="16" rx="4.5"></rect><rect x="236" y="196" width="28" height="30" rx="14"></rect><rect x="300" y="200" width="9" height="16" rx="4.5"></rect><rect x="320" y="200" width="9" height="16" rx="4.5"></rect><rect x="340" y="200" width="9" height="16" rx="4.5"></rect>
+<rect x="150" y="246" width="9" height="18" rx="4.5"></rect><rect x="170" y="246" width="9" height="18" rx="4.5"></rect><rect x="190" y="246" width="9" height="18" rx="4.5"></rect><rect x="236" y="244" width="28" height="36" rx="14"></rect><rect x="300" y="246" width="9" height="18" rx="4.5"></rect><rect x="320" y="246" width="9" height="18" rx="4.5"></rect><rect x="340" y="246" width="9" height="18" rx="4.5"></rect>
+<rect x="386" y="236" width="8" height="14" rx="4"></rect><rect x="406" y="236" width="8" height="14" rx="4"></rect><rect x="426" y="236" width="8" height="14" rx="4"></rect><rect x="446" y="236" width="8" height="14" rx="4"></rect>
+</g>
+<g stroke="#C4A070" stroke-width="2.2" opacity=".8"><line x1="0" y1="300" x2="620" y2="300"></line><line x1="0" y1="306" x2="630" y2="306"></line></g>
+<rect x="0" y="310" width="960" height="60" fill="url(#edRiver)"></rect>
+<g class="uj-shimmer" stroke="#FFF9EC" stroke-width="2" stroke-linecap="round" opacity=".85">
+<line x1="60" y1="324" x2="120" y2="324"></line><line x1="220" y1="332" x2="300" y2="332"></line><line x1="360" y1="322" x2="430" y2="322"></line><line x1="480" y1="340" x2="560" y2="340"></line><line x1="140" y1="350" x2="200" y2="350"></line><line x1="620" y1="328" x2="680" y2="328"></line>
+</g>
+<g fill="#7A1424">
+<g class="uj-b1" transform="translate(96 76)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b2" transform="translate(160 118) scale(.75)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+<g class="uj-b3" transform="translate(64 140) scale(.6) rotate(8)"><g class="uj-bird-fly"><path class="uj-bird-wing" d="M-24 -6 Q-12 -14 0 2 Q12 -14 24 -6 Q10 -6 0 8 Q-10 -6 -24 -6Z"></path></g></g>
+</g>
+
+<path d="M0 372 Q480 354 960 366 V600 H0Z" fill="url(#edDesk)"></path>
+<path d="M0 372 Q480 354 960 366" fill="none" stroke="#B07A48" stroke-width="3"></path>
+<g stroke="#3A2212" stroke-width="1.2" opacity=".35" fill="none"><path d="M0 410 Q300 396 960 404"></path><path d="M0 452 Q420 436 960 446"></path><path d="M0 500 Q380 486 960 496"></path><path d="M0 552 Q460 538 960 548"></path></g>
+
+<circle class="ed-flame-glow" cx="792" cy="320" r="170" fill="url(#edLampGlow)"></circle>
+
+<rect x="628" y="408" width="300" height="58" rx="9" fill="url(#edLeather)"></rect>
+<rect x="628" y="414" width="16" height="46" rx="4" fill="#EEDCB8"></rect>
+<g stroke="#D3A65B" stroke-width="2"><line x1="668" y1="408" x2="668" y2="466"></line><line x1="676" y1="408" x2="676" y2="466"></line><line x1="890" y1="408" x2="890" y2="466"></line></g>
+<path d="M760 424 L772 437 L760 450 L748 437Z" fill="none" stroke="#D3A65B" stroke-width="1.8"></path>
+<rect x="648" y="360" width="268" height="50" rx="9" fill="url(#edLeather2)"></rect>
+<rect x="648" y="366" width="14" height="38" rx="4" fill="#F2E2C2"></rect>
+<g stroke="#D3A65B" stroke-width="2"><line x1="684" y1="360" x2="684" y2="410"></line><line x1="880" y1="360" x2="880" y2="410"></line></g>
+<circle cx="782" cy="385" r="11" fill="none" stroke="#D3A65B" stroke-width="1.6"></circle><circle cx="782" cy="385" r="3.5" fill="#D3A65B"></circle>
+
+<ellipse cx="792" cy="360" rx="58" ry="9" fill="#3A2412" opacity=".35"></ellipse>
+<path d="M748 360 Q792 372 836 360 L826 344 Q792 352 758 344Z" fill="url(#edBrass)"></path>
+<path d="M770 344 Q774 320 792 316 Q810 320 814 344Z" fill="url(#edBrass)"></path>
+<rect x="778" y="306" width="28" height="12" rx="3" fill="url(#edBrass)"></rect>
+<path d="M776 306 Q770 270 780 236 L804 236 Q814 270 808 306Z" fill="url(#edGlass)" stroke="#E7C27A" stroke-width="1.2"></path>
+<g class="ed-flame">
+<path d="M792 266 Q804 290 792 304 Q780 290 792 266Z" fill="#F0A23A"></path>
+<path d="M792 278 Q798 292 792 302 Q786 292 792 278Z" fill="#FFE6A6"></path>
+</g>
+<rect x="776" y="228" width="32" height="10" rx="3" fill="url(#edBrass)"></rect>
+<path d="M784 228 Q792 214 800 228" fill="none" stroke="#C08A30" stroke-width="2.4"></path>
+<path d="M786 250 Q784 272 788 296" fill="none" stroke="#FFFFFF" stroke-width="2" opacity=".5"></path>
+
+<g transform="rotate(-6 330 470)">
+<rect x="150" y="392" width="360" height="190" rx="3" fill="#E9D6B2"></rect>
+<rect x="140" y="384" width="360" height="190" rx="3" fill="url(#edPaper)" stroke="#D9C39D" stroke-width="1.2"></rect>
+<g fill="none" stroke="#6A4A2E" stroke-width="1.5" stroke-linecap="round" opacity=".75" stroke-dasharray="18 5 10 4 24 5 14 4">
+<path d="M172 418 H372"></path><path d="M172 436 H468"></path><path d="M172 454 H460"></path><path d="M172 472 H468"></path><path d="M172 490 H440"></path><path d="M172 508 H462"></path><path d="M172 526 H330"></path>
+</g>
+<path d="M360 548 q12 -18 22 -4 q8 12 18 -6 q10 -14 22 2 q8 10 22 -2" fill="none" stroke="#4C0913" stroke-width="2" stroke-linecap="round"></path>
+<g transform="translate(468 546)">
+<path d="M0 -24 Q14 -26 22 -14 Q30 -2 22 12 Q14 26 0 24 Q-16 26 -22 12 Q-30 -2 -22 -14 Q-14 -26 0 -24Z" fill="#7A1424"></path>
+<circle r="15" fill="#650B18" stroke="#A92B42" stroke-width="1.4"></circle>
+<text x="0" y="6" text-anchor="middle" font-family="Yatra One, serif" font-size="18" fill="#E7C27A">उ</text>
+</g>
+</g>
+
+<g transform="translate(232 478) rotate(-10)" fill="none" stroke="#3A2412" stroke-width="3">
+<circle cx="0" cy="0" r="26"></circle><circle cx="66" cy="0" r="26"></circle><path d="M26 -4 Q33 -12 40 -4"></path><path d="M-26 -4 L-62 -16"></path><path d="M92 -4 L128 -16"></path>
+<circle cx="0" cy="0" r="26" fill="#FFFFFF" fill-opacity=".18" stroke="none"></circle><circle cx="66" cy="0" r="26" fill="#FFFFFF" fill-opacity=".18" stroke="none"></circle>
+</g>
+
+<g transform="translate(410 430) rotate(-34)">
+<rect x="0" y="-6" width="170" height="12" rx="6" fill="#1E1513"></rect>
+<rect x="118" y="-6" width="12" height="12" fill="#C99A52"></rect>
+<rect x="134" y="-6" width="4" height="12" fill="#C99A52"></rect>
+<path d="M0 -6 L-30 0 L0 6Z" fill="#C99A52"></path>
+<line x1="-26" y1="0" x2="-6" y2="0" stroke="#7A4E18" stroke-width="1"></line>
+</g>
+
+<path d="M744 0 C780 56 772 132 820 192 C850 228 910 244 960 250 V0Z" fill="url(#edVelvet)"></path>
+<g fill="none" stroke="#B0344A" stroke-width="2.5" opacity=".45"><path d="M784 0 C808 70 806 140 846 190"></path><path d="M826 0 C846 60 850 130 884 186"></path><path d="M880 0 C894 70 902 150 930 214"></path></g>
+<path d="M744 0 C780 56 772 132 820 192 C850 228 910 244 960 250" fill="none" stroke="#C99A52" stroke-width="9" opacity=".85"></path>
+<path d="M744 0 C780 56 772 132 820 192 C850 228 910 244 960 250" fill="none" stroke="#7A1424" stroke-width="3" stroke-dasharray="3 7"></path>
+
+<g fill="#FFFCF4" stroke="#E2D3B6" stroke-width=".8">
+<g class="uj-p1" transform="translate(600 110)"><g class="uj-petal"><ellipse rx="6.5" ry="3.2"></ellipse></g></g>
+<g class="uj-p2" transform="translate(560 90)"><g class="uj-petal"><ellipse rx="5.5" ry="2.8"></ellipse></g></g>
+<g class="uj-p3" transform="translate(640 140)"><g class="uj-petal"><ellipse rx="6" ry="3"></ellipse></g></g>
+</g>
+</svg>
