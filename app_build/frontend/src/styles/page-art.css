@@ -54,12 +54,8 @@
 /* Literature */
 .art-literature .sh-flip{transform-box:view-box;transform-origin:535px 400px;animation:shFlip-literature 6.5s ease-in-out 1.2s infinite}
 .art-literature .sh-flip-shade{animation:shShade-literature 6.5s ease-in-out 1.2s infinite;opacity:0}
-.art-literature .sh-diya{transform-box:view-box;transform-origin:262px 432px;animation:ujFlicker-literature 2.3s ease-in-out infinite}
-.art-literature .sh-glow{animation:shGlow-literature 2.3s ease-in-out infinite}
 @keyframes shFlip-literature{0%,55%{transform:scaleX(1)}76%{transform:scaleX(.04)}96%{transform:scaleX(-1)}96.01%,100%{transform:scaleX(1)}}
 @keyframes shShade-literature{0%,55%{opacity:0}70%{opacity:.35}82%{opacity:.2}96%,100%{opacity:0}}
-@keyframes ujFlicker-literature{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
-@keyframes shGlow-literature{0%,100%{opacity:.75}45%{opacity:1}}
 
 /* Category */
 .art-category .ct-star{animation:ctTwinkle-category 3.2s ease-in-out infinite}
@@ -67,8 +63,8 @@
 .art-category .ct-star:nth-child(3n){animation-duration:2.7s;animation-delay:-2.1s}
 .art-category .ct-star:nth-child(5n){animation-duration:4.8s;animation-delay:-.7s}
 .art-category .ct-moon{animation:ctMoon-category 8s ease-in-out infinite}
-.art-category .ct-diya{transform-box:view-box;transform-origin:800px 498px;animation:ujFlicker-category 2.3s ease-in-out infinite}
-.art-category .ct-garland{transform-box:view-box;transform-origin:630px 512px;animation:ctSway-category 5s ease-in-out infinite}
+.art-category .ct-diya{transform-box:view-box;transform-origin:884px 418px;animation:ujFlicker-category 2.3s ease-in-out infinite}
+.art-category .ct-garland{transform-box:view-box;transform-origin:700px 456px;animation:ctSway-category 5s ease-in-out infinite}
 @keyframes ctTwinkle-category{0%,100%{opacity:.95}50%{opacity:.2}}
 @keyframes ctMoon-category{0%,100%{opacity:.75}50%{opacity:1}}
 @keyframes ujFlicker-category{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
@@ -188,20 +184,28 @@
 @keyframes ujFlap-receipt{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
 
 /* Contact */
-.art-contact .ks-bell{transform-box:view-box;transform-origin:838px 202px;animation:ksBell-contact 3.6s ease-in-out infinite}
-.art-contact .ks-clap{transform-box:view-box;transform-origin:838px 240px;animation:ksBell-contact 3.6s ease-in-out -.12s infinite}
+.art-contact .ks-bell{transform-box:view-box;transform-origin:836px 228px;animation:ksBell-contact 3.6s ease-in-out infinite}
+.art-contact .ks-clap{transform-box:view-box;transform-origin:836px 266px;animation:ksBell-contact 3.6s ease-in-out -.12s infinite}
 .art-contact .ks-wave path{opacity:0;transform-box:fill-box;transform-origin:0 50%;animation:ksWave-contact 3.6s ease-out infinite}
 .art-contact .ks-wave path:nth-child(2){animation-delay:.15s}
 .art-contact .ks-wave path:nth-child(3){animation-delay:.3s}
 .art-contact .ks-light{animation:ujSun-contact 5s ease-in-out infinite}
-.art-contact .ks-door{transform-box:view-box;transform-origin:756px 400px;animation:ksDoor-contact 9s ease-in-out infinite}
+.art-contact .ks-leaf-l{transform-box:view-box;transform-origin:606px 340px;transform:scaleX(.14) skewY(-4deg);animation:ksOpenL-contact 2.6s cubic-bezier(.5,.05,.2,1) .6s both}
+.art-contact .ks-leaf-r{transform-box:view-box;transform-origin:754px 340px;transform:scaleX(.14) skewY(4deg);animation:ksOpenR-contact 2.6s cubic-bezier(.5,.05,.2,1) .6s both}
+.art-contact .ks-leaf-shade{opacity:.4;animation:ksShade-contact 2.6s ease-in .6s both}
+.art-contact .ks-spill{opacity:1;animation:ksSpill-contact 2.6s ease-in .6s both}
+.art-contact .ks-flame{transform-box:fill-box;transform-origin:50% 100%;animation:ujFlicker-contact 2.2s ease-in-out infinite}
 .art-contact .ks-tulsi path{transform-box:fill-box;transform-origin:50% 100%;animation:ujFlutter-contact 4s ease-in-out infinite}
 .art-contact .ks-tulsi path:nth-child(2n){animation-duration:3.4s;animation-delay:-1s}
 .art-contact .ks-tulsi path:nth-child(3n){animation-duration:4.6s;animation-delay:-2s}
 @keyframes ksBell-contact{0%,40%,100%{transform:rotate(0deg)}50%{transform:rotate(14deg)}60%{transform:rotate(-11deg)}70%{transform:rotate(7deg)}80%{transform:rotate(-4deg)}90%{transform:rotate(1.5deg)}}
 @keyframes ksWave-contact{0%,46%{opacity:0;transform:scale(.6)}56%{opacity:.9}86%,100%{opacity:0;transform:scale(1.25)}}
 @keyframes ujSun-contact{0%,100%{opacity:.8}50%{opacity:1}}
-@keyframes ksDoor-contact{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.82)}}
+@keyframes ksOpenL-contact{from{transform:scaleX(1) skewY(0deg)}to{transform:scaleX(.14) skewY(-4deg)}}
+@keyframes ksOpenR-contact{from{transform:scaleX(1) skewY(0deg)}to{transform:scaleX(.14) skewY(4deg)}}
+@keyframes ksShade-contact{from{opacity:0}to{opacity:.4}}
+@keyframes ksSpill-contact{from{opacity:0}to{opacity:1}}
+@keyframes ujFlicker-contact{0%,100%{transform:scale(1,1) skewX(0deg)}18%{transform:scale(.95,1.08) skewX(-2.5deg)}40%{transform:scale(1.04,.94) skewX(1.5deg)}62%{transform:scale(.97,1.05) skewX(-1deg)}82%{transform:scale(1.02,.98) skewX(1deg)}}
 @keyframes ujFlutter-contact{0%,100%{transform:rotate(0deg)}25%{transform:rotate(4deg)}55%{transform:rotate(-3deg)}80%{transform:rotate(1.5deg)}}
 
 /* NotFound */

@@ -4,9 +4,12 @@ import path from 'node:path';
 
 const cache = new Map<string, { viewBox: string; inner: string }>();
 
-/** Reads a trusted artwork file from public/art once (the files are exported from the approved canvas design). */
+/**
+ * Reads a trusted artwork file from public/art (the files are exported from the approved canvas design).
+ * Production reads each file once; development reads it every time, so a re-exported scene shows without a restart.
+ */
 function load(file: string) {
-  let art = cache.get(file);
+  let art = process.env.NODE_ENV === 'production' ? cache.get(file) : undefined;
   if (!art) {
     const source = readFileSync(path.join(process.cwd(), 'public', 'art', file), 'utf8');
     const m = source.match(/<svg[^>]*viewBox="([^"]+)"[^>]*>([\s\S]*)<\/svg>\s*$/);
