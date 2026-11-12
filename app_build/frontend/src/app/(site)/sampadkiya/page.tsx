@@ -18,7 +18,7 @@ export default async function EditorialPage() {
   return (
     <>
       <PageHero
-        art="editorial" id="ed-h1" title="संपादकीय" eyebrow="संपादक की कलम से" tagline="अपनी बात — अपना मंच"
+        art="editorial" id="ed-h1" title="संपादकीय" eyebrow="संपादक की कलम से"
         crumbs={[{ label: 'मुख्य पृष्ठ', href: '/' }, { label: 'हमारे बारे में', href: '/hamare-bare-mein' }, { label: 'संपादकीय' }]}
         lead="हर अंक के साथ एक नई बातचीत — उजास की संपादकीय दृष्टि, उसके सरोकार और पाठकों व रचनाकारों से एक आत्मीय संवाद।"
       >

@@ -21,7 +21,7 @@ export default async function AboutPage() {
   return (
     <>
       <PageHero
-        art="about" id="ab-h1" size="md" title="हमारे बारे में" eyebrow="उजास का परिचय" tagline="अपनी बात — अपना मंच"
+        art="about" id="ab-h1" size="md" title="हमारे बारे में" eyebrow="उजास का परिचय"
         crumbs={[{ label: 'मुख्य पृष्ठ', href: '/' }, { label: 'हमारे बारे में' }]}
         lead="उजास हिंदी साहित्य, रचनात्मक अभिव्यक्ति, संस्कृति और सार्थक संवाद का एक विचारशील डिजिटल घर है — जहाँ हर रचनाकार की आवाज़ को सम्मान मिलता है और हर पाठक को अच्छा साहित्य।"
       >

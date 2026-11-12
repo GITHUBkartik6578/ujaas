@@ -34,7 +34,6 @@ export function HomeHero({ submitOpen }: { submitOpen: boolean }) {
               <path d="M4 44 C120 78 330 70 636 4 C350 62 140 68 4 48Z" fill="url(#heroSwash)" />
             </svg>
           </div>
-          <p className="hero-tagline">अपनी बात — अपना मंच</p>
           <LotusRule width={420} />
           <p className="hero-lead">
             विचार, संवेदना और सृजन की वह साहित्यिक जगह, जहाँ हर रचनाकार को अपनी बात कहने का स्वतंत्र और सम्मानजनक मंच मिलता है।

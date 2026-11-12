@@ -226,7 +226,6 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="frame footer-base">
-        <p>उजास — अपनी बात, अपना मंच</p>
         <nav className="footer-policy" aria-label="नीतियाँ">
           {POLICY_LINKS.filter((l) => isBuilt(l.href)).map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
         </nav>
