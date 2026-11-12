@@ -10,6 +10,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const fixed = [
     '/', '/sahitya', '/rachnakar', '/sangrah', '/e-patrika', '/hamare-bare-mein', '/sampadkiya', '/gatividhiyan',
     '/niti/gopniyata', '/niti/upyog-ki-sharten', '/niti/copyright-aur-rachna-niti',
+    // genre pages (the four that share a category slug are already listed by the API)
+    '/sahitya/geet', '/sahitya/laghukatha', '/sahitya/sansmaran', '/sahitya/nibandh',
   ].map((p) => ({ url: absUrl(p) }));
   try {
     const res = await fetch(`${API_URL}/api/v1/sitemap-data`, { cache: 'no-store' });

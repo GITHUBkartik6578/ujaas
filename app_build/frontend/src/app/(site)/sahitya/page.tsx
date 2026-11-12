@@ -36,7 +36,7 @@ export default async function LiteraturePage({ searchParams }: { searchParams: P
         crumbs={[{ label: 'मुख्य पृष्ठ', href: '/' }, { label: 'साहित्य' }]}
         lead="उजास पर प्रकाशित कविता, ग़ज़ल, गीत, कहानी, विचार और अन्य रचनाएँ — विधा चुनिए और पढ़ना शुरू कीजिए।"
       />
-      <LiteraryCategories current={type ? `/sahitya?type=${type}` : undefined} title="विधा के अनुसार चुनें" />
+      <LiteraryCategories current={type ? `/sahitya/${type}` : undefined} title="विधा के अनुसार चुनें" />
 
       <section className="pg-sec-tight" aria-labelledby="sh-works-h">
         <div className="pg-wrap">

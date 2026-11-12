@@ -220,7 +220,7 @@ export function SiteFooter() {
           <h2 className="footer-h">साहित्य</h2>
           <ul className="footer-links">
             {FOOTER_GENRES.map((g) => (
-              <li key={g.type}><Link href={`/sahitya?type=${g.type}`}>{g.label}</Link></li>
+              <li key={g.type}><Link href={`/sahitya/${g.type}`}>{g.label}</Link></li>
             ))}
           </ul>
         </nav>
