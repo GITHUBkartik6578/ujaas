@@ -342,7 +342,7 @@ select.pg-in {
 .wp-facts { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 2rem 1.5rem; text-align: center; }
 .wp-initial { width: 110px; height: 110px; font-size: 2.9rem; }
 .wp-photo { margin: 0; width: 140px; }
-.wp-photo img { width: 100%; height: auto; border-radius: 50%; display: block; box-shadow: 0 0 0 4px var(--color-card), 0 0 0 5.5px var(--color-gold-soft); }
+.wp-photo img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 50% 30%; border-radius: 50%; display: block; box-shadow: 0 0 0 4px var(--color-card), 0 0 0 5.5px var(--color-gold-soft); }
 .wp-photo figcaption { margin-top: 0.5rem; font-size: 0.8rem; color: var(--color-muted-warm); }
 .wp-name { margin: 0.25rem 0; font-family: var(--font-reading); font-size: 1.4rem; font-weight: 700; color: var(--color-wine-deep); }
 .wp-facts dl { width: 100%; margin: 0; display: grid; gap: 0; text-align: left; }
@@ -736,3 +736,142 @@ a.sg-book:hover { transform: translateY(-4px) rotate(-0.6deg); box-shadow: 12px 
 .ev-card-body h3 { margin: 0; font-size: 1.3rem; color: var(--color-wine-deep); }
 .ev-card-body p { margin: 0; font-size: 1rem; line-height: 1.75; color: var(--color-muted-warm); }
 .ev-facts { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.95rem; font-weight: 600; color: var(--color-wine-dark); }
+
+/* ---------- standard desktop size (owner request 2026-11-14: the layout filled a 1366px window too tightly) ---------- */
+/* Sizes only: nothing here touches the reading text, which stays at 18px or more. Phones and tablets keep their layouts. */
+@media (min-width: 961px) {
+  .top-strip-row { min-height: 2.5rem; }
+  .header-row { min-height: 4.5rem; padding-block: 0.25rem; }
+  .brand-mark { width: clamp(54px, 4.8vw, 68px); }
+  .brand-word { font-size: clamp(1.9rem, 2.7vw, 2.5rem); }
+  .nav-list { font-size: 1rem; }
+  .cta-btn { min-height: 3rem; padding: 0 1.4rem; font-size: 1rem; gap: 0.6rem; }
+
+  .hero-inner { padding: clamp(1.5rem, 2.4vw, 2.25rem) var(--frame) clamp(5.5rem, 6.4vw, 6.25rem); }
+  .hero-copy { gap: 0.45rem; }
+  .hero-eyebrow, .ph-eyebrow { font-size: clamp(1rem, 1.2vw, 1.2rem); }
+  .hero-title h1 { font-size: clamp(3.75rem, 5.6vw, 5.5rem); }
+  .hero-lead, .ph-lead { font-size: clamp(1rem, 1.2vw, 1.15rem); line-height: 1.65; }
+  .hero-ctas, .ph-ctas { gap: 0.9rem; margin-top: 0.75rem; }
+
+  .ph-inner { padding: clamp(1.25rem, 2.2vw, 2rem) var(--frame) clamp(2.5rem, 3.8vw, 3.25rem); }
+  .ph-copy { gap: 0.4rem; }
+  .ph-crumbs ol { font-size: 0.875rem; }
+  .ph-xl h1, .ph-xl .ph-display { font-size: clamp(3.5rem, 5.6vw, 5.25rem); }
+  .ph-lg h1 { font-size: clamp(3.1rem, 4.8vw, 4.5rem); }
+  .ph-md h1 { font-size: clamp(2.5rem, 3.8vw, 3.6rem); }
+  .ph-sm h1 { font-size: clamp(2.3rem, 3.5vw, 3.3rem); }
+  .ph-display { font-size: clamp(4.5rem, 7vw, 6.5rem); }
+  .ph h1.ph-sub { margin-top: 0.5rem; font-size: clamp(1.6rem, 2.3vw, 2.1rem); }
+  .ph-tagline { font-size: clamp(1.2rem, 1.6vw, 1.5rem); }
+  .gold-band { height: 44px; }
+
+  .pg-sec { padding-block: clamp(3rem, 4.8vw, 4.25rem); }
+  .pg-sec-tight { padding-block: 2rem clamp(3rem, 4.8vw, 4.25rem); }
+  .pg-head { margin-bottom: 2rem; }
+  .pg-head h2, .pg-h2, .section-head h2 { font-size: clamp(1.75rem, 2.5vw, 2.25rem); }
+  .section-head { margin-bottom: 2rem; }
+  .latest, .works, .writers, .discourse, .submit { padding-block: clamp(3rem, 4.8vw, 4.25rem); }
+  .latest-text h2, .discourse h2, .submit h2, .ab-lead h2 { font-size: clamp(1.75rem, 2.6vw, 2.25rem); }
+  .ed-sheet h2 { font-size: clamp(1.75rem, 2.6vw, 2.25rem); }
+  .site-footer { padding-block: 2.75rem 1.25rem; }
+}
+
+/* Components at a standard desktop size (owner request 2026-11-14: cards, icons, fields and the genre ribbon looked too large). */
+@media (min-width: 961px) {
+  /* hero art: on very wide screens keep it from stretching, so a scene never gets cropped harder than on a laptop */
+  .ph-art, .hero-art { left: max(35%, calc(50% - 12rem), calc(100% - 1100px)); }
+  .hero-inner { padding-bottom: clamp(4.5rem, 5.4vw, 5.25rem); }
+
+  /* genre ribbon */
+  .genres { margin-top: -54px; padding-bottom: 1.75rem; }
+  .genres-panel { border-radius: 20px; padding: 0.4rem clamp(0.75rem, 4vw, 3.75rem); box-shadow: inset 0 0 0 5px color-mix(in srgb, var(--color-paper) 90%, transparent), inset 0 0 0 6px color-mix(in srgb, var(--color-gold) 35%, transparent), 0 18px 36px -22px color-mix(in srgb, var(--color-wine-night) 75%, transparent); }
+  .genre { min-height: 5rem; gap: 0.35rem; padding: 0.5rem 0.3rem; font-size: 1.0625rem; }
+  .genre-icon svg { height: 32px; width: auto; }
+  .genres-orn { width: 28px; height: 28px; }
+  .genres-orn-l { left: 18px; } .genres-orn-r { right: 18px; }
+  .genres-mandala { width: 170px; height: 170px; }
+
+  /* cards and lists */
+  .wk-grid { gap: 1.1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+  .wk-band { padding: 0.6rem 0.95rem; }
+  .wk-mark { width: 28px; height: 28px; font-size: 0.9rem; }
+  .wk-body { gap: 0.45rem; padding: 1rem 1.15rem 1.15rem; }
+  .wk-title { font-size: 1.15rem; }
+  .wk-excerpt { font-size: 0.95rem; line-height: 1.75; }
+  .works-grid { gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr)); }
+  .work-band { height: 5.5rem; }
+  .work-body { gap: 0.45rem; padding: 1.1rem 1.25rem 1.3rem; }
+  .work-title { font-size: 1.2rem; }
+  .writers-grid { gap: 1.1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr)); }
+  .writer { padding: 1.4rem 1rem; gap: 0.5rem; }
+  .writer-initial, .writer-photo { width: 84px; height: 84px; font-size: 2.2rem; }
+  .writer-name { font-size: 1.2rem; }
+  .latest-cover { max-width: 300px; }
+  .latest-cover-word { font-size: 2.8rem; }
+  .latest-grid { gap: 3.5rem; }
+  .submit-card { padding: clamp(1.75rem, 3.6vw, 3rem); }
+  .wr-grid { gap: 1.1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14.5rem), 1fr)); }
+  .wr { padding: 1.4rem 1.1rem 1.2rem; gap: 0.45rem; }
+  .wr-initial { width: 68px; height: 68px; font-size: 1.7rem; }
+  .wr-name { font-size: 1.2rem; }
+  .pg-grid { gap: 1.1rem; }
+  .pg-medal { width: 58px; height: 58px; font-size: 1.5rem; }
+  .pg-medal-sm { width: 44px; height: 44px; font-size: 1.15rem; }
+  .pg-letter { width: 46px; height: 46px; font-size: 1.3rem; border-radius: 12px; }
+  .pg-steps .pg-medal { width: 54px; height: 54px; font-size: 1.45rem; }
+  .pg-steps::before { top: 27px; }
+  .ab-value { padding: 1.6rem 1.2rem 1.4rem; gap: 0.6rem; }
+  .ab-value h3 { font-size: 1.25rem; }
+  .ab-genre { padding: 0.9rem 1.1rem; gap: 0.8rem; }
+  .ab-genre-name { font-size: 1.1rem; }
+  .ab-quote { padding: 2.25rem 2rem 1.75rem; }
+  .ab-lead-mark { width: 190px; height: 190px; font-size: 4.75rem; }
+  .ev-date { width: 54px; height: 54px; }
+  .ev-card-top { padding: 0.9rem 1.1rem; }
+  .ev-card-body { padding: 1.1rem 1.2rem 1.25rem; }
+  .sg-title { font-size: 1.35rem; }
+  .sg-cover { padding: 1rem 0.9rem; }
+  .kp-latest { grid-template-columns: minmax(0, 300px) minmax(0, 1fr); }
+  .kp-cover-link { max-width: 300px; }
+  .ip-large .ip-word { font-size: 3rem; }
+  .ki-head { grid-template-columns: minmax(0, 290px) minmax(0, 1fr); }
+  .ki-figure { max-width: 290px; }
+  .ki-facts div { padding: 0.85rem 1.15rem; }
+  .ct-badge { min-height: 44px; }
+  .ct-feature-side { padding: 1.6rem 1.5rem; }
+  .ct-index li { padding: 1.1rem 1.3rem; }
+  .ks-details { padding: 1.4rem; }
+  .ks-route, .rd-rel { padding: 1.25rem; }
+  .kr-form-card { padding: clamp(1.25rem, 2.4vw, 2rem); }
+  .kg-badge { width: 60px; height: 60px; }
+  .pg-empty { padding: 2rem 1.5rem; }
+  .pg-empty-mark { width: 60px; height: 60px; }
+  .pg-invite { padding-block: clamp(2.25rem, 3.6vw, 3.25rem); }
+  .pg-pages a, .pg-pages [aria-current='page'] { min-width: 40px; min-height: 40px; }
+  .wp-initial { width: 90px; height: 90px; font-size: 2.4rem; }
+  .wp-facts { padding: 1.5rem 1.25rem; }
+
+  /* buttons, chips, fields */
+  .pg-chip { min-height: 38px; padding: 0 0.95rem; font-size: 0.9rem; }
+  .pg-in { min-height: 46px; padding: 0.55rem 0.9rem; font-size: 1rem; }
+  .pg-searchbar { max-width: 520px; padding: 5px 5px 5px 0.9rem; }
+  .pg-searchbar input { height: 44px; font-size: 1rem; }
+  .pg-searchbar .cta-btn { min-height: 44px; }
+  .rk-letters a { min-width: 38px; min-height: 38px; font-size: 1rem; }
+  .rd-tool { min-height: 38px; }
+}
+
+/* Entrance of each page's top screen. The scroll reveal (ScrollReveal.tsx) skips this part so it never flickers, so it
+   rises in with CSS instead: the copy line by line, the scene fading in beside it. Reduced motion turns it all off. */
+@keyframes phRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes phFade { from { opacity: 0; } to { opacity: 1; } }
+.ph-copy > *, .hero-copy > * { animation: phRise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.ph-copy > :nth-child(1), .hero-copy > :nth-child(1) { animation-delay: 0.05s; }
+.ph-copy > :nth-child(2), .hero-copy > :nth-child(2) { animation-delay: 0.14s; }
+.ph-copy > :nth-child(3), .hero-copy > :nth-child(3) { animation-delay: 0.23s; }
+.ph-copy > :nth-child(4), .hero-copy > :nth-child(4) { animation-delay: 0.32s; }
+.ph-copy > :nth-child(5), .hero-copy > :nth-child(5) { animation-delay: 0.41s; }
+.ph-copy > :nth-child(6), .hero-copy > :nth-child(6) { animation-delay: 0.5s; }
+.ph-copy > :nth-child(n + 7), .hero-copy > :nth-child(n + 7) { animation-delay: 0.58s; }
+.ph-art, .hero-art { animation: phFade 1.1s ease 0.1s both; }

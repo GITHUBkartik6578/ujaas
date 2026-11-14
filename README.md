@@ -77,6 +77,10 @@ npm run dev:web                  # Next.js on :3000 (proxies /api and /media to 
 # sample content for local viewing only (refuses to run in production)
 cd app_build/backend && npm run seed:dev && cd ../..
 
+# real content from Hindi_Sahitya_Sankalan.pdf (additive and re-runnable; refuses to run in production)
+cd app_build/backend && npm run import:sankalan             # dry run: lists what it would add
+cd app_build/backend && npm run import:sankalan -- --apply  # writes; existing records are never changed
+
 # first administrator (one time, no default credentials)
 cd app_build/backend && npm run create-admin -- --email you@example.org --name "Your Name"
 ```

@@ -38,26 +38,26 @@ export default function AuthorsPage() {
     if (editing !== 'new') body.archived = f.archived;
     try {
       await request(editing === 'new' ? '/authors' : `/authors/${editing}`, { method: editing === 'new' ? 'POST' : 'PATCH', body });
-      show('सहेजा गया'); setEditing(null); list.reload();
+      show('Saved'); setEditing(null); list.reload();
     } catch (e) { setErrors(fieldErrors(e)); setBanner(errorText(e)); }
   };
 
   return (
     <>
-      <PageTitle action={<button type="button" className="btn btn-primary" onClick={() => edit(null)}>नया रचनाकार</button>}>रचनाकार</PageTitle>
+      <PageTitle action={<button type="button" className="btn btn-primary" onClick={() => edit(null)}>New author</button>}>Authors</PageTitle>
       {toast}
       <LoadState error={list.error} loading={list.loading} retry={list.reload} />
       <div className="split">
         <div>
-          {list.data && list.data.items.length === 0 && <p className="state">अभी कोई रचनाकार नहीं है।</p>}
+          {list.data && list.data.items.length === 0 && <p className="state">No authors yet.</p>}
           {list.data && list.data.items.length > 0 && (
             <table className="table">
-              <thead><tr><th>नाम</th><th>सार्वजनिक प्रोफ़ाइल</th><th>पता</th></tr></thead>
+              <thead><tr><th>Name</th><th>Public profile</th><th>Slug</th></tr></thead>
               <tbody>
                 {list.data.items.map((a) => (
                   <tr key={a.id}>
-                    <td><button type="button" className="linklike" onClick={() => edit(a)}>{a.name}</button>{a.archived && <span className="sub"> संग्रहित</span>}</td>
-                    <td>{a.is_public ? 'हाँ' : 'नहीं'}</td>
+                    <td><button type="button" className="linklike" onClick={() => edit(a)}>{a.name}</button>{a.archived && <span className="sub"> archived</span>}</td>
+                    <td>{a.is_public ? 'Yes' : 'No'}</td>
                     <td><code>{a.slug}</code></td>
                   </tr>
                 ))}
@@ -66,28 +66,28 @@ export default function AuthorsPage() {
           )}
         </div>
         {editing && (
-          <form className="panel" onSubmit={(e) => { e.preventDefault(); void save(); }} aria-label="रचनाकार का विवरण">
-            <h2>{editing === 'new' ? 'नया रचनाकार' : 'रचनाकार संपादित करें'}</h2>
+          <form className="panel" onSubmit={(e) => { e.preventDefault(); void save(); }} aria-label="Author details">
+            <h2>{editing === 'new' ? 'New author' : 'Edit author'}</h2>
             {banner && <p className="banner" role="alert">{banner}</p>}
-            <Field id="a-name" label="नाम" error={errors.name}><input id="a-name" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} required /></Field>
-            <Field id="a-slug" label="पता (वैकल्पिक)" error={errors.slug}><input id="a-slug" value={f.slug} onChange={(e) => setF({ ...f, slug: e.target.value.toLowerCase() })} pattern="[a-z0-9]+(-[a-z0-9]+)*" /></Field>
-            <Field id="a-bio" label="परिचय"><textarea id="a-bio" rows={3} value={f.bio} onChange={(e) => setF({ ...f, bio: e.target.value })} /></Field>
+            <Field id="a-name" label="Name" error={errors.name}><input id="a-name" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} required /></Field>
+            <Field id="a-slug" label="Slug (optional)" error={errors.slug}><input id="a-slug" value={f.slug} onChange={(e) => setF({ ...f, slug: e.target.value.toLowerCase() })} pattern="[a-z0-9]+(-[a-z0-9]+)*" /></Field>
+            <Field id="a-bio" label="Bio"><textarea id="a-bio" rows={3} value={f.bio} onChange={(e) => setF({ ...f, bio: e.target.value })} /></Field>
             <div className="row">
-              <Field id="a-year" label="जन्म वर्ष"><input id="a-year" type="number" min={1000} max={2100} value={f.birth_year} onChange={(e) => setF({ ...f, birth_year: e.target.value })} /></Field>
-              <Field id="a-place" label="जन्म स्थान"><input id="a-place" value={f.birthplace} onChange={(e) => setF({ ...f, birthplace: e.target.value })} /></Field>
+              <Field id="a-year" label="Birth year"><input id="a-year" type="number" min={1000} max={2100} value={f.birth_year} onChange={(e) => setF({ ...f, birth_year: e.target.value })} /></Field>
+              <Field id="a-place" label="Birthplace"><input id="a-place" value={f.birthplace} onChange={(e) => setF({ ...f, birthplace: e.target.value })} /></Field>
             </div>
-            <Field id="a-photo" label="चित्र" error={errors.photo_media_id} hint="सार्वजनिक प्रोफ़ाइल में चित्र के लिए वैकल्पिक पाठ और अनुमति आवश्यक है।">
+            <Field id="a-photo" label="Photo" error={errors.photo_media_id} hint="A photo on a public profile needs alt text and permission.">
               <select id="a-photo" value={f.photo_media_id} onChange={(e) => setF({ ...f, photo_media_id: e.target.value })}>
-                <option value="">कोई नहीं</option>
-                {media.data?.items.map((m) => <option key={m.id} value={m.id}>{m.alt_text || 'वैकल्पिक पाठ नहीं'} ({m.width}×{m.height})</option>)}
+                <option value="">None</option>
+                {media.data?.items.map((m) => <option key={m.id} value={m.id}>{m.alt_text || 'No alt text'} ({m.width}×{m.height})</option>)}
               </select>
             </Field>
-            <Field id="a-contact" label="निजी संपर्क (सार्वजनिक नहीं दिखता)"><input id="a-contact" value={f.private_contact} onChange={(e) => setF({ ...f, private_contact: e.target.value })} /></Field>
-            <label className="check"><input type="checkbox" checked={f.is_public} onChange={(e) => setF({ ...f, is_public: e.target.checked })} /> लेखक की सहमति है: सार्वजनिक प्रोफ़ाइल दिखाएँ</label>
-            {editing !== 'new' && <label className="check"><input type="checkbox" checked={f.archived} onChange={(e) => setF({ ...f, archived: e.target.checked })} /> संग्रहित करें (प्रोफ़ाइल हट जाएगी)</label>}
+            <Field id="a-contact" label="Private contact (never shown publicly)"><input id="a-contact" value={f.private_contact} onChange={(e) => setF({ ...f, private_contact: e.target.value })} /></Field>
+            <label className="check"><input type="checkbox" checked={f.is_public} onChange={(e) => setF({ ...f, is_public: e.target.checked })} /> Author has consented: show public profile</label>
+            {editing !== 'new' && <label className="check"><input type="checkbox" checked={f.archived} onChange={(e) => setF({ ...f, archived: e.target.checked })} /> Archive (the profile will be removed)</label>}
             <div className="actions">
-              <button className="btn btn-primary" type="submit">सहेजें</button>
-              <button className="btn" type="button" onClick={() => setEditing(null)}>रद्द करें</button>
+              <button className="btn btn-primary" type="submit">Save</button>
+              <button className="btn" type="button" onClick={() => setEditing(null)}>Cancel</button>
             </div>
           </form>
         )}

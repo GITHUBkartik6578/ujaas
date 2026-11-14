@@ -70,7 +70,8 @@ export function ScrollReveal() {
       }
     };
 
-    const raf = requestAnimationFrame(scan);
+    // A timer, not requestAnimationFrame: a page opened in a background tab never gets a frame, and would never be scanned.
+    const raf = window.setTimeout(scan, 30);
     // Streamed or client-rendered sections arrive after the first scan.
     let t: ReturnType<typeof setTimeout> | undefined;
     const mo = new MutationObserver(() => { clearTimeout(t); t = setTimeout(scan, 120); });
@@ -78,7 +79,7 @@ export function ScrollReveal() {
     if (main) mo.observe(main, { childList: true, subtree: true });
 
     return () => {
-      cancelAnimationFrame(raf); clearTimeout(t); mo.disconnect(); io.disconnect();
+      clearTimeout(raf); clearTimeout(t); mo.disconnect(); io.disconnect();
       window.removeEventListener('scroll', onScroll);
       // Nothing may stay hidden once its observer is gone (the footer outlives a client-side navigation).
       document.querySelectorAll<HTMLElement>('[data-rv]').forEach((el) => {

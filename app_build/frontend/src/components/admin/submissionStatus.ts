@@ -1,5 +1,5 @@
 /** Labels for the submission states (docs/editorial-workflow.md section 2). */
 export const SUB_STATUS: Record<string, string> = {
-  pending_review: 'समीक्षा की प्रतीक्षा', under_review: 'समीक्षा में', revision_requested: 'संशोधन माँगा', approved: 'स्वीकृत',
-  rejected: 'अस्वीकृत', converted: 'मसौदे में बदली', withdrawn: 'वापस ली गई',
+  pending_review: 'Awaiting review', under_review: 'Under review', revision_requested: 'Revision requested', approved: 'Approved',
+  rejected: 'Rejected', converted: 'Converted to draft', withdrawn: 'Withdrawn',
 };

@@ -53,10 +53,10 @@ export default function IssueEditorPage({ params }: { params: Promise<{ id: stri
       publication_details: f.publication_details || null, show_in_archive: f.show_in_archive,
     } });
     apply(await request<Issue>(`/issues/${id}/items`, { method: 'PUT', body: { items: rows.map((r) => ({ content_id: r.content_id, section_label: r.section_label || null })) } }));
-  }, 'सहेजा गया');
+  }, 'Saved');
   const transition = (to: string, confirm?: string) => {
     if (confirm && !ask(confirm)) return;
-    void run(async () => { apply(await request<Issue>(`/issues/${id}/transition`, { method: 'POST', body: { to } })); }, 'स्थिति बदली');
+    void run(async () => { apply(await request<Issue>(`/issues/${id}/transition`, { method: 'POST', body: { to } })); }, 'Status changed');
   };
 
   if (!load.data) return <LoadState error={load.error} loading={load.loading} retry={load.reload} />;
@@ -64,73 +64,73 @@ export default function IssueEditorPage({ params }: { params: Promise<{ id: stri
 
   return (
     <>
-      <PageTitle action={<StatusPill status={status === 'draft' ? 'draft' : status === 'published' ? 'published' : 'archived'} />}>अंक संपादित करें</PageTitle>
+      <PageTitle action={<StatusPill status={status === 'draft' ? 'draft' : status === 'published' ? 'published' : 'archived'} />}>Edit issue</PageTitle>
       {banner && <p className="banner" role="alert">{banner}</p>}
       <div className="editor-grid">
         <form className="editor-main" onSubmit={(e) => { e.preventDefault(); void saveAll(); }}>
-          <Field id="t" label="अंक का नाम" error={errors.title}><input id="t" value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} required /></Field>
+          <Field id="t" label="Issue title" error={errors.title}><input id="t" value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} required /></Field>
           <div className="row">
-            <Field id="n" label="अंक संख्या" error={errors.issue_number}><input id="n" type="number" min={1} value={f.issue_number} onChange={(e) => setF({ ...f, issue_number: e.target.value })} required /></Field>
-            <Field id="v" label="खंड (वैकल्पिक)"><input id="v" value={f.volume} onChange={(e) => setF({ ...f, volume: e.target.value })} /></Field>
-            <Field id="d" label="प्रकाशन तिथि" error={errors.publication_date}><input id="d" type="date" value={f.publication_date} onChange={(e) => setF({ ...f, publication_date: e.target.value })} required /></Field>
+            <Field id="n" label="Issue number" error={errors.issue_number}><input id="n" type="number" min={1} value={f.issue_number} onChange={(e) => setF({ ...f, issue_number: e.target.value })} required /></Field>
+            <Field id="v" label="Volume (optional)"><input id="v" value={f.volume} onChange={(e) => setF({ ...f, volume: e.target.value })} /></Field>
+            <Field id="d" label="Publication date" error={errors.publication_date}><input id="d" type="date" value={f.publication_date} onChange={(e) => setF({ ...f, publication_date: e.target.value })} required /></Field>
           </div>
-          <Field id="p" label="अवधि" error={errors.period_label}><input id="p" value={f.period_label} onChange={(e) => setF({ ...f, period_label: e.target.value })} required /></Field>
-          <Field id="cv" label="आवरण चित्र" error={errors.cover_media_id} hint="प्रकाशन के लिए वैकल्पिक पाठ वाला चित्र चाहिए।">
+          <Field id="p" label="Period" error={errors.period_label}><input id="p" value={f.period_label} onChange={(e) => setF({ ...f, period_label: e.target.value })} required /></Field>
+          <Field id="cv" label="Cover image" error={errors.cover_media_id} hint="Publishing needs an image with alt text.">
             <select id="cv" value={f.cover_media_id} onChange={(e) => setF({ ...f, cover_media_id: e.target.value })}>
-              <option value="">कोई नहीं</option>
-              {media.data?.items.map((m) => <option key={m.id} value={m.id}>{m.alt_text || 'वैकल्पिक पाठ नहीं'} ({m.width}×{m.height})</option>)}
+              <option value="">None</option>
+              {media.data?.items.map((m) => <option key={m.id} value={m.id}>{m.alt_text || 'No alt text'} ({m.width}×{m.height})</option>)}
             </select>
           </Field>
-          {cover && !cover.alt_text.trim() && <p className="field-error" role="alert">इस चित्र का वैकल्पिक पाठ नहीं है; चित्र पृष्ठ पर उसे भरें।</p>}
-          <Field id="intro" label="संपादकीय परिचय"><textarea id="intro" rows={5} value={f.editorial_intro} onChange={(e) => setF({ ...f, editorial_intro: e.target.value })} lang="hi" /></Field>
-          <Field id="det" label="प्रकाशन विवरण (प्रकाशक, संपादक आदि)" hint="जो जानकारी दी जाएगी वही दिखेगी।"><textarea id="det" rows={3} value={f.publication_details} onChange={(e) => setF({ ...f, publication_details: e.target.value })} /></Field>
-          <Field id="slug" label="पता" error={errors.slug}><input id="slug" value={f.slug} onChange={(e) => setF({ ...f, slug: e.target.value.toLowerCase() })} pattern="[a-z0-9]+(-[a-z0-9]+)*" /></Field>
-          <label className="check"><input type="checkbox" checked={f.show_in_archive} onChange={(e) => setF({ ...f, show_in_archive: e.target.checked })} /> संग्रह (archive) सूची में दिखाएँ</label>
+          {cover && !cover.alt_text.trim() && <p className="field-error" role="alert">This image has no alt text; add it on the Media page.</p>}
+          <Field id="intro" label="Editorial introduction"><textarea id="intro" rows={5} value={f.editorial_intro} onChange={(e) => setF({ ...f, editorial_intro: e.target.value })} lang="hi" /></Field>
+          <Field id="det" label="Publication details (publisher, editors, etc.)" hint="Only what you enter here is shown."><textarea id="det" rows={3} value={f.publication_details} onChange={(e) => setF({ ...f, publication_details: e.target.value })} /></Field>
+          <Field id="slug" label="Slug" error={errors.slug}><input id="slug" value={f.slug} onChange={(e) => setF({ ...f, slug: e.target.value.toLowerCase() })} pattern="[a-z0-9]+(-[a-z0-9]+)*" /></Field>
+          <label className="check"><input type="checkbox" checked={f.show_in_archive} onChange={(e) => setF({ ...f, show_in_archive: e.target.checked })} /> Show in the archive list</label>
 
-          <h2>इस अंक की रचनाएँ</h2>
+          <h2>Pieces in this issue</h2>
           {errors.items && <p className="field-error" role="alert">{errors.items}</p>}
-          {rows.length === 0 && <p className="muted">अभी कोई रचना नहीं जोड़ी गई।</p>}
+          {rows.length === 0 && <p className="muted">No pieces added yet.</p>}
           <ol className="ordered">
             {rows.map((r, i) => (
               <li key={r.content_id}>
-                <span className="ordered-title">{r.title ?? '(हटाई गई रचना)'}{r.warning && <span className="sub"> · प्रकाशित नहीं है; सार्वजनिक पृष्ठ से हट जाएगी</span>}</span>
+                <span className="ordered-title">{r.title ?? '(deleted piece)'}{r.warning && <span className="sub"> · not published; it will be dropped from the public page</span>}</span>
                 <span className="ordered-actions">
-                  <label className="visually-hidden" htmlFor={`sec-${i}`}>खंड का नाम</label>
-                  <input id={`sec-${i}`} placeholder="खंड का नाम" value={r.section_label ?? ''} onChange={(e) => setRows(rows.map((x, j) => (j === i ? { ...x, section_label: e.target.value } : x)))} />
-                  <button type="button" className="btn" disabled={i === 0} onClick={() => move(i, -1)} aria-label={`${r.title} ऊपर करें`}>ऊपर</button>
-                  <button type="button" className="btn" disabled={i === rows.length - 1} onClick={() => move(i, 1)} aria-label={`${r.title} नीचे करें`}>नीचे</button>
-                  <button type="button" className="btn" onClick={() => setRows(rows.filter((_, j) => j !== i))} aria-label={`${r.title} हटाएँ`}>हटाएँ</button>
+                  <label className="visually-hidden" htmlFor={`sec-${i}`}>Section name</label>
+                  <input id={`sec-${i}`} placeholder="Section name" value={r.section_label ?? ''} onChange={(e) => setRows(rows.map((x, j) => (j === i ? { ...x, section_label: e.target.value } : x)))} />
+                  <button type="button" className="btn" disabled={i === 0} onClick={() => move(i, -1)} aria-label={`Move ${r.title} up`}>Up</button>
+                  <button type="button" className="btn" disabled={i === rows.length - 1} onClick={() => move(i, 1)} aria-label={`Move ${r.title} down`}>Down</button>
+                  <button type="button" className="btn" onClick={() => setRows(rows.filter((_, j) => j !== i))} aria-label={`Remove ${r.title}`}>Remove</button>
                 </span>
               </li>
             ))}
           </ol>
-          <Field id="add" label="प्रकाशित रचना जोड़ें">
+          <Field id="add" label="Add a published piece">
             <select id="add" value="" onChange={(e) => { const p = addable.find((x) => x.id === e.target.value); if (p) setRows([...rows, { content_id: p.id, section_label: rows.at(-1)?.section_label ?? null, title: p.title, warning: null }]); }}>
-              <option value="">चुनें</option>
+              <option value="">Select</option>
               {addable.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
             </select>
           </Field>
           <div className="actions">
-            <button className="btn btn-primary" type="submit" disabled={busy}>सहेजें</button>
+            <button className="btn btn-primary" type="submit" disabled={busy}>Save</button>
             {toast}
           </div>
         </form>
 
-        <aside className="editor-side" aria-label="कार्य">
+        <aside className="editor-side" aria-label="Actions">
           <section className="panel">
-            <h2>कार्य</h2>
+            <h2>Actions</h2>
             <div className="stack">
-              {status === 'draft' && chief && <button type="button" className="btn btn-primary" disabled={busy} onClick={() => transition('published')}>अंक प्रकाशित करें</button>}
-              {status === 'draft' && !chief && <p className="muted">प्रकाशन प्रधान संपादक करते हैं।</p>}
+              {status === 'draft' && chief && <button type="button" className="btn btn-primary" disabled={busy} onClick={() => transition('published')}>Publish issue</button>}
+              {status === 'draft' && !chief && <p className="muted">Only the editor-in-chief can publish.</p>}
               {status === 'published' && chief && (
                 <>
-                  <button type="button" className="btn" disabled={busy} onClick={() => transition('draft', 'अंक सार्वजनिक साइट से हट जाएगा। जारी रखें?')}>मसौदे में लौटाएँ</button>
-                  <button type="button" className="btn" disabled={busy} onClick={() => transition('archived', 'अंक सार्वजनिक साइट से हट जाएगा और संग्रहित होगा। जारी रखें?')}>संग्रहित करें</button>
+                  <button type="button" className="btn" disabled={busy} onClick={() => transition('draft', 'The issue will be removed from the public site. Continue?')}>Return to draft</button>
+                  <button type="button" className="btn" disabled={busy} onClick={() => transition('archived', 'The issue will be removed from the public site and archived. Continue?')}>Archive</button>
                 </>
               )}
-              {status === 'archived' && <button type="button" className="btn" disabled={busy} onClick={() => transition('draft')}>मसौदे में लौटाएँ</button>}
+              {status === 'archived' && <button type="button" className="btn" disabled={busy} onClick={() => transition('draft')}>Return to draft</button>}
             </div>
-            <p className="muted">प्रकाशन के लिए: आवरण चित्र (वैकल्पिक पाठ सहित), अंक संख्या, तिथि और कम से कम एक प्रकाशित रचना।</p>
+            <p className="muted">To publish: a cover image (with alt text), an issue number, a date and at least one published piece.</p>
           </section>
         </aside>
       </div>

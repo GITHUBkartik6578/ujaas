@@ -7,22 +7,22 @@ import { ask } from './ui';
 
 interface NavItem { label: string; href: string; show: (u: AdminUser) => boolean }
 const NAV: NavItem[] = [
-  { label: 'डैशबोर्ड', href: '/admin', show: () => true },
-  { label: 'रचनाएँ', href: '/admin/content', show: () => true },
-  { label: 'रचनाकार', href: '/admin/authors', show: () => true },
-  { label: 'श्रेणियाँ', href: '/admin/categories', show: () => true },
-  { label: 'संग्रह', href: '/admin/collections', show: () => true },
-  { label: 'ई-पत्रिका अंक', href: '/admin/issues', show: (u) => can.editorUp(u.role) },
-  { label: 'प्रविष्टियाँ', href: '/admin/submissions', show: (u) => can.editorUp(u.role) },
-  { label: 'संदेश', href: '/admin/messages', show: (u) => can.editorUp(u.role) },
-  { label: 'चित्र', href: '/admin/media', show: () => true },
-  { label: 'मुख्य पृष्ठ', href: '/admin/homepage', show: (u) => can.chiefUp(u.role) },
-  { label: 'सेटिंग्स', href: '/admin/settings', show: (u) => can.admin(u.role) },
-  { label: 'गतिविधि लॉग', href: '/admin/audit', show: (u) => can.chiefUp(u.role) },
+  { label: 'Dashboard', href: '/admin', show: () => true },
+  { label: 'Content', href: '/admin/content', show: () => true },
+  { label: 'Authors', href: '/admin/authors', show: () => true },
+  { label: 'Categories', href: '/admin/categories', show: () => true },
+  { label: 'Collections', href: '/admin/collections', show: () => true },
+  { label: 'E-magazine issues', href: '/admin/issues', show: (u) => can.editorUp(u.role) },
+  { label: 'Submissions', href: '/admin/submissions', show: (u) => can.editorUp(u.role) },
+  { label: 'Messages', href: '/admin/messages', show: (u) => can.editorUp(u.role) },
+  { label: 'Media', href: '/admin/media', show: () => true },
+  { label: 'Homepage', href: '/admin/homepage', show: (u) => can.chiefUp(u.role) },
+  { label: 'Settings', href: '/admin/settings', show: (u) => can.admin(u.role) },
+  { label: 'Activity log', href: '/admin/audit', show: (u) => can.chiefUp(u.role) },
 ];
 
 const ROLE_LABEL: Record<string, string> = {
-  site_admin: 'साइट प्रशासक', editor_in_chief: 'प्रधान संपादक', editor: 'संपादक', content_manager: 'सामग्री प्रबंधक',
+  site_admin: 'Site admin', editor_in_chief: 'Editor-in-chief', editor: 'Editor', content_manager: 'Content manager',
 };
 
 /** The controls only hide what a role cannot do; the API refuses it again on every call. */
@@ -39,18 +39,18 @@ function Frame({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const router = useRouter();
   const leave = (e: React.MouseEvent) => {
-    if (dirty && !ask('सहेजे न गए बदलाव खो जाएँगे। फिर भी छोड़ें?')) e.preventDefault();
+    if (dirty && !ask('Unsaved changes will be lost. Leave anyway?')) e.preventDefault();
     else setDirty(false);
   };
   const active = (href: string) => (href === '/admin' ? path === '/admin' : path.startsWith(href));
   return (
     <div className="shell">
-      <a className="skip-link" href="#admin-main">मुख्य सामग्री पर जाएँ</a>
+      <a className="skip-link" href="#admin-main">Skip to main content</a>
       <aside className="sidebar">
         <p className="brand-line">
-          <span className="brand-name">उजास</span> <span className="brand-scope">प्रशासन</span>
+          <span className="brand-name">Ujaas</span> <span className="brand-scope">Admin</span>
         </p>
-        <nav aria-label="प्रशासन">
+        <nav aria-label="Admin">
           <ul>
             {NAV.filter((n) => n.show(user)).map((n) => (
               <li key={n.href}>
@@ -66,14 +66,14 @@ function Frame({ children }: { children: React.ReactNode }) {
             type="button"
             className="btn"
             onClick={async () => {
-              if (dirty && !ask('सहेजे न गए बदलाव खो जाएँगे। फिर भी लॉग आउट करें?')) return;
+              if (dirty && !ask('Unsaved changes will be lost. Log out anyway?')) return;
               setDirty(false);
               await request('/auth/logout', { method: 'POST' }).catch(() => undefined);
               router.push('/admin/login');
               router.refresh();
             }}
           >
-            लॉग आउट
+            Log out
           </button>
         </div>
       </aside>

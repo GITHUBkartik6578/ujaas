@@ -28,26 +28,26 @@ export default function AdminLoginPage() {
               router.refresh();
               return;
             }
-            setError(res.status === 429 ? 'बहुत अधिक प्रयास। कुछ देर बाद फिर कोशिश करें।' : 'ईमेल या पासवर्ड सही नहीं है।');
+            setError(res.status === 429 ? 'Too many attempts. Please try again in a little while.' : 'Incorrect email or password.');
           } catch {
-            setError('सेवा से संपर्क नहीं हो सका। फिर से प्रयास करें।');
+            setError('Could not reach the server. Please try again.');
           } finally {
             setBusy(false);
           }
         }}
       >
-        <p className="brand-line"><span className="brand-name">उजास</span> <span className="brand-scope">प्रशासन</span></p>
-        <h1>लॉग इन</h1>
+        <p className="brand-line"><span className="brand-name">Ujaas</span> <span className="brand-scope">Admin</span></p>
+        <h1>Log in</h1>
         <div className="field">
-          <label htmlFor="email">ईमेल</label>
+          <label htmlFor="email">Email</label>
           <input id="email" type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
         </div>
         <div className="field">
-          <label htmlFor="password">पासवर्ड</label>
+          <label htmlFor="password">Password</label>
           <input id="password" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </div>
         {error && <p className="field-error" role="alert">{error}</p>}
-        <button className="btn btn-primary" type="submit" disabled={busy}>लॉग इन करें</button>
+        <button className="btn btn-primary" type="submit" disabled={busy}>Log in</button>
       </form>
     </main>
   );

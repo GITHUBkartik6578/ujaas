@@ -23,18 +23,18 @@ export default function HomepageManagerPage() {
 
   return (
     <>
-      <PageTitle>मुख्य पृष्ठ के चयन</PageTitle>
+      <PageTitle>Homepage picks</PageTitle>
       {toast}
       {banner && <p className="banner" role="alert">{banner}</p>}
       <LoadState error={data.error} loading={data.loading} retry={data.reload} />
       {data.data && (
-        <section className="panel narrow" aria-label="विशेष रचनाएँ">
-          <h2>विशेष रचनाएँ (अधिकतम 6)</h2>
-          <p className="muted">खाली रहने पर मुख्य पृष्ठ पर नवीनतम रचनाएँ दिखती हैं।</p>
+        <section className="panel narrow" aria-label="Featured pieces">
+          <h2>Featured pieces (up to 6)</h2>
+          <p className="muted">When empty, the homepage shows the latest pieces.</p>
           <OrderedList items={order} onChange={setOrder} />
-          <Field id="h-add" label="प्रकाशित रचना जोड़ें">
+          <Field id="h-add" label="Add a published piece">
             <select id="h-add" value="" disabled={order.length >= 6} onChange={(e) => { const c = addable.find((x) => x.id === e.target.value); if (c) setOrder([...order, { id: c.id, title: c.title }]); }}>
-              <option value="">चुनें</option>
+              <option value="">Select</option>
               {addable.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
             </select>
           </Field>
@@ -43,11 +43,11 @@ export default function HomepageManagerPage() {
               type="button" className="btn btn-primary"
               onClick={async () => {
                 setBanner('');
-                try { await request('/homepage', { method: 'PUT', body: { featured_ids: order.map((o) => o.id) } }); show('सहेजा गया'); }
+                try { await request('/homepage', { method: 'PUT', body: { featured_ids: order.map((o) => o.id) } }); show('Saved'); }
                 catch (e) { setBanner(errorText(e)); }
               }}
             >
-              सहेजें
+              Save
             </button>
           </div>
         </section>

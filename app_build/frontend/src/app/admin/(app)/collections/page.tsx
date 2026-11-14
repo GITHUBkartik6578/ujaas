@@ -22,14 +22,14 @@ export default function CollectionsAdminPage() {
   const open = (c: Col) => {
     setSelected(c); setBanner('');
     setMeta({ title: c.title, description: c.description ?? '', status: c.status });
-    setOrder(c.items.map((i) => ({ id: i.content_id, title: i.title ?? '(हटाई गई रचना)', warning: i.warning })));
+    setOrder(c.items.map((i) => ({ id: i.content_id, title: i.title ?? '(deleted piece)', warning: i.warning })));
   };
 
   const create = async () => {
     setBanner('');
     try {
       const c = await request<Col>('/collections', { method: 'POST', body: { title: newTitle } });
-      setNewTitle(''); cols.reload(); open(c); show('संग्रह बना');
+      setNewTitle(''); cols.reload(); open(c); show('Collection created');
     } catch (e) { setBanner(errorText(e)); }
   };
   const saveAll = async () => {
@@ -38,7 +38,7 @@ export default function CollectionsAdminPage() {
     try {
       await request(`/collections/${selected.id}`, { method: 'PATCH', body: { title: meta.title, description: meta.description || null, status: meta.status } });
       const updated = await request<Col>(`/collections/${selected.id}/items`, { method: 'PUT', body: { content_ids: order.map((o) => o.id) } });
-      show('सहेजा गया'); cols.reload(); open(updated);
+      show('Saved'); cols.reload(); open(updated);
     } catch (e) { setBanner(errorText(e)); }
   };
 
@@ -46,22 +46,22 @@ export default function CollectionsAdminPage() {
 
   return (
     <>
-      <PageTitle>संग्रह</PageTitle>
+      <PageTitle>Collections</PageTitle>
       {toast}
       <form className="toolbar" onSubmit={(e) => { e.preventDefault(); void create(); }}>
         <div className="field inline grow">
-          <label htmlFor="new-col">नया संग्रह</label>
-          <input id="new-col" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="संग्रह का नाम" required />
+          <label htmlFor="new-col">New collection</label>
+          <input id="new-col" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="Collection name" required />
         </div>
-        <button className="btn btn-primary" type="submit">बनाएँ</button>
+        <button className="btn btn-primary" type="submit">Create</button>
       </form>
       <LoadState error={cols.error} loading={cols.loading} retry={cols.reload} />
       <div className="split">
         <div>
-          {cols.data && cols.data.items.length === 0 && <p className="state">अभी कोई संग्रह नहीं है।</p>}
+          {cols.data && cols.data.items.length === 0 && <p className="state">No collections yet.</p>}
           {cols.data && cols.data.items.length > 0 && (
             <table className="table">
-              <thead><tr><th>संग्रह</th><th>स्थिति</th><th className="num">रचनाएँ</th></tr></thead>
+              <thead><tr><th>Collection</th><th>Status</th><th className="num">Pieces</th></tr></thead>
               <tbody>
                 {cols.data.items.map((c) => (
                   <tr key={c.id}>
@@ -75,27 +75,27 @@ export default function CollectionsAdminPage() {
           )}
         </div>
         {selected && (
-          <section className="panel" aria-label="संग्रह का विवरण">
-            <h2>संग्रह संपादित करें</h2>
+          <section className="panel" aria-label="Collection details">
+            <h2>Edit collection</h2>
             {banner && <p className="banner" role="alert">{banner}</p>}
-            <Field id="c-title" label="नाम"><input id="c-title" value={meta.title} onChange={(e) => setMeta({ ...meta, title: e.target.value })} /></Field>
-            <Field id="c-desc" label="विवरण"><textarea id="c-desc" rows={2} value={meta.description} onChange={(e) => setMeta({ ...meta, description: e.target.value })} /></Field>
-            <Field id="c-status" label="स्थिति">
+            <Field id="c-title" label="Name"><input id="c-title" value={meta.title} onChange={(e) => setMeta({ ...meta, title: e.target.value })} /></Field>
+            <Field id="c-desc" label="Description"><textarea id="c-desc" rows={2} value={meta.description} onChange={(e) => setMeta({ ...meta, description: e.target.value })} /></Field>
+            <Field id="c-status" label="Status">
               <select id="c-status" value={meta.status} onChange={(e) => setMeta({ ...meta, status: e.target.value })}>
-                <option value="draft">मसौदा</option><option value="published">प्रकाशित</option><option value="archived">संग्रहित</option>
+                <option value="draft">Draft</option><option value="published">Published</option><option value="archived">Archived</option>
               </select>
             </Field>
-            <h3>रचनाएँ (क्रम में)</h3>
+            <h3>Pieces (in order)</h3>
             <OrderedList items={order} onChange={setOrder} />
-            <Field id="c-add" label="प्रकाशित रचना जोड़ें">
+            <Field id="c-add" label="Add a published piece">
               <select id="c-add" value="" onChange={(e) => { const p = addable.find((x) => x.id === e.target.value); if (p) setOrder([...order, { id: p.id, title: p.title }]); }}>
-                <option value="">चुनें</option>
+                <option value="">Select</option>
                 {addable.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
               </select>
             </Field>
             <div className="actions">
-              <button type="button" className="btn btn-primary" onClick={() => void saveAll()}>सहेजें</button>
-              <button type="button" className="btn" onClick={() => setSelected(null)}>बंद करें</button>
+              <button type="button" className="btn btn-primary" onClick={() => void saveAll()}>Save</button>
+              <button type="button" className="btn" onClick={() => setSelected(null)}>Close</button>
             </div>
           </section>
         )}

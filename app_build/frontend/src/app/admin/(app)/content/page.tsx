@@ -2,9 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { LoadState, PageTitle, StatusPill, STATUS_LABEL, formatDateTime, useLoad } from '@/components/admin/ui';
+import { LoadState, PageTitle, StatusPill, STATUS_LABEL, formatDateTime, useLoad, TYPE_LABEL } from '@/components/admin/ui';
 import { useAdmin } from '@/components/admin/session';
-import { TYPE_LABEL } from '@/lib/format';
 
 interface Row {
   id: string; slug: string; title: string; status: string; content_type: string; category: string | null;
@@ -29,48 +28,48 @@ export default function ContentListPage() {
 
   return (
     <>
-      <PageTitle action={<Link className="btn btn-primary" href="/admin/content/new">नई रचना</Link>}>रचनाएँ</PageTitle>
+      <PageTitle action={<Link className="btn btn-primary" href="/admin/content/new">New piece</Link>}>Content</PageTitle>
       <form
         className="toolbar"
         role="search"
         onSubmit={(e) => { e.preventDefault(); setPage(1); setApplied(q.trim()); }}
       >
         <div className="field inline">
-          <label htmlFor="f-status">स्थिति</label>
+          <label htmlFor="f-status">Status</label>
           <select id="f-status" value={status} onChange={(e) => { setStatus(e.target.value); setPage(1); }}>
-            <option value="">सभी</option>
+            <option value="">All</option>
             {Object.entries(STATUS_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </select>
         </div>
         <div className="field inline">
-          <label htmlFor="f-type">प्रकार</label>
+          <label htmlFor="f-type">Type</label>
           <select id="f-type" value={type} onChange={(e) => { setType(e.target.value); setPage(1); }}>
-            <option value="">सभी</option>
+            <option value="">All</option>
             {Object.entries(TYPE_LABEL).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </select>
         </div>
         <div className="field inline grow">
-          <label htmlFor="f-q">खोजें</label>
-          <input id="f-q" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="शीर्षक या पाठ" />
+          <label htmlFor="f-q">Search</label>
+          <input id="f-q" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Title or text" />
         </div>
-        <button className="btn" type="submit">लागू करें</button>
+        <button className="btn" type="submit">Apply</button>
       </form>
       <LoadState error={list.error} loading={list.loading} retry={list.reload} />
       {d && d.items.length === 0 && (
-        <p className="state">कोई रचना नहीं मिली। <Link href="/admin/content/new">नई रचना बनाएँ</Link>।</p>
+        <p className="state">No content found. <Link href="/admin/content/new">Create a new piece</Link>.</p>
       )}
       {d && d.items.length > 0 && (
         <>
           <table className="table">
             <thead>
-              <tr><th>शीर्षक</th><th>स्थिति</th><th>प्रकार</th><th>श्रेणी</th><th className="num">अंतिम बदलाव</th></tr>
+              <tr><th>Title</th><th>Status</th><th>Type</th><th>Category</th><th className="num">Last updated</th></tr>
             </thead>
             <tbody>
               {d.items.map((r) => (
                 <tr key={r.id}>
                   <td>
                     <Link href={`/admin/content/${r.id}`}>{r.title}</Link>
-                    {r.schedule_error && <p className="field-error">निर्धारित प्रकाशन विफल: {r.schedule_error}</p>}
+                    {r.schedule_error && <p className="field-error">Scheduled publishing failed: {r.schedule_error}</p>}
                   </td>
                   <td>
                     <StatusPill status={r.status} />
@@ -83,10 +82,10 @@ export default function ContentListPage() {
               ))}
             </tbody>
           </table>
-          <nav className="pager" aria-label="पृष्ठ">
-            <button className="btn" type="button" disabled={page <= 1} onClick={() => setPage(page - 1)}>पिछला</button>
-            <span>{page} / {pages} · कुल {d.total}</span>
-            <button className="btn" type="button" disabled={page >= pages} onClick={() => setPage(page + 1)}>अगला</button>
+          <nav className="pager" aria-label="Pages">
+            <button className="btn" type="button" disabled={page <= 1} onClick={() => setPage(page - 1)}>Previous</button>
+            <span>{page} / {pages} · {d.total} total</span>
+            <button className="btn" type="button" disabled={page >= pages} onClick={() => setPage(page + 1)}>Next</button>
           </nav>
         </>
       )}

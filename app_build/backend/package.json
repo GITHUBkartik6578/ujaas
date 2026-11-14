@@ -12,7 +12,9 @@
     "lint": "eslint src tests",
     "test": "vitest run",
     "create-admin": "tsx scripts/create-admin.ts",
+    "reset-admin-password": "tsx scripts/reset-admin-password.ts",
     "seed:dev": "tsx scripts/seed-dev.ts",
+    "import:sankalan": "tsx scripts/import-sankalan.ts",
     "backup": "tsx scripts/backup.ts",
     "restore": "tsx scripts/restore.ts",
     "backup:drill": "tsx scripts/backup-drill.ts"

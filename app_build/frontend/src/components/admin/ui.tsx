@@ -4,8 +4,15 @@ import { useEffect, useState } from 'react';
 import { AdminApiError, type FieldError } from './session';
 
 export const STATUS_LABEL: Record<string, string> = {
-  draft: 'मसौदा', in_review: 'समीक्षा में', approved: 'स्वीकृत', scheduled: 'निर्धारित',
-  published: 'प्रकाशित', unpublished: 'अप्रकाशित', archived: 'संग्रहित',
+  draft: 'Draft', in_review: 'In review', approved: 'Approved', scheduled: 'Scheduled',
+  published: 'Published', unpublished: 'Unpublished', archived: 'Archived',
+};
+
+/** Content types in English for the admin (the public site keeps its Hindi names in lib/format). */
+export const TYPE_LABEL: Record<string, string> = {
+  kavita: 'Poem (Kavita)', ghazal: 'Ghazal', geet: 'Song (Geet)', kahani: 'Story (Kahani)', laghukatha: 'Short story (Laghukatha)',
+  nibandh: 'Essay (Nibandh)', sansmaran: 'Memoir (Sansmaran)', vichar: 'Opinion (Vichar)', vimarsh: 'Discourse (Vimarsh)',
+  samiksha: 'Review (Samiksha)', other: 'Other',
 };
 
 /** One status mark per row: a pale tint with dark text, never colour alone (the word is the signal). */
@@ -33,34 +40,44 @@ export function Field({ id, label, error, hint, children }: { id: string; label:
   );
 }
 
-const CODE_HI: Record<string, string> = {
-  slug_taken: 'यह पता पहले से उपयोग में है', required: 'यह जाँच पूरी नहीं हुई', too_small: 'यह फ़ील्ड ज़रूरी है',
-  invalid_type: 'मान सही नहीं है', unknown_category: 'श्रेणी नहीं मिली', unknown_author: 'रचनाकार नहीं मिला',
-  unknown_media: 'चित्र नहीं मिला', not_published: 'केवल प्रकाशित रचनाएँ चुनी जा सकती हैं', in_use: 'यह उपयोग में है',
-  alt_required: 'वैकल्पिक पाठ आवश्यक है', must_be_future: 'समय भविष्य का होना चाहिए', control_chars: 'पाठ में अमान्य अक्षर हैं',
+// The admin is in English: field errors are worded here by code, never taken from the API's Hindi text.
+const CODE_EN: Record<string, string> = {
+  slug_taken: 'This slug is already in use', required: 'This check is not complete', too_small: 'This field is required',
+  too_big: 'This is too long', too_short: 'This is too short', invalid_type: 'Invalid value', invalid_value: 'Invalid value',
+  invalid_format: 'Wrong format', custom: 'Invalid value', invalid: 'Invalid value', duplicate: 'This already exists',
+  unknown_category: 'Category not found', unknown_author: 'Author not found', unknown_admin: 'Editor not found',
+  unknown_media: 'Image not found', not_published: 'Only published pieces can be chosen', in_use: 'This is in use and cannot be deleted',
+  alt_required: 'Alt text is required', must_be_future: 'The time must be in the future', control_chars: 'The text contains invalid characters',
+  delete_not_allowed: 'Only a draft that was never published can be deleted', self: 'You cannot deactivate your own account',
+  last_site_admin: 'The last active site admin cannot be deactivated', use_convert: 'Use the Convert to draft action instead',
+  note_required: 'A note is required for this action', incorrect: 'The old password is incorrect', number_taken: 'This issue number is already in use',
 };
 export const BLOCKER_LABEL: Record<string, string> = {
-  lang_checked: 'भाषा जाँच', proof_checked: 'प्रूफ़ जाँच', final_approved: 'अंतिम स्वीकृति',
-  rights_note: 'अनुमति नोट', credits: 'कम से कम एक रचनाकार', cover_alt: 'आवरण का वैकल्पिक पाठ',
-  cover: 'आवरण चित्र', items: 'कम से कम एक प्रकाशित रचना', issue_number: 'अंक संख्या', publication_date: 'प्रकाशन तिथि',
+  lang_checked: 'language check', proof_checked: 'proofreading', final_approved: 'final approval',
+  rights_note: 'permission note', credits: 'at least one author', cover_alt: 'cover image alt text',
+  cover: 'cover image', items: 'at least one published piece', issue_number: 'issue number', publication_date: 'publication date',
 };
 
 /** Field-level messages from a 422, keyed by field name. */
 export function fieldErrors(err: unknown): Record<string, string> {
   const out: Record<string, string> = {};
-  if (err instanceof AdminApiError) for (const f of err.fields as FieldError[]) out[f.field] = f.message_hi ?? CODE_HI[f.code] ?? 'मान सही नहीं है';
+  if (err instanceof AdminApiError) for (const f of err.fields as FieldError[]) out[f.field] = CODE_EN[f.code] ?? 'Invalid value';
   return out;
 }
 
 export function errorText(err: unknown): string {
   if (err instanceof AdminApiError) {
-    if (err.code === 'publish_blocked') return `प्रकाशन से पहले पूरा करें: ${err.fields.map((f) => BLOCKER_LABEL[f.field] ?? f.field).join(', ')}`;
-    if (err.code === 'conflict') return err.messageHi ?? 'यह रचना किसी और ने बदल दी है। पृष्ठ फिर से खोलें।';
-    if (err.status === 403) return 'इस कार्य की अनुमति आपके पास नहीं है।';
-    if (err.status === 429) return 'बहुत अधिक अनुरोध, कुछ देर बाद फिर कोशिश करें।';
-    return err.messageHi ?? 'कार्य पूरा नहीं हो सका। जानकारी जाँचें।';
+    if (err.code === 'publish_blocked') return `Complete before publishing: ${err.fields.map((f) => BLOCKER_LABEL[f.field] ?? f.field).join(', ')}`;
+    if (err.code === 'conflict') return `${err.message || 'This item was changed by someone else'}. Reopen the page.`;
+    if (err.status === 403) return 'You do not have permission to do this.';
+    if (err.status === 429) return 'Too many requests. Please try again in a little while.';
+    if (err.code === 'validation_failed') {
+      const first = err.fields.map((f) => CODE_EN[f.code]).find(Boolean);
+      return first ? `Please check the form: ${first}.` : 'Please check the form.';
+    }
+    return err.message ? `${err.message}.` : 'The action could not be completed. Please check the details.';
   }
-  return 'सेवा से संपर्क नहीं हो सका। फिर से प्रयास करें।';
+  return 'Could not reach the server. Please try again.';
 }
 
 /** A quiet confirmation that disappears by itself; announced to screen readers. */
@@ -78,7 +95,7 @@ export const ask = (message: string) => window.confirm(message);
 
 export function formatDateTime(iso: string | null | undefined): string {
   if (!iso) return '–';
-  return new Intl.DateTimeFormat('hi-IN', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Kolkata' }).format(new Date(iso));
+  return new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Kolkata' }).format(new Date(iso));
 }
 
 /** Loads data once and again on demand; shows honest loading, empty and error states. */
@@ -102,10 +119,10 @@ export function LoadState({ error, loading, retry }: { error: unknown; loading: 
     return (
       <div className="state" role="alert">
         <p>{errorText(error)}</p>
-        <button type="button" className="btn" onClick={retry}>फिर से प्रयास करें</button>
+        <button type="button" className="btn" onClick={retry}>Try again</button>
       </div>
     );
   }
-  if (loading) return <p className="state" aria-busy="true">लोड हो रहा है…</p>;
+  if (loading) return <p className="state" aria-busy="true">Loading…</p>;
   return null;
 }

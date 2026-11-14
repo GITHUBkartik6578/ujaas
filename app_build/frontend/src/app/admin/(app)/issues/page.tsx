@@ -20,7 +20,7 @@ export default function IssuesPage() {
 
   return (
     <>
-      <PageTitle action={<button type="button" className="btn btn-primary" onClick={() => setOpen(true)}>नया अंक</button>}>ई-पत्रिका अंक</PageTitle>
+      <PageTitle action={<button type="button" className="btn btn-primary" onClick={() => setOpen(true)}>New issue</button>}>E-magazine issues</PageTitle>
       {open && (
         <form
           className="panel narrow"
@@ -32,25 +32,25 @@ export default function IssuesPage() {
             } catch (err) { setErrors(fieldErrors(err)); setBanner(errorText(err)); }
           }}
         >
-          <h2>नया अंक</h2>
+          <h2>New issue</h2>
           {banner && <p className="banner" role="alert">{banner}</p>}
-          <Field id="i-title" label="अंक का नाम" error={errors.title}><input id="i-title" value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} required /></Field>
+          <Field id="i-title" label="Issue title" error={errors.title}><input id="i-title" value={f.title} onChange={(e) => setF({ ...f, title: e.target.value })} required /></Field>
           <div className="row">
-            <Field id="i-num" label="अंक संख्या" error={errors.issue_number}><input id="i-num" type="number" min={1} value={f.issue_number} onChange={(e) => setF({ ...f, issue_number: e.target.value })} required /></Field>
-            <Field id="i-date" label="प्रकाशन तिथि" error={errors.publication_date}><input id="i-date" type="date" value={f.publication_date} onChange={(e) => setF({ ...f, publication_date: e.target.value })} required /></Field>
+            <Field id="i-num" label="Issue number" error={errors.issue_number}><input id="i-num" type="number" min={1} value={f.issue_number} onChange={(e) => setF({ ...f, issue_number: e.target.value })} required /></Field>
+            <Field id="i-date" label="Publication date" error={errors.publication_date}><input id="i-date" type="date" value={f.publication_date} onChange={(e) => setF({ ...f, publication_date: e.target.value })} required /></Field>
           </div>
-          <Field id="i-period" label="अवधि (जैसे जनवरी–मार्च)" error={errors.period_label}><input id="i-period" value={f.period_label} onChange={(e) => setF({ ...f, period_label: e.target.value })} required /></Field>
+          <Field id="i-period" label="Period (e.g. January–March)" error={errors.period_label}><input id="i-period" value={f.period_label} onChange={(e) => setF({ ...f, period_label: e.target.value })} required /></Field>
           <div className="actions">
-            <button className="btn btn-primary" type="submit">बनाएँ</button>
-            <button className="btn" type="button" onClick={() => setOpen(false)}>रद्द करें</button>
+            <button className="btn btn-primary" type="submit">Create</button>
+            <button className="btn" type="button" onClick={() => setOpen(false)}>Cancel</button>
           </div>
         </form>
       )}
       <LoadState error={list.error} loading={list.loading} retry={list.reload} />
-      {list.data && list.data.items.length === 0 && <p className="state">अभी कोई अंक नहीं है। पहला अंक बनाएँ।</p>}
+      {list.data && list.data.items.length === 0 && <p className="state">No issues yet. Create the first one.</p>}
       {list.data && list.data.items.length > 0 && (
         <table className="table">
-          <thead><tr><th className="num">अंक</th><th>नाम</th><th>अवधि</th><th>स्थिति</th><th className="num">रचनाएँ</th><th className="num">तिथि</th></tr></thead>
+          <thead><tr><th className="num">Issue</th><th>Name</th><th>Period</th><th>Status</th><th className="num">Pieces</th><th className="num">Date</th></tr></thead>
           <tbody>
             {list.data.items.map((i) => (
               <tr key={i.id}>

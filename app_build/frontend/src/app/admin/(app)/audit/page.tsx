@@ -19,36 +19,36 @@ export default function AuditPage() {
   const pages = d ? Math.max(1, Math.ceil(d.total / d.page_size)) : 1;
   return (
     <>
-      <PageTitle>गतिविधि लॉग</PageTitle>
+      <PageTitle>Activity log</PageTitle>
       <div className="toolbar">
         <div className="field inline">
-          <label htmlFor="a-entity">विषय</label>
+          <label htmlFor="a-entity">Entity</label>
           <select id="a-entity" value={entity} onChange={(e) => { setEntity(e.target.value); setPage(1); }}>
-            <option value="">सभी</option>
+            <option value="">All</option>
             {['content', 'author', 'category', 'topic', 'collection', 'homepage', 'settings', 'media_asset', 'admin_user'].map((x) => <option key={x} value={x}>{x}</option>)}
           </select>
         </div>
       </div>
       <LoadState error={log.error} loading={log.loading} retry={log.reload} />
-      {d && d.items.length === 0 && <p className="state">कोई प्रविष्टि नहीं मिली।</p>}
+      {d && d.items.length === 0 && <p className="state">No entries found.</p>}
       {d && d.items.length > 0 && (
         <>
           <table className="table">
-            <thead><tr><th className="num">समय</th><th>कार्य</th><th>विषय</th><th>पहले</th><th>बाद में</th><th>टिप्पणी</th></tr></thead>
+            <thead><tr><th className="num">Time</th><th>Action</th><th>Entity</th><th>Before</th><th>After</th><th>Note</th></tr></thead>
             <tbody>
               {d.items.map((r) => (
                 <tr key={r.id}>
                   <td className="num">{formatDateTime(r.created_at)}</td>
-                  <td><code>{r.action}</code><p className="sub">{r.actor === 'system' ? 'सिस्टम' : r.actor.slice(-6)}</p></td>
+                  <td><code>{r.action}</code><p className="sub">{r.actor === 'system' ? 'System' : r.actor.slice(-6)}</p></td>
                   <td>{r.entity}</td><td>{r.from ?? '–'}</td><td>{r.to ?? '–'}</td><td>{r.note ?? '–'}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <nav className="pager" aria-label="पृष्ठ">
-            <button className="btn" type="button" disabled={page <= 1} onClick={() => setPage(page - 1)}>पिछला</button>
-            <span>{page} / {pages} · कुल {d.total}</span>
-            <button className="btn" type="button" disabled={page >= pages} onClick={() => setPage(page + 1)}>अगला</button>
+          <nav className="pager" aria-label="Pages">
+            <button className="btn" type="button" disabled={page <= 1} onClick={() => setPage(page - 1)}>Previous</button>
+            <span>{page} / {pages} · {d.total} total</span>
+            <button className="btn" type="button" disabled={page >= pages} onClick={() => setPage(page + 1)}>Next</button>
           </nav>
         </>
       )}

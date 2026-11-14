@@ -14,16 +14,16 @@ export function OrderedList({ items, onChange, disabled }: { items: OrderedItem[
     [next[i], next[j]] = [next[j]!, next[i]!];
     onChange(next);
   };
-  if (items.length === 0) return <p className="muted">अभी कोई रचना नहीं चुनी गई।</p>;
+  if (items.length === 0) return <p className="muted">No pieces selected yet.</p>;
   return (
     <ol className="ordered">
       {items.map((it, i) => (
         <li key={it.id}>
-          <span className="ordered-title">{it.title}{it.warning && <span className="sub"> · प्रकाशित नहीं है</span>}</span>
+          <span className="ordered-title">{it.title}{it.warning && <span className="sub"> · not published</span>}</span>
           <span className="ordered-actions">
-            <button type="button" className="btn" disabled={disabled || i === 0} onClick={() => move(i, -1)} aria-label={`${it.title} ऊपर करें`}>ऊपर</button>
-            <button type="button" className="btn" disabled={disabled || i === items.length - 1} onClick={() => move(i, 1)} aria-label={`${it.title} नीचे करें`}>नीचे</button>
-            <button type="button" className="btn" disabled={disabled} onClick={() => onChange(items.filter((_, j) => j !== i))} aria-label={`${it.title} हटाएँ`}>हटाएँ</button>
+            <button type="button" className="btn" disabled={disabled || i === 0} onClick={() => move(i, -1)} aria-label={`Move ${it.title} up`}>Up</button>
+            <button type="button" className="btn" disabled={disabled || i === items.length - 1} onClick={() => move(i, 1)} aria-label={`Move ${it.title} down`}>Down</button>
+            <button type="button" className="btn" disabled={disabled} onClick={() => onChange(items.filter((_, j) => j !== i))} aria-label={`Remove ${it.title}`}>Remove</button>
           </span>
         </li>
       ))}

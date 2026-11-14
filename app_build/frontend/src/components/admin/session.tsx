@@ -7,8 +7,8 @@ export interface AdminUser { id: string; email: string; display_name: string; ro
 
 export interface FieldError { field: string; code: string; message_hi?: string }
 export class AdminApiError extends Error {
-  constructor(public status: number, public code: string, public fields: FieldError[], public messageHi?: string) {
-    super(`${status} ${code}`);
+  constructor(public status: number, public code: string, public fields: FieldError[], message?: string) {
+    super(message ?? '');
   }
 }
 
@@ -73,8 +73,8 @@ export function AdminSessionProvider({ user, csrf: initialCsrf, children }: { us
     if (res.status === 204) return undefined as T;
     const data = await res.json().catch(() => ({}));
     if (!res.ok) {
-      const e = (data as { error?: { code?: string; fields?: FieldError[]; message_hi?: string } }).error ?? {};
-      throw new AdminApiError(res.status, e.code ?? 'error', e.fields ?? [], e.message_hi);
+      const e = (data as { error?: { code?: string; fields?: FieldError[]; message?: string } }).error ?? {};
+      throw new AdminApiError(res.status, e.code ?? 'error', e.fields ?? [], e.message);
     }
     return data as T;
   }, [raw, askRelogin]);
@@ -112,16 +112,16 @@ function ReloginDialog({ email, onDone }: { email: string; onDone: (csrf: string
             body: JSON.stringify({ email, password }),
           });
           setBusy(false);
-          if (!res.ok) { setError(res.status === 429 ? 'बहुत अधिक प्रयास, कुछ देर बाद फिर कोशिश करें।' : 'पासवर्ड सही नहीं है।'); return; }
+          if (!res.ok) { setError(res.status === 429 ? 'Too many attempts. Please try again in a little while.' : 'Incorrect password.'); return; }
           onDone(((await res.json()) as { csrf_token: string }).csrf_token);
         }}
       >
-        <h2 id="relogin-h">सत्र समाप्त हो गया</h2>
-        <p>आपका काम सुरक्षित है। जारी रखने के लिए {email} का पासवर्ड फिर से दर्ज करें।</p>
-        <label htmlFor="relogin-pw">पासवर्ड</label>
+        <h2 id="relogin-h">Session expired</h2>
+        <p>Your work is safe. Enter the password for {email} again to continue.</p>
+        <label htmlFor="relogin-pw">Password</label>
         <input id="relogin-pw" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required autoFocus />
         {error && <p className="field-error" role="alert">{error}</p>}
-        <button className="btn btn-primary" type="submit" disabled={busy}>लॉग इन करें</button>
+        <button className="btn btn-primary" type="submit" disabled={busy}>Log in</button>
       </form>
     </div>
   );

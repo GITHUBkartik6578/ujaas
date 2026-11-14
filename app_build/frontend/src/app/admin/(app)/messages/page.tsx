@@ -15,19 +15,19 @@ export default function MessagesPage() {
   const list = useLoad(() => request<{ items: Msg[]; total: number }>(`/messages?page_size=100${status ? `&status=${status}` : ''}`), [status]);
   return (
     <>
-      <PageTitle>संदेश</PageTitle>
+      <PageTitle>Messages</PageTitle>
       {toast}
       {banner && <p className="banner" role="alert">{banner}</p>}
       <div className="toolbar">
         <div className="field inline">
-          <label htmlFor="m-status">स्थिति</label>
+          <label htmlFor="m-status">Status</label>
           <select id="m-status" value={status} onChange={(e) => setStatus(e.target.value)}>
-            <option value="new">नए</option><option value="handled">निपटाए गए</option><option value="">सभी</option>
+            <option value="new">New</option><option value="handled">Handled</option><option value="">All</option>
           </select>
         </div>
       </div>
       <LoadState error={list.error} loading={list.loading} retry={list.reload} />
-      {list.data && list.data.items.length === 0 && <p className="state">कोई संदेश नहीं।</p>}
+      {list.data && list.data.items.length === 0 && <p className="state">No messages.</p>}
       {list.data && list.data.items.length > 0 && (
         <ul className="messages">
           {list.data.items.map((m) => (
@@ -39,11 +39,11 @@ export default function MessagesPage() {
                 type="button" className="btn"
                 onClick={async () => {
                   setBanner('');
-                  try { await request(`/messages/${m.id}`, { method: 'PATCH', body: { status: m.status === 'new' ? 'handled' : 'new' } }); show('सहेजा गया'); list.reload(); }
+                  try { await request(`/messages/${m.id}`, { method: 'PATCH', body: { status: m.status === 'new' ? 'handled' : 'new' } }); show('Saved'); list.reload(); }
                   catch (e) { setBanner(errorText(e)); }
                 }}
               >
-                {m.status === 'new' ? 'निपटाया हुआ चिह्नित करें' : 'नया चिह्नित करें'}
+                {m.status === 'new' ? 'Mark as handled' : 'Mark as new'}
               </button>
             </li>
           ))}

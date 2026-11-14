@@ -6,8 +6,8 @@ import { PageTitle } from '@/components/admin/ui';
 export default function CategoriesPage() {
   return (
     <>
-      <PageTitle>श्रेणियाँ</PageTitle>
-      <TaxonomyManager path="categories" heading="श्रेणियाँ" noun="श्रेणी" />
+      <PageTitle>Categories</PageTitle>
+      <TaxonomyManager path="categories" heading="Categories" noun="category" />
     </>
   );
 }
