@@ -3,15 +3,16 @@ import mongoose, { type Types } from 'mongoose';
 import { z } from 'zod';
 import type { Env } from '../config/env.js';
 import { actorOf, ah, OBJECT_ID, parseWith } from '../lib/admin.js';
-import { AppError, notFound, validationFailed } from '../lib/errors.js';
+import { AppError, notFound } from '../lib/errors.js';
 import { escapeRegex, regex } from '../lib/queries.js';
 import { searchFolded } from '../lib/hindi.js';
 import { previewKey, signPreview } from '../lib/preview.js';
 import { ROLES, type ContentStatus } from '../lib/workflow.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 import { requireCsrf } from '../middleware/security.js';
-import { Author, Category, Content, ContentRevision, CONTENT_STATUSES, CONTENT_TYPES, MediaAsset, SlugRedirect } from '../models/index.js';
-import { createContent, createContentInput, restoreRevision, transitionContent, updateContent, updateContentInput } from '../services/content.js';
+import { Author, Category, Content, ContentRevision, CONTENT_STATUSES, CONTENT_TYPES, MediaAsset } from '../models/index.js';
+import { createContent, createContentInput, restoreRevision, transitionContent, updateContent, updateContentInput, withTx } from '../services/content.js';
+import { purgeContents } from '../services/delete.js';
 import { writeAudit } from '../services/audit.js';
 
 const pageQ = z.object({
@@ -162,18 +163,16 @@ export function createAdminContentRouter(env: Env): Router {
     return { token, path: `/preview/${token}`, expires_in_minutes: 30 };
   }));
 
-  // Hard delete only for never-published drafts, by site_admin (editorial_workflow §1.1).
+  // Permanent delete, site_admin only, any status (a published piece disappears from the site, search and sitemap at once).
   r.delete('/contents/:id', adminOnly, ah(async (req) => {
     const id = idOf(req);
-    const c = (await Content.findById(id).select('status published_at').lean()) as unknown as { status: string; published_at?: Date } | null;
+    const c = (await Content.findById(id).select('status title').lean()) as unknown as { status: string; title: string } | null;
     if (!c) throw notFound();
-    if (c.status !== 'draft' || c.published_at) {
-      throw validationFailed([{ field: 'status', code: 'delete_not_allowed', message_hi: 'केवल कभी-प्रकाशित न हुआ मसौदा हटाया जा सकता है' }]);
-    }
-    await ContentRevision.deleteMany({ content_id: id });
-    await SlugRedirect.deleteMany({ target_id: id } as never);
-    await Content.deleteOne({ _id: id });
-    await writeAudit({ actor_id: req.admin!.id, action: 'content.delete', entity: 'content', entity_id: id, request_id: (req as { id?: string }).id });
+    await withTx((session) => purgeContents([new mongoose.Types.ObjectId(id)], session));
+    await writeAudit({
+      actor_id: req.admin!.id, action: 'content.delete', entity: 'content', entity_id: id,
+      note: `${c.status}: ${c.title}`.slice(0, 200), request_id: (req as { id?: string }).id,
+    });
     return undefined;
   }));
 

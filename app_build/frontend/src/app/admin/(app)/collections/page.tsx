@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { OrderedList, type OrderedItem } from '@/components/admin/OrderedList';
-import { Field, LoadState, PageTitle, StatusPill, errorText, useLoad, useToast } from '@/components/admin/ui';
-import { useAdmin } from '@/components/admin/session';
+import { Field, LoadState, PageTitle, StatusPill, ask, errorText, useLoad, useToast } from '@/components/admin/ui';
+import { can, useAdmin } from '@/components/admin/session';
 
 interface Col { id: string; title: string; slug: string; description: string | null; status: string; items: Array<{ content_id: string; title: string | null; status: string | null; warning: string | null }> }
 interface Pub { id: string; title: string }
 
 export default function CollectionsAdminPage() {
-  const { request } = useAdmin();
+  const { request, user } = useAdmin();
   const cols = useLoad(() => request<{ items: Col[] }>('/collections'), []);
   const published = useLoad(() => request<{ items: Pub[] }>('/contents?status=published&page_size=100'), []);
   const [selected, setSelected] = useState<Col | null>(null);
@@ -23,6 +23,12 @@ export default function CollectionsAdminPage() {
     setSelected(c); setBanner('');
     setMeta({ title: c.title, description: c.description ?? '', status: c.status });
     setOrder(c.items.map((i) => ({ id: i.content_id, title: i.title ?? '(deleted piece)', warning: i.warning })));
+  };
+
+  const remove = async () => {
+    if (!selected || !ask(`Delete the collection "${selected.title}" permanently? The pieces in it are kept. This cannot be undone.`)) return;
+    try { await request(`/collections/${selected.id}`, { method: 'DELETE' }); show('Deleted'); setSelected(null); cols.reload(); }
+    catch (e) { setBanner(errorText(e)); }
   };
 
   const create = async () => {
@@ -96,6 +102,7 @@ export default function CollectionsAdminPage() {
             <div className="actions">
               <button type="button" className="btn btn-primary" onClick={() => void saveAll()}>Save</button>
               <button type="button" className="btn" onClick={() => setSelected(null)}>Close</button>
+              {can.admin(user.role) && <button type="button" className="btn btn-danger" onClick={() => void remove()}>Delete collection</button>}
             </div>
           </section>
         )}

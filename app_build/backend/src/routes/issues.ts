@@ -252,6 +252,19 @@ export function createAdminIssuesRouter(env: Env): Router {
     return shape((await MagazineIssue.findById(id).lean()) as unknown as IssueRec);
   }));
 
+  // Permanent delete, site_admin only. The pieces in the issue stay; only the issue and its list go.
+  r.delete('/issues/:id', requireRole(env, 'site_admin'), ah(async (req) => {
+    const id = idOf(req);
+    const cur = (await MagazineIssue.findById(id).select('title').lean()) as unknown as { title: string } | null;
+    if (!cur) throw notFound();
+    await withTx(async (session) => {
+      await IssueItem.deleteMany({ issue_id: id } as never, { session });
+      await MagazineIssue.deleteOne({ _id: id }, { session });
+    });
+    await audit(req, 'issue.delete', id, { note: cur.title.slice(0, 200) });
+    return undefined;
+  }));
+
   const TRANSITIONS: Record<string, Record<string, 'editor' | 'chief'>> = {
     draft: { published: 'chief' },
     published: { draft: 'chief', archived: 'chief' },

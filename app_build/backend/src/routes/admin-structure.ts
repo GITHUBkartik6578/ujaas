@@ -17,6 +17,7 @@ import {
 } from '../models/index.js';
 import { writeAudit } from '../services/audit.js';
 import { withTx } from '../services/content.js';
+import { purgeContents } from '../services/delete.js';
 
 const plain = (max: number) => z.string().max(max).transform((s) => stripHtml(s).trim());
 const oidStr = z.string().regex(OBJECT_ID, 'invalid id');
@@ -102,6 +103,28 @@ export function createAdminStructureRouter(env: Env): Router {
     const a = await Author.findByIdAndUpdate(id, { $set: b } as never, { returnDocument: 'after' }).select('+private_contact').lean();
     await audit(req, 'author.update', 'author', id);
     return authorShape(a as unknown as Doc);
+  }));
+
+  // Permanent delete, site_admin only. An author who still has works is refused unless `?with_works=1`: then the works
+  // credited to this author alone are deleted too, and works shared with other authors only lose this credit.
+  r.delete('/authors/:id', adminOnly, ah(async (req) => {
+    const id = idOf(req);
+    const a = (await Author.findById(id).select('name photo_media_id').lean()) as unknown as Doc | null;
+    if (!a) throw notFound();
+    const withWorks = req.query.with_works === '1';
+    const credited = (await Content.find({ 'credits.author_id': id } as never).select('credits').lean()) as unknown as Array<{ _id: Types.ObjectId; credits: Array<{ author_id: Types.ObjectId }> }>;
+    if (credited.length > 0 && !withWorks) {
+      throw validationFailed([{ field: 'id', code: 'has_works', message_hi: `इस रचनाकार की ${credited.length} रचनाएँ हैं`, works: credited.length } as never]);
+    }
+    const alone = credited.filter((c) => c.credits.every((x) => String(x.author_id) === id)).map((c) => c._id);
+    const shared = credited.filter((c) => c.credits.some((x) => String(x.author_id) !== id)).map((c) => c._id);
+    await withTx(async (session) => {
+      await purgeContents(alone, session);
+      if (shared.length > 0) await Content.updateMany({ _id: inList(shared) } as never, { $pull: { credits: { author_id: id } } } as never, { session });
+      await Author.deleteOne({ _id: id } as never, { session });
+    });
+    await audit(req, 'author.delete', 'author', id, `${String(a.name)}; works deleted: ${alone.length}; credit removed from: ${shared.length}`);
+    return { deleted_works: alone.length, credit_removed: shared.length };
   }));
 
   // ---------- categories and topics ----------
@@ -197,6 +220,18 @@ export function createAdminStructureRouter(env: Env): Router {
     const c = await Collection.findByIdAndUpdate(id, { $set: set } as never, { returnDocument: 'after' }).lean();
     await audit(req, 'collection.update', 'collection', id);
     return collectionShape(c as unknown as Doc);
+  }));
+  // Permanent delete, site_admin only. The member pieces stay; only the grouping goes.
+  r.delete('/collections/:id', adminOnly, ah(async (req) => {
+    const id = idOf(req);
+    const c = (await Collection.findById(id).select('title').lean()) as unknown as Doc | null;
+    if (!c) throw notFound();
+    await withTx(async (session) => {
+      await CollectionItem.deleteMany({ collection_id: id } as never, { session });
+      await Collection.deleteOne({ _id: id } as never, { session });
+    });
+    await audit(req, 'collection.delete', 'collection', id, String(c.title));
+    return undefined;
   }));
   // Ordered members, published items only; replaced atomically so a failure never leaves half a list.
   r.put('/collections/:id/items', ah(async (req) => {

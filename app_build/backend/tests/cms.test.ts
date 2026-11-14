@@ -220,7 +220,7 @@ describe('T-PUB-01 / T-PUB-03 / T-PUB-04 publish, unpublish, archive', () => {
     expect((await pub(`/redirects/content/${slug}`)).body).toEqual({ slug: `${slug}-naya` });
     expect((await pub(`/contents/${slug}-naya`)).status).toBe(200);
   });
-  it('hard delete: only a never-published draft, only by site_admin; its revisions go too', async () => {
+  it('hard delete: any status including published, only by site_admin; its revisions go too', async () => {
     const draft = (await call(clients.editor, 'post', '/contents', baseDraft())).body;
     expect((await call(clients.editor_in_chief, 'delete', `/contents/${draft.id}`)).status).toBe(403);
     expect((await call(clients.site_admin, 'delete', `/contents/${draft.id}`)).status).toBe(204);
@@ -228,8 +228,11 @@ describe('T-PUB-01 / T-PUB-03 / T-PUB-04 publish, unpublish, archive', () => {
     const { id } = await approvedItem();
     await readyToPublish(id);
     await call(clients.editor_in_chief, 'post', `/contents/${id}/transition`, { to: 'published' });
-    expect((await call(clients.site_admin, 'delete', `/contents/${id}`)).status).toBe(422);
+    expect((await call(clients.editor_in_chief, 'delete', `/contents/${id}`)).status).toBe(403);
     expect(await Content.countDocuments({ _id: id })).toBe(1);
+    expect((await call(clients.site_admin, 'delete', `/contents/${id}`)).status).toBe(204);
+    expect(await Content.countDocuments({ _id: id })).toBe(0);
+    expect(await ContentRevision.countDocuments({ content_id: id })).toBe(0);
   });
 });
 

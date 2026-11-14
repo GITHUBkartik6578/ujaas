@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { use, useState } from 'react';
 import { can, useAdmin, type Role } from '@/components/admin/session';
 import { Field, LoadState, PageTitle, ask, errorText, formatDateTime, useLoad, useToast, TYPE_LABEL } from '@/components/admin/ui';
@@ -34,6 +35,7 @@ const ok = (min: Act['min'], role: Role) => (min === 'editor' ? can.editorUp(rol
 export default function SubmissionDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { request, user } = useAdmin();
+  const router = useRouter();
   const [d, setD] = useState<Detail | null>(null);
   const [staff, setStaff] = useState<Staff[]>([]);
   const [cats, setCats] = useState<Option[]>([]);
@@ -179,6 +181,24 @@ export default function SubmissionDetailPage({ params }: { params: Promise<{ id:
             </Field>
             <button type="button" className="btn" disabled={busy || !note.trim()} onClick={() => void run(() => request<Detail>(`/submissions/${id}/notes`, { method: 'POST', body: { note } }), 'Note added')}>Add</button>
           </section>
+
+          {can.admin(user.role) && (
+            <section className="panel">
+              <h2>Delete</h2>
+              <p className="muted">Removes this submission, the writer&apos;s details and its whole history permanently. A draft already created from it stays. This cannot be undone.</p>
+              <button
+                type="button" className="btn btn-danger" disabled={busy}
+                onClick={async () => {
+                  if (!ask(`Delete submission ${d.reference_id} (“${d.title}”) permanently? This cannot be undone.`)) return;
+                  setBusy(true); setBanner('');
+                  try { await request(`/submissions/${id}`, { method: 'DELETE' }); router.push('/admin/submissions'); router.refresh(); }
+                  catch (e) { setBanner(errorText(e)); setBusy(false); }
+                }}
+              >
+                Delete submission
+              </button>
+            </section>
+          )}
         </aside>
       </div>
     </>

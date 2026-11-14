@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { use, useMemo, useState } from 'react';
 import { can, useAdmin } from '@/components/admin/session';
 import { Field, LoadState, PageTitle, StatusPill, ask, errorText, fieldErrors, useLoad, useToast } from '@/components/admin/ui';
@@ -16,6 +17,7 @@ interface MediaOpt { id: string; alt_text: string; width: number; height: number
 export default function IssueEditorPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { request, user } = useAdmin();
+  const router = useRouter();
   const [f, setF] = useState({ title: '', slug: '', issue_number: '', volume: '', period_label: '', publication_date: '', cover_media_id: '', editorial_intro: '', publication_details: '', show_in_archive: true });
   const [rows, setRows] = useState<Item[]>([]);
   const [status, setStatus] = useState('draft');
@@ -57,6 +59,11 @@ export default function IssueEditorPage({ params }: { params: Promise<{ id: stri
   const transition = (to: string, confirm?: string) => {
     if (confirm && !ask(confirm)) return;
     void run(async () => { apply(await request<Issue>(`/issues/${id}/transition`, { method: 'POST', body: { to } })); }, 'Status changed');
+  };
+
+  const remove = () => {
+    if (!ask(`Delete the issue "${f.title}" permanently? The pieces in it are kept. This cannot be undone.`)) return;
+    void run(async () => { await request(`/issues/${id}`, { method: 'DELETE' }); router.push('/admin/issues'); }, 'Deleted');
   };
 
   if (!load.data) return <LoadState error={load.error} loading={load.loading} retry={load.reload} />;
@@ -129,6 +136,7 @@ export default function IssueEditorPage({ params }: { params: Promise<{ id: stri
                 </>
               )}
               {status === 'archived' && <button type="button" className="btn" disabled={busy} onClick={() => transition('draft')}>Return to draft</button>}
+              {can.admin(user.role) && <button type="button" className="btn btn-danger" disabled={busy} onClick={remove}>Delete issue</button>}
             </div>
             <p className="muted">To publish: a cover image (with alt text), an issue number, a date and at least one published piece.</p>
           </section>

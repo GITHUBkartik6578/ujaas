@@ -200,5 +200,29 @@ export function createAdminSubmissionsRouter(env: Env): Router {
     return { id, status: b.status };
   }));
 
+  // ---------- permanent deletes, site_admin only ----------
+  // A submission goes with its whole history. A draft already made from it is a normal piece by then and stays.
+  r.delete('/submissions/:id', requireRole(env, 'site_admin'), ah(async (req) => {
+    const id = idOf(req);
+    const s = (await Submission.findById(id).select('reference_id title').lean()) as unknown as { reference_id: string; title: string } | null;
+    if (!s) throw notFound();
+    await withTx(async (session) => {
+      await SubmissionEvent.deleteMany({ submission_id: id } as never, { session });
+      await Submission.deleteOne({ _id: id } as never, { session });
+    });
+    await writeAudit({
+      actor_id: req.admin!.id, action: 'submission.delete', entity: 'submission', entity_id: id,
+      note: `${s.reference_id}: ${s.title}`.slice(0, 200), request_id: rid(req),
+    });
+    return undefined;
+  }));
+  r.delete('/messages/:id', requireRole(env, 'site_admin'), ah(async (req) => {
+    const id = idOf(req);
+    const m = await ContactMessage.findByIdAndDelete(id).lean();
+    if (!m) throw notFound();
+    await writeAudit({ actor_id: req.admin!.id, action: 'message.delete', entity: 'contact_message', entity_id: id, request_id: rid(req) });
+    return undefined;
+  }));
+
   return r;
 }

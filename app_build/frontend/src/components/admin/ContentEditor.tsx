@@ -193,7 +193,10 @@ export function ContentEditor({ id }: { id?: string }) {
   };
 
   const remove = async () => {
-    if (!ask('This draft will be deleted permanently. Continue?')) return;
+    const live = status === 'published' || status === 'scheduled';
+    if (!ask(live
+      ? 'This piece is LIVE on the website. It will disappear from the site, search and sitemap, and be deleted permanently with its revision history. This cannot be undone. Continue?'
+      : 'This piece will be deleted permanently with its revision history. This cannot be undone. Continue?')) return;
     try { setDirty(false); await request(`/contents/${id}`, { method: 'DELETE' }); router.push('/admin/content'); }
     catch (e) { setBanner(errorText(e)); }
   };
@@ -367,11 +370,11 @@ export function ContentEditor({ id }: { id?: string }) {
                 {(status === 'published' || status === 'scheduled') && <p className="muted">Unpublish the piece before restoring.</p>}
               </section>
             )}
-            {can.admin(user.role) && status === 'draft' && !meta?.published_at && (
+            {can.admin(user.role) && (
               <section className="panel">
                 <h2>Delete</h2>
-                <p className="muted">Only a draft that was never published can be deleted. This cannot be undone.</p>
-                <button type="button" className="btn btn-danger" onClick={() => void remove()}>Delete draft</button>
+                <p className="muted">Deletes this piece permanently, whatever its status, with its revision history. It is also removed from any collection or issue. This cannot be undone.</p>
+                <button type="button" className="btn btn-danger" onClick={() => void remove()}>Delete piece</button>
               </section>
             )}
           </aside>

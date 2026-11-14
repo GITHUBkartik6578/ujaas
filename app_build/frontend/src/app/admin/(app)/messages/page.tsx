@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { LoadState, PageTitle, errorText, formatDateTime, useLoad, useToast } from '@/components/admin/ui';
-import { useAdmin } from '@/components/admin/session';
+import { LoadState, PageTitle, ask, errorText, formatDateTime, useLoad, useToast } from '@/components/admin/ui';
+import { can, useAdmin } from '@/components/admin/session';
 
 interface Msg { id: string; name: string; email: string; subject: string; message: string; status: 'new' | 'handled'; created_at: string }
 
 /** Messages from the contact form. Private: names and email addresses are visible only here. */
 export default function MessagesPage() {
-  const { request } = useAdmin();
+  const { request, user } = useAdmin();
   const [status, setStatus] = useState('new');
   const [banner, setBanner] = useState('');
   const { toast, show } = useToast();
@@ -45,6 +45,19 @@ export default function MessagesPage() {
               >
                 {m.status === 'new' ? 'Mark as handled' : 'Mark as new'}
               </button>
+              {can.admin(user.role) && (
+                <button
+                  type="button" className="btn btn-danger"
+                  onClick={async () => {
+                    if (!ask(`Delete the message “${m.subject}” from ${m.name} permanently? This cannot be undone.`)) return;
+                    setBanner('');
+                    try { await request(`/messages/${m.id}`, { method: 'DELETE' }); show('Deleted'); list.reload(); }
+                    catch (e) { setBanner(errorText(e)); }
+                  }}
+                >
+                  Delete
+                </button>
+              )}
             </li>
           ))}
         </ul>

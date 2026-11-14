@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Field, LoadState, PageTitle, errorText, fieldErrors, useLoad, useToast } from '@/components/admin/ui';
-import { useAdmin } from '@/components/admin/session';
+import { Field, LoadState, PageTitle, ask, errorText, fieldErrors, useLoad, useToast } from '@/components/admin/ui';
+import { AdminApiError, can, useAdmin } from '@/components/admin/session';
 
 interface Author {
   id: string; name: string; slug: string; bio: string | null; is_public: boolean; archived: boolean;
@@ -13,7 +13,7 @@ interface MediaOpt { id: string; alt_text: string; width: number; height: number
 const BLANK = { name: '', slug: '', bio: '', is_public: false, archived: false, birth_year: '', birthplace: '', private_contact: '', photo_media_id: '' };
 
 export default function AuthorsPage() {
-  const { request } = useAdmin();
+  const { request, user } = useAdmin();
   const list = useLoad(() => request<{ items: Author[] }>('/authors?page_size=100'), []);
   const media = useLoad(() => request<{ items: MediaOpt[] }>('/media?page_size=100'), []);
   const [editing, setEditing] = useState<string | null>(null);
@@ -40,6 +40,22 @@ export default function AuthorsPage() {
       await request(editing === 'new' ? '/authors' : `/authors/${editing}`, { method: editing === 'new' ? 'POST' : 'PATCH', body });
       show('Saved'); setEditing(null); list.reload();
     } catch (e) { setErrors(fieldErrors(e)); setBanner(errorText(e)); }
+  };
+
+  /** Permanent delete. An author with works asks a second question: delete the works too? */
+  const remove = async () => {
+    if (editing === null || editing === 'new') return;
+    if (!ask(`Delete "${f.name}" permanently? This cannot be undone.`)) return;
+    setBanner('');
+    try {
+      await request(`/authors/${editing}`, { method: 'DELETE' });
+    } catch (e) {
+      if (!(e instanceof AdminApiError && e.fields.some((x) => x.code === 'has_works'))) { setBanner(errorText(e)); return; }
+      const msg = e.fields.find((x) => x.code === 'has_works')?.message_hi ?? '';
+      if (!ask(`This author still has works (${msg}). Delete the author AND the works credited only to this author? Works shared with other authors are kept and only lose this credit. This cannot be undone.`)) return;
+      try { await request(`/authors/${editing}?with_works=1`, { method: 'DELETE' }); } catch (e2) { setBanner(errorText(e2)); return; }
+    }
+    show('Deleted'); setEditing(null); list.reload();
   };
 
   return (
@@ -88,6 +104,7 @@ export default function AuthorsPage() {
             <div className="actions">
               <button className="btn btn-primary" type="submit">Save</button>
               <button className="btn" type="button" onClick={() => setEditing(null)}>Cancel</button>
+              {editing !== 'new' && can.admin(user.role) && <button className="btn btn-danger" type="button" onClick={() => void remove()}>Delete author</button>}
             </div>
           </form>
         )}
