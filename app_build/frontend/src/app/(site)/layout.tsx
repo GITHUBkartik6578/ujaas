@@ -1,4 +1,5 @@
 import { SiteFooter } from '@/components/HomeSections';
+import { ScrollReveal } from '@/components/ScrollReveal';
 import { SiteHeader } from '@/components/SiteHeader';
 
 /** Public shell: skip link, header, main, footer. The admin has its own shell under /admin. */
@@ -9,6 +10,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <SiteHeader />
       <main id="main">{children}</main>
       <SiteFooter />
+      <ScrollReveal />
     </>
   );
 }

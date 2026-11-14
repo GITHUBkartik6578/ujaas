@@ -43,11 +43,10 @@ export async function SiteHeader() {
         </div>
       </div>
       <div className="frame header-row">
-        <Link className="brand" href="/" aria-label="उजास — अपनी बात, अपना मंच — मुख्य पृष्ठ">
+        <Link className="brand" href="/" aria-label="उजास — मुख्य पृष्ठ">
           <ArtSvg file="ujaas-mark.svg" scope="hdr" className="brand-mark" />
           <span className="brand-text">
             <span className="brand-word">उजास</span>
-            <span className="brand-tag">अपनी बात — अपना मंच</span>
           </span>
         </Link>
         <HeaderNav items={items} />

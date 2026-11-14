@@ -104,7 +104,7 @@
   --radius: 6px; /* one corner radius for buttons and panels */
   --gap: 12px;
   --measure: 66ch;
-  --page-max: 1600px;
+  --page-max: 1280px; /* standard desktop content width */
 }
 
 @media (min-width: 768px) {

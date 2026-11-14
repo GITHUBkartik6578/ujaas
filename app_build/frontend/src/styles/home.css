@@ -137,7 +137,7 @@
     linear-gradient(180deg, var(--color-parchment-light) 0%, var(--color-parchment) 100%);
 }
 .hero-art {
-  position: absolute; top: 0; bottom: 0; left: 35%; right: 0; touch-action: manipulation;
+  position: absolute; top: 0; bottom: 0; left: max(35%, calc(50% - 12rem)); right: 0; touch-action: manipulation;
   -webkit-mask-image: linear-gradient(to right, transparent 0, black 17%);
   mask-image: linear-gradient(to right, transparent 0, black 17%);
 }
@@ -149,7 +149,7 @@
 /* The copy sits over the left edge of the artwork; only the column itself takes the pointer. */
 .hero-inner {
   position: relative; z-index: 2; max-width: var(--page-max); margin-inline: auto; pointer-events: none;
-  padding: clamp(2.5rem, 5vw, 4.4rem) var(--frame) clamp(7rem, 9vw, 8.75rem);
+  padding: clamp(2rem, 3.6vw, 3.25rem) var(--frame) clamp(6.5rem, 8vw, 7.75rem);
 }
 .hero-copy {
   width: 46%; max-width: 680px; pointer-events: auto;
@@ -162,7 +162,7 @@
 .hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 38px; height: 2px; background: var(--color-ink-warm); flex-shrink: 0; }
 .hero-title { position: relative; padding: 0 0.5rem; }
 .hero-title h1 {
-  margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(5.5rem, 10vw, 9.4rem); line-height: 1.16;
+  margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(4.5rem, 7.4vw, 7.25rem); line-height: 1.16;
   color: var(--color-wine);
   background: linear-gradient(180deg, var(--color-wine-bright) 0%, var(--color-wine) 45%, var(--color-wine-dark) 100%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;

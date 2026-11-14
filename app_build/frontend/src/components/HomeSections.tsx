@@ -203,7 +203,6 @@ export function SiteFooter() {
             <ArtSvg file="ujaas-mark-light.svg" scope="ftr" className="footer-mark" />
             <span>
               <span className="footer-word">उजास</span>
-              <span className="footer-tag">अपनी बात — अपना मंच</span>
             </span>
           </Link>
           <p>हिंदी साहित्य, रचनात्मक अभिव्यक्ति, संस्कृति और सार्थक संवाद का एक विचारशील डिजिटल घर।</p>

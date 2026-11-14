@@ -4,7 +4,7 @@ import './globals.css';
 import { ALLOW_INDEXING, SITE_URL } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: { default: 'उजास — अपनी बात, अपना मंच', template: '%s | उजास' },
+  title: { default: 'उजास', template: '%s | उजास' },
   description: 'उजास: हिंदी साहित्य का मंच।',
   metadataBase: new URL(SITE_URL),
   // Indexing stays off in development and staging; only production with ALLOW_INDEXING=1 is indexed.
